@@ -1,0 +1,255 @@
+school_year,behavior_category_code,behavior_category,behavior_code,behavior,number_of_events
+2023-2024,BAP,Behaviors that Impede Academic Progress,BAP3,"Scholastic dishonesty (such as cheating, plagiarism)",4111
+2023-2024,BAP,Behaviors that Impede Academic Progress,BAP2,"Interfering with learning outside of the classroom (examples include excessive noise, interrupting a class)",8070
+2023-2024,BAP,Behaviors that Impede Academic Progress,BAP1,"Interfering with learning in the classroom (examples include talking, excessive noise, off-task, out of seat, possessing items that distract)",58274
+2023-2024,BAP,Behaviors that Impede Academic Progress,BAP5,Unexcused tardiness to school,12584
+2023-2024,BAP,Behaviors that Impede Academic Progress,BAP4,Unexcused tardiness to class,27022
+2023-2024,BSO,Behaviors related to School Operations,BSO7,Dress Code Violation,1427
+2023-2024,BSO,Behaviors related to School Operations,BSO8,Gambling (games of chance for money or profit),60
+2023-2024,BSO,Behaviors related to School Operations,BSO9,"Possessing items that are inappropriate for school (examples include toys, literature, electronics)",2133
+2023-2024,BSO,Behaviors related to School Operations,BSO10,Possession of stolen items,829
+2023-2024,BSO,Behaviors related to School Operations,BSO11,Unauthorized use of school electronic or other equipment,2774
+2023-2024,BSO,Behaviors related to School Operations,BSO16,Student is in an unauthorized area of the campus (NOT related to school or class attendance/nonattendance).,14143
+2023-2024,BSO,Behaviors related to School Operations,BSO15,Student is not going to class as assigned,27863
+2023-2024,BSO,Behaviors related to School Operations,BSO14,"Vandalism, graffiti or other damage to school or personal property",4933
+2023-2024,BSO,Behaviors related to School Operations,BSO13,Violation of school board policy regarding the possession or use of portable communication devices,16839
+2023-2024,BSO,Behaviors related to School Operations,BSO6,Bringing unauthorized persons to school or allowing unauthorized persons to enter the school building,252
+2023-2024,BSO,Behaviors related to School Operations,BSO5,"Failure to attend assigned disciplinary setting (detention, in-school suspension, Saturday school)",4399
+2023-2024,BSO,Behaviors related to School Operations,BSO3,Refusal to comply with requests of staff in a way that interferes with the operation of school,67559
+2023-2024,BSO,Behaviors related to School Operations,BSO12,Violation of the Acceptable Use of Technology/internet policy,4191
+2023-2024,BSO,Behaviors related to School Operations,BSO1,Altering an official document or record,171
+2023-2024,BSO,Behaviors related to School Operations,BSO2,"Giving false information, misrepresentation",4232
+2023-2024,RB,Relationship Behaviors,RB11,Unwanted or inappropriate physical contact,19154
+2023-2024,RB,Relationship Behaviors,RB10,Failure to respond to questions or requests by staff,26614
+2023-2024,RB,Relationship Behaviors,RB9,"Using slurs based upon the actual or perceived race, ethnicity, color, national origin, citizenship/immigration status, weight, gender, gender identity, gender expression, sexual orientation, or disability",6102
+2023-2024,RB,Relationship Behaviors,RB8,"Using profane or vulgar language or gestures (swearing, cursing, hate speech, gang signs or gestures)",30823
+2023-2024,RB,Relationship Behaviors,RB7,"Teasing, taunting, engaging in a verbal confrontation, verbally inciting a fight",9035
+2023-2024,RB,Relationship Behaviors,RB6,"Speaking to another in an uncivil, discourteous manner",25523
+2023-2024,RB,Relationship Behaviors,RB5,Stealing money or property without physical force,3135
+2023-2024,RB,Relationship Behaviors,RB4,"Saying or writing either directly or through electronic communication sexually suggestive comments, innuendos, propositions, or other remarks of a sexual nature",2117
+2023-2024,RB,Relationship Behaviors,RB3,"Posting, distributing, displaying, or sharing inappropriate material or literature, including using electronics means",1756
+2023-2024,RB,Relationship Behaviors,RB1,Bullying with no physical injury (See Model Policy to Addressing Bullying in Virginia's  Public Schools),2369
+2023-2024,RB,Relationship Behaviors,RB2,Cyberbullying (See Model Policy to Addressing Bullying in Virginia's  Public Schools),393
+2023-2024,BSC,Behaviors of a Safety Concern,BSC16,"Throwing an object that has the potential to cause a disturbance, injury, or property damage",9940
+2023-2024,BSC,Behaviors of a Safety Concern,BSC15,Inciting or causing a substantial disturbance to the operation of school or the safety of staff and/or students,9277
+2023-2024,BSC,Behaviors of a Safety Concern,BSC18,"Exposing body parts, lewd or indecent public behavior",1569
+2023-2024,BSC,Behaviors of a Safety Concern,BSC19,"Physical contact of a sexual nature ¿ patting body parts, pinching, tugging clothing",1076
+2023-2024,BSC,Behaviors of a Safety Concern,BSC21,Stalking as described in the Code of Virginia  section 18.2-60.3,6
+2023-2024,BSC,Behaviors of a Safety Concern,BSC22,Stealing money or property using physical force (no weapon involved),293
+2023-2024,BSC,Behaviors of a Safety Concern,BSC24,Leaving school grounds without permission,4221
+2023-2024,BSC,Behaviors of a Safety Concern,BSC25,Trespassing,360
+2023-2024,BSC,Behaviors of a Safety Concern,BSC26,Possessing dangerous instruments/substances that could be used to inflict harm upon another,846
+2023-2024,BSC,Behaviors of a Safety Concern,BSC27,Weapons: Possessing any weapon (other than a firearm) as defined by § 18.2-308.1.,1274
+2023-2024,BSC,Behaviors of a Safety Concern,BSC14,Fighting that results in no injury as determined by the school administration,16533
+2023-2024,BSC,Behaviors of a Safety Concern,BSC13,Engaging in reckless behavior the creates a risk of injury to self or others,29337
+2023-2024,BSC,Behaviors of a Safety Concern,BSC12,Fire Related: Possessing items that could be used to set or cause a fire or produce large amounts of smoke,380
+2023-2024,BSC,Behaviors of a Safety Concern,BSC11,Fire alarm: Falsely activating a fire or other disaster alarm,173
+2023-2024,BSC,Behaviors of a Safety Concern,BSC10,Bus: Endangering the safety of others on the bus,6221
+2023-2024,BSC,Behaviors of a Safety Concern,BSC9,Bus: Distracting the bus driver,10151
+2023-2024,BSC,Behaviors of a Safety Concern,BSC8,Harassment: Repeatedly annoying or attacking a student or a group of students or personnel creating  an intimidating or hostile educational or work environment ,1326
+2023-2024,BSC,Behaviors of a Safety Concern,BSC7,Cyberbullying that continues after intervention (See Link: Model Policy to Addressing Bullying in Virginia¿s Public Schools) Cyberbullying that relates a threat to the safety of students and staff should be treated with a higher level of intervention and consequences.,81
+2023-2024,BSC,Behaviors of a Safety Concern,BSC6,Bullying Behavior without physical injury that continues after intervention (See Link: Model Policy to Addressing Bullying in Virginia¿s Public Schools) Bullying that leads to physical injury should be classified as Assault and Battery.,452
+2023-2024,BSC,Behaviors of a Safety Concern,BSC5,"Tobacco: Possessing/Using/Distributing tobacco products, possessing tobacco paraphernalia, electronic cigarettes, vaping equipment",14948
+2023-2024,BSC,Behaviors of a Safety Concern,BSC4,Drugs: Violating school board non-prescription (Over the counter) medication policy or look-alike drug policy,452
+2023-2024,BSC,Behaviors of a Safety Concern,BSC3,Drugs: Possessing drug paraphernalia,1615
+2023-2024,BSC,Behaviors of a Safety Concern,BSC2,Alcohol: Distributing alcohol to other students,81
+2023-2024,BSC,Behaviors of a Safety Concern,BSC1,"Alcohol: Possessing, using, or being under the influence of alcohol",738
+2023-2024,BSC,Behaviors of a Safety Concern,BSC17,"Shoving, pushing, striking, biting another a student with no visible injury",39802
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO1,Assault: Intending to cause physical injury to another person,4795
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO2,Assault and Battery: Causing physical injury to another person,2958
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO3,Fighting: The use of physical violence between students or on another person where there is minor injury as determined by the school administration,5843
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO4,Striking Staff: The use of force against a staff member when no injury is caused,6499
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO5,"Drugs: Possessing controlled substances, illegal drugs inhalants, or synthetic hallucinogens or unauthorized prescription medications",3836
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO6,"Drugs: Being under the influence of controlled substances, illegal drugs, inhalants, or synthetic hallucinogens or unauthorized prescription medications",1533
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO7,Drugs: Using controlled substances or using  illegal drugs or synthetic hallucinogens or unauthorized prescription medications ,1103
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO9,"Fire: Attempting to set, aiding in setting, or setting a fire",83
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO10,Gang-Related Behavior: Engaging in threatening or dangerous behavior that is gang-related as defined in §18.2-46.1,73
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO11,Hazing as defined in §18.2-56 and noted in § 22.1-279.6.,8
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO12,"Threatening, intimidating, or instigating violence, injury or harm to a staff member or members",3431
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO13,"Threatening, intimidating,¿or instigating violence, injury or harm to another student(s) or other(s) (not including written threats)",8626
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO14,"Threatening, intimidation, or instigating violence, injury or harm to another student(s) or other(s) in writing. If the written threat is to a staff member, a report to law enforcement is required unless the student making the threat has a disability.",993
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO15,Using an object not generally considered to be a weapon to threaten or attempt to injure school personnel,183
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO16,Using an object not generally considered to be a weapon to threaten or attempt to injure students or others,477
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO17,Bomb threat - Making a bomb threat,136
+2023-2024,BESO,Behaviors that Endanger Self or Others,BESO18,"A crime in the community where the student was charged with an offense relating to the Commonwealth's laws, which is not covered by any other behavior code, but required to be disclosed to the superintendent of the school division pursuant to ¿ 16.1-260(G)",395
+2023-2024,PD,Behaviors to Determine Persistently Dangerous Schools,PD3,Sexual Assault,11
+2023-2024,PD,Behaviors to Determine Persistently Dangerous Schools,PD4,Attempted Sexual Assault,2
+2023-2024,PD,Behaviors to Determine Persistently Dangerous Schools,PD6,Assault with Firearm or Weapon,10
+2023-2024,PD,Behaviors to Determine Persistently Dangerous Schools,PD7,Actual or Attempted Robbery,14
+2023-2024,PD,Behaviors to Determine Persistently Dangerous Schools,PD8,Kidnapping/Abduction,1
+2023-2024,PD,Behaviors to Determine Persistently Dangerous Schools,PD16,Illegal Possession of Controlled Drugs and Substances with Intent to Distribute or Sell,294
+2023-2024,PD,Behaviors to Determine Persistently Dangerous Schools,PD10,Aggravated Sexual Battery on a Student,4
+2023-2024,PD,Behaviors to Determine Persistently Dangerous Schools,PD11,Illegal Possession of Handgun,21
+2023-2024,PD,Behaviors to Determine Persistently Dangerous Schools,PD12,Illegal Possession of Rifle or Shotgun,5
+2023-2024,PD,Behaviors to Determine Persistently Dangerous Schools,PD13,Illegal Possession of Any Other Projectile Weapon,21
+2023-2024,PD,Behaviors to Determine Persistently Dangerous Schools,PD15,"Illegal Possession of Other Firearms: firebombs, explosive materials or devices, hoax explosive devices per ¿ 18.2-85, or explosive incendiary devices, as defined in ¿ 18.2-433.1, or chemical bombs per ¿ 18.2-87.1",3
+2023-2024,PD,Behaviors to Determine Persistently Dangerous Schools,PD9,Malicious Wounding without a Weapon,5
+2022-2023,BAP,Behaviors that Impede Academic Progress,BAP3,"Scholastic dishonesty (such as cheating, plagiarism)",3487
+2022-2023,BAP,Behaviors that Impede Academic Progress,BAP2,"Interfering with learning outside of the classroom (examples include excessive noise, interrupting a class)",8058
+2022-2023,BAP,Behaviors that Impede Academic Progress,BAP1,"Interfering with learning in the classroom (examples include talking, excessive noise, off-task, out of seat, possessing items that distract)",56491
+2022-2023,BAP,Behaviors that Impede Academic Progress,BAP5,Unexcused tardiness to school,10786
+2022-2023,BAP,Behaviors that Impede Academic Progress,BAP4,Unexcused tardiness to class,30506
+2022-2023,BSO,Behaviors related to School Operations,BSO7,Dress Code Violation,1449
+2022-2023,BSO,Behaviors related to School Operations,BSO8,Gambling (games of chance for money or profit),20
+2022-2023,BSO,Behaviors related to School Operations,BSO9,"Possessing items that are inappropriate for school (examples include toys, literature, electronics)",2511
+2022-2023,BSO,Behaviors related to School Operations,BSO10,Possession of stolen items,923
+2022-2023,BSO,Behaviors related to School Operations,BSO11,Unauthorized use of school electronic or other equipment,2770
+2022-2023,BSO,Behaviors related to School Operations,BSO16,Student is in an unauthorized area of the campus (NOT related to school or class attendance/nonattendance).,12697
+2022-2023,BSO,Behaviors related to School Operations,BSO15,Student is not going to class as assigned,34123
+2022-2023,BSO,Behaviors related to School Operations,BSO14,"Vandalism, graffiti or other damage to school or personal property",4632
+2022-2023,BSO,Behaviors related to School Operations,BSO13,Violation of school board policy regarding the possession or use of portable communication devices,15369
+2022-2023,BSO,Behaviors related to School Operations,BSO6,Bringing unauthorized persons to school or allowing unauthorized persons to enter the school building,244
+2022-2023,BSO,Behaviors related to School Operations,BSO5,"Failure to attend assigned disciplinary setting (detention, in-school suspension, Saturday school)",4750
+2022-2023,BSO,Behaviors related to School Operations,BSO3,Refusal to comply with requests of staff in a way that interferes with the operation of school,60457
+2022-2023,BSO,Behaviors related to School Operations,BSO12,Violation of the Acceptable Use of Technology/internet policy,4519
+2022-2023,BSO,Behaviors related to School Operations,BSO1,Altering an official document or record,194
+2022-2023,BSO,Behaviors related to School Operations,BSO2,"Giving false information, misrepresentation",4024
+2022-2023,RB,Relationship Behaviors,RB11,Unwanted or inappropriate physical contact,17631
+2022-2023,RB,Relationship Behaviors,RB10,Failure to respond to questions or requests by staff,25407
+2022-2023,RB,Relationship Behaviors,RB9,"Using slurs based upon the actual or perceived race, ethnicity, color, national origin, citizenship/immigration status, weight, gender, gender identity, gender expression, sexual orientation, or disability",4053
+2022-2023,RB,Relationship Behaviors,RB8,"Using profane or vulgar language or gestures (swearing, cursing, hate speech, gang signs or gestures)",27568
+2022-2023,RB,Relationship Behaviors,RB7,"Teasing, taunting, engaging in a verbal confrontation, verbally inciting a fight",8058
+2022-2023,RB,Relationship Behaviors,RB6,"Speaking to another in an uncivil, discourteous manner",22239
+2022-2023,RB,Relationship Behaviors,RB5,Stealing money or property without physical force,2944
+2022-2023,RB,Relationship Behaviors,RB4,"Saying or writing either directly or through electronic communication sexually suggestive comments, innuendos, propositions, or other remarks of a sexual nature",2067
+2022-2023,RB,Relationship Behaviors,RB3,"Posting, distributing, displaying, or sharing inappropriate material or literature, including using electronics means",1772
+2022-2023,RB,Relationship Behaviors,RB1,Bullying with no physical injury (See Model Policy to Addressing Bullying in Virginia's  Public Schools),2386
+2022-2023,RB,Relationship Behaviors,RB2,Cyberbullying (See Model Policy to Addressing Bullying in Virginia's  Public Schools),535
+2022-2023,BSC,Behaviors of a Safety Concern,BSC16,"Throwing an object that has the potential to cause a disturbance, injury, or property damage",8358
+2022-2023,BSC,Behaviors of a Safety Concern,BSC15,Inciting or causing a substantial disturbance to the operation of school or the safety of staff and/or students,8841
+2022-2023,BSC,Behaviors of a Safety Concern,BSC18,"Exposing body parts, lewd or indecent public behavior",1413
+2022-2023,BSC,Behaviors of a Safety Concern,BSC19,"Physical contact of a sexual nature ¿ patting body parts, pinching, tugging clothing",1192
+2022-2023,BSC,Behaviors of a Safety Concern,BSC21,Stalking as described in the Code of Virginia  section 18.2-60.3,7
+2022-2023,BSC,Behaviors of a Safety Concern,BSC22,Stealing money or property using physical force (no weapon involved),335
+2022-2023,BSC,Behaviors of a Safety Concern,BSC24,Leaving school grounds without permission,4906
+2022-2023,BSC,Behaviors of a Safety Concern,BSC25,Trespassing,415
+2022-2023,BSC,Behaviors of a Safety Concern,BSC26,Possessing dangerous instruments/substances that could be used to inflict harm upon another,1264
+2022-2023,BSC,Behaviors of a Safety Concern,BSC27,Weapons: Possessing any weapon (other than a firearm) as defined by § 18.2-308.1.,1898
+2022-2023,BSC,Behaviors of a Safety Concern,BSC14,Fighting that results in no injury as determined by the school administration,15819
+2022-2023,BSC,Behaviors of a Safety Concern,BSC13,Engaging in reckless behavior the creates a risk of injury to self or others,21203
+2022-2023,BSC,Behaviors of a Safety Concern,BSC12,Fire Related: Possessing items that could be used to set or cause a fire or produce large amounts of smoke,479
+2022-2023,BSC,Behaviors of a Safety Concern,BSC11,Fire alarm: Falsely activating a fire or other disaster alarm,190
+2022-2023,BSC,Behaviors of a Safety Concern,BSC10,Bus: Endangering the safety of others on the bus,6161
+2022-2023,BSC,Behaviors of a Safety Concern,BSC9,Bus: Distracting the bus driver,7655
+2022-2023,BSC,Behaviors of a Safety Concern,BSC8,Harassment: Repeatedly annoying or attacking a student or a group of students or personnel creating  an intimidating or hostile educational or work environment ,1300
+2022-2023,BSC,Behaviors of a Safety Concern,BSC7,Cyberbullying that continues after intervention (See Link: Model Policy to Addressing Bullying in Virginia¿s Public Schools) Cyberbullying that relates a threat to the safety of students and staff should be treated with a higher level of intervention and consequences.,97
+2022-2023,BSC,Behaviors of a Safety Concern,BSC6,Bullying Behavior without physical injury that continues after intervention (See Link: Model Policy to Addressing Bullying in Virginia¿s Public Schools) Bullying that leads to physical injury should be classified as Assault and Battery.,505
+2022-2023,BSC,Behaviors of a Safety Concern,BSC5,"Tobacco: Possessing/Using/Distributing tobacco products, possessing tobacco paraphernalia, electronic cigarettes, vaping equipment",16537
+2022-2023,BSC,Behaviors of a Safety Concern,BSC4,Drugs: Violating school board non-prescription (Over the counter) medication policy or look-alike drug policy,522
+2022-2023,BSC,Behaviors of a Safety Concern,BSC3,Drugs: Possessing drug paraphernalia,1874
+2022-2023,BSC,Behaviors of a Safety Concern,BSC2,Alcohol: Distributing alcohol to other students,116
+2022-2023,BSC,Behaviors of a Safety Concern,BSC1,"Alcohol: Possessing, using, or being under the influence of alcohol",862
+2022-2023,BSC,Behaviors of a Safety Concern,BSC17,"Shoving, pushing, striking, biting another a student with no visible injury",34880
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO1,Assault: Intending to cause physical injury to another person,5328
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO2,Assault and Battery: Causing physical injury to another person,2841
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO3,Fighting: The use of physical violence between students or on another person where there is minor injury as determined by the school administration,5962
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO4,Striking Staff: The use of force against a staff member when no injury is caused,4449
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO5,"Drugs: Possessing controlled substances, illegal drugs inhalants, or synthetic hallucinogens or unauthorized prescription medications",3938
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO6,"Drugs: Being under the influence of controlled substances, illegal drugs, inhalants, or synthetic hallucinogens or unauthorized prescription medications",1590
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO7,Drugs: Using controlled substances or using  illegal drugs or synthetic hallucinogens or unauthorized prescription medications ,1210
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO9,"Fire: Attempting to set, aiding in setting, or setting a fire",116
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO10,Gang-Related Behavior: Engaging in threatening or dangerous behavior that is gang-related as defined in §18.2-46.1,104
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO11,Hazing as defined in §18.2-56 and noted in § 22.1-279.6.,11
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO12,"Threatening, intimidating, or instigating violence, injury or harm to a staff member or members",3449
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO13,"Threatening, intimidating,¿or instigating violence, injury or harm to another student(s) or other(s) (not including written threats)",9159
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO14,"Threatening, intimidation, or instigating violence, injury or harm to another student(s) or other(s) in writing. If the written threat is to a staff member, a report to law enforcement is required unless the student making the threat has a disability.",720
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO15,Using an object not generally considered to be a weapon to threaten or attempt to injure school personnel,167
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO16,Using an object not generally considered to be a weapon to threaten or attempt to injure students or others,454
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO17,Bomb threat - Making a bomb threat,110
+2022-2023,BESO,Behaviors that Endanger Self or Others,BESO18,"A crime in the community where the student was charged with an offense relating to the Commonwealth's laws, which is not covered by any other behavior code, but required to be disclosed to the superintendent of the school division pursuant to ¿ 16.1-260(G)",381
+2022-2023,PD,Behaviors to Determine Persistently Dangerous Schools,PD3,Sexual Assault,14
+2022-2023,PD,Behaviors to Determine Persistently Dangerous Schools,PD4,Attempted Sexual Assault,4
+2022-2023,PD,Behaviors to Determine Persistently Dangerous Schools,PD6,Assault with Firearm or Weapon,20
+2022-2023,PD,Behaviors to Determine Persistently Dangerous Schools,PD7,Actual or Attempted Robbery,12
+2022-2023,PD,Behaviors to Determine Persistently Dangerous Schools,PD8,Kidnapping/Abduction,2
+2022-2023,PD,Behaviors to Determine Persistently Dangerous Schools,PD16,Illegal Possession of Controlled Drugs and Substances with Intent to Distribute or Sell,334
+2022-2023,PD,Behaviors to Determine Persistently Dangerous Schools,PD10,Aggravated Sexual Battery on a Student,3
+2022-2023,PD,Behaviors to Determine Persistently Dangerous Schools,PD11,Illegal Possession of Handgun,45
+2022-2023,PD,Behaviors to Determine Persistently Dangerous Schools,PD12,Illegal Possession of Rifle or Shotgun,8
+2022-2023,PD,Behaviors to Determine Persistently Dangerous Schools,PD13,Illegal Possession of Any Other Projectile Weapon,36
+2022-2023,PD,Behaviors to Determine Persistently Dangerous Schools,PD15,"Illegal Possession of Other Firearms: firebombs, explosive materials or devices, hoax explosive devices per ¿ 18.2-85, or explosive incendiary devices, as defined in ¿ 18.2-433.1, or chemical bombs per ¿ 18.2-87.1",6
+2022-2023,PD,Behaviors to Determine Persistently Dangerous Schools,PD9,Malicious Wounding without a Weapon,4
+2021-2022,BAP,Behaviors that Impede Academic Progress,BAP2,"Interfering with learning outside of the classroom (examples include excessive noise, interrupting a class)",6168
+2021-2022,BAP,Behaviors that Impede Academic Progress,BAP1,"Interfering with learning in the classroom (examples include talking, excessive noise, off-task, out of seat, possessing items that distract)",41672
+2021-2022,BAP,Behaviors that Impede Academic Progress,BAP5,Unexcused tardiness to school,7726
+2021-2022,BAP,Behaviors that Impede Academic Progress,BAP4,Unexcused tardiness to class,27349
+2021-2022,BAP,Behaviors that Impede Academic Progress,BAP3,"Scholastic dishonesty (such as cheating, plagiarism)",2094
+2021-2022,BSO,Behaviors related to School Operations,BSO6,Bringing unauthorized persons to school or allowing unauthorized persons to enter the school building,168
+2021-2022,BSO,Behaviors related to School Operations,BSO7,Dress Code Violation,1636
+2021-2022,BSO,Behaviors related to School Operations,BSO8,Gambling (games of chance for money or profit),23
+2021-2022,BSO,Behaviors related to School Operations,BSO9,"Possessing items that are inappropriate for school (examples include toys, literature, electronics)",1760
+2021-2022,BSO,Behaviors related to School Operations,BSO10,Possession of stolen items,639
+2021-2022,BSO,Behaviors related to School Operations,BSO14,"Vandalism, graffiti or other damage to school or personal property",4705
+2021-2022,BSO,Behaviors related to School Operations,BSO13,Violation of school board policy regarding the possession or use of portable communication devices,6883
+2021-2022,BSO,Behaviors related to School Operations,BSO12,Violation of the Acceptable Use of Technology/internet policy,3253
+2021-2022,BSO,Behaviors related to School Operations,BSO5,"Failure to attend assigned disciplinary setting (detention, in-school suspension, Saturday school)",2314
+2021-2022,BSO,Behaviors related to School Operations,BSO4,Failure to be in ones assigned place ,36251
+2021-2022,BSO,Behaviors related to School Operations,BSO3,Refusal to comply with requests of staff in a way that interferes with the operation of school,44915
+2021-2022,BSO,Behaviors related to School Operations,BSO11,Unauthorized use of school electronic or other equipment,2236
+2021-2022,BSO,Behaviors related to School Operations,BSO1,Altering an official document or record,195
+2021-2022,BSO,Behaviors related to School Operations,BSO2,"Giving false information, misrepresentation",3018
+2021-2022,RB,Relationship Behaviors,RB11,Unwanted or inappropriate physical contact,12257
+2021-2022,RB,Relationship Behaviors,RB10,Failure to respond to questions or requests by staff,17416
+2021-2022,RB,Relationship Behaviors,RB9,"Using slurs based upon the actual or perceived race, ethnicity, color, national origin, citizenship/immigration status, weight, gender, gender identity, gender expression, sexual orientation, or disability",2442
+2021-2022,RB,Relationship Behaviors,RB8,"Using profane or vulgar language or gestures (swearing, cursing, hate speech, gang signs or gestures)",20919
+2021-2022,RB,Relationship Behaviors,RB7,"Teasing, taunting, engaging in a verbal confrontation, verbally inciting a fight",5937
+2021-2022,RB,Relationship Behaviors,RB6,"Speaking to another in an uncivil, discourteous manner",14838
+2021-2022,RB,Relationship Behaviors,RB5,Stealing money or property without physical force,1804
+2021-2022,RB,Relationship Behaviors,RB4,"Saying or writing either directly or through electronic communication sexually suggestive comments, innuendos, propositions, or other remarks of a sexual nature",1819
+2021-2022,RB,Relationship Behaviors,RB3,"Posting, distributing, displaying, or sharing inappropriate material or literature, including using electronics means",1488
+2021-2022,RB,Relationship Behaviors,RB1,Bullying with no physical injury (See Model Policy to Addressing Bullying in Virginia's  Public Schools),1942
+2021-2022,RB,Relationship Behaviors,RB2,Cyberbullying (See Model Policy to Addressing Bullying in Virginia's  Public Schools),412
+2021-2022,BSC,Behaviors of a Safety Concern,BSC15,Inciting or causing a substantial disturbance to the operation of school or the safety of staff and/or students,6495
+2021-2022,BSC,Behaviors of a Safety Concern,BSC14,Fighting that results in no injury as determined by the school administration,14318
+2021-2022,BSC,Behaviors of a Safety Concern,BSC17,"Shoving, pushing, striking, biting another a student with no visible injury",23621
+2021-2022,BSC,Behaviors of a Safety Concern,BSC18,"Exposing body parts, lewd or indecent public behavior",859
+2021-2022,BSC,Behaviors of a Safety Concern,BSC19,"Physical contact of a sexual nature ¿ patting body parts, pinching, tugging clothing",962
+2021-2022,BSC,Behaviors of a Safety Concern,BSC21,Stalking as described in the Code of Virginia  section 18.2-60.3,11
+2021-2022,BSC,Behaviors of a Safety Concern,BSC22,Stealing money or property using physical force (no weapon involved),279
+2021-2022,BSC,Behaviors of a Safety Concern,BSC24,Leaving school grounds without permission,5121
+2021-2022,BSC,Behaviors of a Safety Concern,BSC25,Trespassing,345
+2021-2022,BSC,Behaviors of a Safety Concern,BSC26,Possessing dangerous instruments/substances that could be used to inflict harm upon another,1154
+2021-2022,BSC,Behaviors of a Safety Concern,BSC27,Weapons: Possessing any weapon (other than a firearm) as defined by § 18.2-308.1.,1663
+2021-2022,BSC,Behaviors of a Safety Concern,BSC13,Engaging in reckless behavior the creates a risk of injury to self or others,18128
+2021-2022,BSC,Behaviors of a Safety Concern,BSC12,Fire Related: Possessing items that could be used to set or cause a fire or produce large amounts of smoke,437
+2021-2022,BSC,Behaviors of a Safety Concern,BSC11,Fire alarm: Falsely activating a fire or other disaster alarm,205
+2021-2022,BSC,Behaviors of a Safety Concern,BSC10,Bus: Endangering the safety of others on the bus,6130
+2021-2022,BSC,Behaviors of a Safety Concern,BSC9,Bus: Distracting the bus driver,5739
+2021-2022,BSC,Behaviors of a Safety Concern,BSC8,Harassment: Repeatedly annoying or attacking a student or a group of students or personnel creating  an intimidating or hostile educational or work environment ,1154
+2021-2022,BSC,Behaviors of a Safety Concern,BSC7,Cyberbullying that continues after intervention (See Link: Model Policy to Addressing Bullying in Virginia¿s Public Schools) Cyberbullying that relates a threat to the safety of students and staff should be treated with a higher level of intervention and consequences.,95
+2021-2022,BSC,Behaviors of a Safety Concern,BSC6,Bullying Behavior without physical injury that continues after intervention (See Link: Model Policy to Addressing Bullying in Virginia¿s Public Schools) Bullying that leads to physical injury should be classified as Assault and Battery.,426
+2021-2022,BSC,Behaviors of a Safety Concern,BSC5,"Tobacco: Possessing/Using/Distributing tobacco products, possessing tobacco paraphernalia, electronic cigarettes, vaping equipment",14416
+2021-2022,BSC,Behaviors of a Safety Concern,BSC4,Drugs: Violating school board non-prescription (Over the counter) medication policy or look-alike drug policy,479
+2021-2022,BSC,Behaviors of a Safety Concern,BSC3,Drugs: Possessing drug paraphernalia,1157
+2021-2022,BSC,Behaviors of a Safety Concern,BSC2,Alcohol: Distributing alcohol to other students,54
+2021-2022,BSC,Behaviors of a Safety Concern,BSC1,"Alcohol: Possessing, using, or being under the influence of alcohol",591
+2021-2022,BSC,Behaviors of a Safety Concern,BSC16,"Throwing an object that has the potential to cause a disturbance, injury, or property damage",6140
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO1,Assault: Intending to cause physical injury to another person,3622
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO2,Assault and Battery: Causing physical injury to another person,2007
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO3,Fighting: The use of physical violence between students or on another person where there is minor injury as determined by the school administration,5104
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO4,Striking Staff: The use of force against a staff member when no injury is caused,3154
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO5,"Drugs: Possessing controlled substances, illegal drugs inhalants, or synthetic hallucinogens or unauthorized prescription medications",2537
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO6,"Drugs: Being under the influence of controlled substances, illegal drugs, inhalants, or synthetic hallucinogens or unauthorized prescription medications",905
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO7,Drugs: Using controlled substances or using  illegal drugs or synthetic hallucinogens or unauthorized prescription medications ,776
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO9,"Fire: Attempting to set, aiding in setting, or setting a fire",147
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO10,Gang-Related Behavior: Engaging in threatening or dangerous behavior that is gang-related as defined in §18.2-46.1,86
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO11,Hazing as defined in §18.2-56 and noted in § 22.1-279.6.,12
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO12,"Threatening, intimidating, or instigating violence, injury or harm to a staff member or members",2453
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO13,"Threatening, intimidating, or instigating violence, injury or harm to another student(s) or other(s)",5983
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO15,Using an object not generally considered to be a weapon to threaten or attempt to injure school personnel,140
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO16,Using an object not generally considered to be a weapon to threaten or attempt to injure students or others,360
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO17,Bomb threat - Making a bomb threat,82
+2021-2022,BESO,Behaviors that Endanger Self or Others,BESO18,"A crime in the community where the student was charged with an offense relating to the Commonwealth's laws, which is not covered by any other behavior code, but required to be disclosed to the superintendent of the school division pursuant to ¿ 16.1-260(G)",176
+2021-2022,PD,Behaviors to Determine Persistently Dangerous Schools,PD1,Homicide - Firearm,1
+2021-2022,PD,Behaviors to Determine Persistently Dangerous Schools,PD3,Sexual Assault,15
+2021-2022,PD,Behaviors to Determine Persistently Dangerous Schools,PD4,Attempted Sexual Assault,2
+2021-2022,PD,Behaviors to Determine Persistently Dangerous Schools,PD6,Assault with Firearm or Weapon,23
+2021-2022,PD,Behaviors to Determine Persistently Dangerous Schools,PD7,Actual or Attempted Robbery,7
+2021-2022,PD,Behaviors to Determine Persistently Dangerous Schools,PD8,Kidnapping/Abduction,1
+2021-2022,PD,Behaviors to Determine Persistently Dangerous Schools,PD16,Illegal Possession of Controlled Drugs and Substances with Intent to Distribute or Sell,199
+2021-2022,PD,Behaviors to Determine Persistently Dangerous Schools,PD10,Aggravated Sexual Battery on a Student,6
+2021-2022,PD,Behaviors to Determine Persistently Dangerous Schools,PD11,Illegal Possession of Handgun,65
+2021-2022,PD,Behaviors to Determine Persistently Dangerous Schools,PD12,Illegal Possession of Rifle or Shotgun,2
+2021-2022,PD,Behaviors to Determine Persistently Dangerous Schools,PD13,Illegal Possession of Any Other Projectile Weapon,44
+2021-2022,PD,Behaviors to Determine Persistently Dangerous Schools,PD15,Illegal Possession of Other Firearms,10
+2021-2022,PD,Behaviors to Determine Persistently Dangerous Schools,PD9,Malicious Wounding without a Weapon,4
