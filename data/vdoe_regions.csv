@@ -1,0 +1,134 @@
+region_name,region_number,district_name,GEOID
+Tidewater,2,Accomack County,51001
+Valley,5,Albemarle County,51003
+Northern Virginia,4,Alexandria City,51510
+Western Virginia,6,Alleghany Highlands County,51005
+Southside,8,Amelia County,51007
+Valley,5,Amherst County,51009
+Southside,8,Appomattox County,51011
+Northern Virginia,4,Arlington County,51013
+Valley,5,Augusta County,51015
+Valley,5,Bath County,51017
+Valley,5,Bedford County,51019
+Southwest,7,Bland County,51021
+Western Virginia,6,Botetourt County,51023
+Southwest,7,Bristol City,51520
+Southside,8,Brunswick County,51025
+Southwest,7,Buchanan County,51027
+Southside,8,Buckingham County,51029
+Valley,5,Buena Vista City,51530
+Valley,5,Campbell County,51031
+Northern Neck,3,Caroline County,51033
+Southwest,7,Carroll County,51035
+Central Virginia,1,Charles City County,51036
+Southside,8,Charlotte County,51037
+Valley,5,Charlottesville City,51540
+Tidewater,2,Chesapeake City,51550
+Central Virginia,1,Chesterfield County,51041
+Northern Virginia,4,Clarke County,51043
+Valley,5,Covington City,51580
+Central Virginia,1,Colonial Heights City,51570
+Western Virginia,6,Craig County,51045
+Northern Virginia,4,Culpeper County,51047
+Southside,8,Cumberland County,51049
+Western Virginia,6,Danville City,51590
+Southwest,7,Dickenson County,51051
+Central Virginia,1,Dinwiddie County,51053
+Southside,8,Emporia City,51595
+Northern Neck,3,Essex County,51057
+Northern Virginia,4,Fairfax City,51600
+Northern Virginia,4,Fairfax County,51059
+Northern Virginia,4,Falls Church City,51610
+Northern Virginia,4,Fauquier County,51061
+Western Virginia,6,Floyd County,51063
+Valley,5,Fluvanna County,51065
+Tidewater,2,Franklin City,51620
+Western Virginia,6,Franklin County,51067
+Northern Virginia,4,Frederick County,51069
+Northern Neck,3,Fredericksburg City,51630
+Southwest,7,Galax City,51640
+Southwest,7,Giles County,51071
+Northern Neck,3,Gloucester County,51073
+Central Virginia,1,Goochland County,51075
+Southwest,7,Grayson County,51077
+Valley,5,Greene County,51079
+Southside,8,Greensville County,51081
+Southside,8,Halifax County,51083
+Tidewater,2,Hampton City,51650
+Central Virginia,1,Hanover County,51085
+Valley,5,Harrisonburg City,51660
+Central Virginia,1,Henrico County,51087
+Western Virginia,6,Henry County,51089
+Valley,5,Highland County,51091
+Central Virginia,1,Hopewell City,51670
+Tidewater,2,Isle of Wight County,51093
+Tidewater,2,James City County,51095
+Northern Neck,3,King and Queen County,51097
+Northern Neck,3,King George County,51099
+Northern Neck,3,King William County,51101
+Northern Neck,3,Lancaster County,51103
+Southwest,7,Lee County,51105
+Valley,5,Lexington City,51678
+Northern Virginia,4,Loudoun County,51107
+Valley,5,Louisa County,51109
+Southside,8,Lunenburg County,51111
+Valley,5,Lynchburg City,51680
+Northern Virginia,4,Madison County,51113
+Northern Virginia,4,Manassas City,51683
+Northern Virginia,4,Manassas Park City,51685
+Western Virginia,6,Martinsville City,51690
+Northern Neck,3,Mathews County,51115
+Southside,8,Mecklenburg County,51117
+Northern Neck,3,Middlesex County,51119
+Western Virginia,6,Montgomery County,51121
+Valley,5,Nelson County,51125
+Central Virginia,1,New Kent County,51127
+Tidewater,2,Newport News City,51700
+Tidewater,2,Norfolk City,51710
+Tidewater,2,Northampton County,51131
+Northern Neck,3,Northumberland County,51133
+Southwest,7,Norton City,51720
+Southside,8,Nottoway County,51135
+Northern Virginia,4,Orange County,51137
+Northern Virginia,4,Page County,51139
+Western Virginia,6,Patrick County,51141
+Central Virginia,1,Petersburg City,51730
+Western Virginia,6,Pittsylvania County,51143
+Tidewater,2,Poquoson City,51735
+Tidewater,2,Portsmouth City,51740
+Central Virginia,1,Powhatan County,51145
+Southside,8,Prince Edward County,51147
+Central Virginia,1,Prince George County,51149
+Northern Virginia,4,Prince William County,51153
+Southwest,7,Pulaski County,51155
+Southwest,7,Radford City,51750
+Northern Virginia,4,Rappahannock County,51157
+Central Virginia,1,Richmond City,51760
+Northern Neck,3,Richmond County,51159
+Western Virginia,6,Roanoke City,51770
+Western Virginia,6,Roanoke County,51161
+Valley,5,Rockbridge County,51163
+Valley,5,Rockingham County,51165
+Southwest,7,Russell County,51167
+Western Virginia,6,Salem City,51775
+Southwest,7,Scott County,51169
+Northern Virginia,4,Shenandoah County,51171
+Southwest,7,Smyth County,51173
+Tidewater,2,Southampton County,51175
+Northern Neck,3,Spotsylvania County,51177
+Northern Neck,3,Stafford County,51179
+Valley,5,Staunton City,51790
+Tidewater,2,Suffolk City,51800
+Central Virginia,1,Surry County,51181
+Central Virginia,1,Sussex County,51183
+Southwest,7,Tazewell County,51185
+Tidewater,2,Virginia Beach City,51810
+Northern Virginia,4,Warren County,51187
+Southwest,7,Washington County,51191
+Valley,5,Waynesboro City,51820
+Northern Neck,3,Westmoreland County,51193
+Tidewater,2,Williamsburg City,51830
+Northern Virginia,4,Winchester City,51840
+Southwest,7,Wise County,51195
+Southwest,7,Wythe County,51197
+Tidewater,2,York County,51199

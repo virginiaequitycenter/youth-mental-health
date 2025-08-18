@@ -1,0 +1,11 @@
+# Ignore project and user files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Ignore raw data 
+/data/raw
+
+# Ignore test scripts 
+/scripts/explore*

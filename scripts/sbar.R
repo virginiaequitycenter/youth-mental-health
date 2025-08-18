@@ -106,56 +106,27 @@ sbar_sch <- sbar_sch %>%
 
 write_csv(sbar_sch, "data/sbar_school.csv")
 
-# Explore -----
+# Behavior Codes ----
 
-# Filter to firearm-related incidents:
+beh_url <- c("https://www.doe.virginia.gov/home/showpublisheddocument/57882/638862802164530000")
 
-# Behaviors of interest: 
-# "Assault with Firearm or Weapon", "Illegal Possession of Rifle or Shotgun", 
-# "Illegal Possession of Handgun", "Illegal Possession of Any Other Projectile Weapon",
-# "Illegal Possession of Other Firearms:..."
-sbar_firearm <- sbar %>%
-  filter(grepl("Firearm or Weapon|Rifle|Handgun|Other Projectile Weapon|Other Firearms", behavior)) %>%
-  group_by(division_name, school_year) %>%
-  summarize(total_incidents = sum(number_of_events))
+dest_beh <- "data/raw/sbar_behavior_codes.xlsx"
 
+walk2(beh_url, dest_beh, custom_dl_func)
 
+beh <- map_dfr(dest_beh, 
+               ~read_excel(.x, sheet = "Behavior Codes", col_names = TRUE,
+                           skip = 2))
+beh <- beh %>% 
+  clean_names() %>%
+  mutate(behavior_group = case_when(
+    str_detect(behavior_code, "BAP") ~ "BAP: Behaviors that Impede the Academic Progress (BAP) of the student or of other students",
+    str_detect(behavior_code, "BSO") ~ "BSO: Behaviors related to School Operations (BSO) interfere with the daily operation of school procedures",
+    str_detect(behavior_code, "RB") ~ "RB: Relationship Behaviors (RB) create a negative relationship between two or more members of the school community (No physical harm is done.)",
+    str_detect(behavior_code, "BSC") ~ "BSC: Behaviors of a Safety Concern (BSC) create unsafe conditions for students, staff, and/or visitors to the school.",
+    str_detect(behavior_code, "BESO") ~ "BESO: Behaviors that Endanger Self or Others (BESO) These behaviors endanger the health, safety, or welfare of either the student or others in the school community.",
+    str_detect(behavior_code, "PD") ~ "PD: Behaviors described in the Virginia’s Unsafe School Choice Option Policy required by the federal Every Student Succeeds Act of 2015."
+  )) %>%
+  filter(!is.na(description) & !is.na(behavior_code))
 
-# Join with school enrollment numbers to calculate rates ----
-# ACS school enrollment 
-raw <- get_acs(geography = "county",
-               variables = c("B01003_001", "B14001_005", "B14001_006", "B14001_007"),
-               state = "VA",
-               survey = "acs5",
-               year = 2023,
-               geometry = TRUE,
-               output = "wide")
-
-acs <- raw %>%
-  mutate(county = gsub('.{10}$', "", NAME)) %>%
-  select(-ends_with("M"), -NAME) %>%
-  rename(pop_est = B01003_001E,
-         grade1to4 = B14001_005E,
-         grade5to8 = B14001_006E,
-         grade9to12 = B14001_007E) %>%
-  group_by(county) %>%
-  mutate(enrolled = sum(grade1to4, grade5to8, grade9to12)) %>%
-  ungroup() %>%
-  st_as_sf() %>%
-  st_transform(crs = 4326)
-
-sbar_firearms <- acs %>%
-  left_join(sbar, by = join_by(county == division_name)) %>%
-  mutate(incident_rate = (total_incidents / enrolled))
-
-# Quickly visualize to confirm
-plot(sbar_firearms["incident_rate"])
-plot(sbar_firearms["total_incidents"])
-
-sbar_firearms <- sbar_firearms %>%
-  drop_na(incident_rate) %>%
-  select(district = county, school_year, total_pop = pop_est, enrolled, total_incidents, 
-         incident_rate, geometry)
-
-# Save ----
-saveRDS(sbar_firarms, "data/sbar_firearms.RDS")
+write_csv(beh, "data/sbar_behavior_codes.csv")
