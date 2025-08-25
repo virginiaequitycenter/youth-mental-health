@@ -6,6 +6,7 @@
 
 # Ignore raw data 
 /data/raw
+/data/temp
 
 # Ignore test scripts 
 /scripts/explore*

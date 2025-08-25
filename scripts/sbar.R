@@ -79,16 +79,38 @@ sbar_sch <- map_dfr(files_sch, ~read_excel(.x, sheet = "Events by Behavior"))
 
 # Tidy & Save ----
 
-regions <- tibble(
-  region_number = c(1:8),
-  region_name = c("Central Virginia", "Tidewater", "Northern Neck", "Northern Virginia",
-             "Valley", "Western Virginia", "Southwest", "Southside"))
+regions <- read_csv("data/vdoe_regions.csv")
 
-# Division: 
+## Division ----
+
+# Deal with missing, renamed, etc. school districts 
 sbar_div <- sbar_div %>%
   clean_names() %>%
   rename(region_number = region) %>%
-  left_join(regions)
+  mutate(division_name = case_when(
+    grepl("Alleghany", division_name) ~ "Alleghany Highlands County",
+    grepl("Colonial Beach", division_name) ~ "Westmoreland County",
+    grepl("Enterprise", division_name) ~ "Newport News City",
+    grepl("West Point", division_name) ~ "King William County",
+    TRUE ~ division_name))
+  
+# Join with regions to get GEOID 
+sbar_div <- sbar_div %>%
+  select(-region_number) %>%
+  left_join(regions, by = join_by(division_name == district_name))
+
+# Fix combined Williamsburg/James City County District 
+sbar_div <- sbar_div %>%
+  mutate(
+    region_name = case_when(
+      division_name == "Williamsburg-James City County" ~ "Tidewater",
+      TRUE ~ region_name),
+    region_number = case_when(
+      division_name == "Williamsburg-James City County" ~ 2,
+      TRUE ~ region_number),
+    GEOID = case_when(
+      division_name == "Williamsburg-James City County" ~ 51830,
+      TRUE ~ GEOID))
 
 write_csv(sbar_div, "data/sbar_division.csv")
 
