@@ -3,10 +3,13 @@
 .Rhistory
 .RData
 .Ruserdata
+/_extensions
 
-# Ignore raw data 
+# Ignore raw and test data 
 /data/raw
 /data/temp
 
-# Ignore test scripts 
+# Ignore test and temp scripts 
 /scripts/explore*
+explore_sbar_files/
+*.html

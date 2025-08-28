@@ -1,0 +1,526 @@
+school_year,division_number,division_name,ft_count,pt_count,total_count,region_name,region_number,GEOID
+2021-2022,1,Accomack County,4751,1,4752,Tidewater,2,51001
+2021-2022,2,Albemarle County,13721,28,13749,Valley,5,51003
+2021-2022,101,Alexandria City,15676,36,15712,Northern Virginia,4,51510
+2021-2022,3,Alleghany County,1911,NA,1911,Western Virginia,6,51005
+2021-2022,4,Amelia County,1635,NA,1635,Southside,8,51007
+2021-2022,5,Amherst County,3970,NA,3970,Valley,5,51009
+2021-2022,6,Appomattox County,2338,NA,2338,Southside,8,51011
+2021-2022,7,Arlington County,27042,3,27045,Northern Virginia,4,51013
+2021-2022,8,Augusta County,9929,2,9931,Valley,5,51015
+2021-2022,9,Bath County,502,NA,502,Valley,5,51017
+2021-2022,10,Bedford County,9008,1,9009,Valley,5,51019
+2021-2022,11,Bland County,719,NA,719,Southwest,7,51021
+2021-2022,12,Botetourt County,4472,NA,4472,Western Virginia,6,51023
+2021-2022,102,Bristol City,2200,NA,2200,Southwest,7,51520
+2021-2022,13,Brunswick County,1419,NA,1419,Southside,8,51025
+2021-2022,14,Buchanan County,2427,NA,2427,Southwest,7,51027
+2021-2022,15,Buckingham County,1933,NA,1933,Southside,8,51029
+2021-2022,103,Buena Vista City,887,NA,887,Valley,5,51530
+2021-2022,16,Campbell County,7854,NA,7854,Valley,5,51031
+2021-2022,17,Caroline County,4238,NA,4238,Northern Neck,3,51033
+2021-2022,18,Carroll County,3517,2,3519,Southwest,7,51035
+2021-2022,19,Charles City County,528,NA,528,Central Virginia,1,51036
+2021-2022,20,Charlotte County,1702,NA,1702,Southside,8,51037
+2021-2022,104,Charlottesville City,4288,2,4290,Valley,5,51540
+2021-2022,136,Chesapeake City,40478,NA,40478,Tidewater,2,51550
+2021-2022,21,Chesterfield County,62445,55,62500,Central Virginia,1,51041
+2021-2022,22,Clarke County,1833,2,1835,Northern Virginia,4,51043
+2021-2022,202,Colonial Beach,625,NA,625,Northern Neck,3,51193
+2021-2022,106,Colonial Heights City,2786,NA,2786,Central Virginia,1,51570
+2021-2022,107,Covington City,963,3,966,Valley,5,51580
+2021-2022,23,Craig County,513,NA,513,Western Virginia,6,51045
+2021-2022,24,Culpeper County,8366,NA,8366,Northern Virginia,4,51047
+2021-2022,25,Cumberland County,1208,NA,1208,Southside,8,51049
+2021-2022,108,Danville City,5736,NA,5736,Western Virginia,6,51590
+2021-2022,26,Dickenson County,1965,NA,1965,Southwest,7,51051
+2021-2022,27,Dinwiddie County,4189,NA,4189,Central Virginia,1,51053
+2021-2022,28,Essex County,1393,NA,1393,Northern Neck,3,51057
+2021-2022,29,Fairfax County,178605,30,178635,Northern Virginia,4,51059
+2021-2022,109,Falls Church City,2493,NA,2493,Northern Virginia,4,51610
+2021-2022,30,Fauquier County,10873,1,10874,Northern Virginia,4,51061
+2021-2022,31,Floyd County,1776,NA,1776,Western Virginia,6,51063
+2021-2022,32,Fluvanna County,3316,NA,3316,Valley,5,51065
+2021-2022,135,Franklin City,992,NA,992,Tidewater,2,51620
+2021-2022,33,Franklin County,6319,1,6320,Western Virginia,6,51067
+2021-2022,34,Frederick County,13875,1,13876,Northern Virginia,4,51069
+2021-2022,110,Fredericksburg City,3624,NA,3624,Northern Neck,3,51630
+2021-2022,111,Galax City,1354,1,1355,Southwest,7,51640
+2021-2022,35,Giles County,3528,3,3531,Southwest,7,51071
+2021-2022,36,Gloucester County,5036,17,5053,Northern Neck,3,51073
+2021-2022,37,Goochland County,2596,NA,2596,Central Virginia,1,51075
+2021-2022,38,Grayson County,1530,NA,1530,Southwest,7,51077
+2021-2022,39,Greene County,2897,NA,2897,Valley,5,51079
+2021-2022,40,Greensville County,2037,NA,2037,Southside,8,51081
+2021-2022,41,Halifax County,4588,5,4593,Southside,8,51083
+2021-2022,112,Hampton City,19619,NA,19619,Tidewater,2,51650
+2021-2022,42,Hanover County,16865,NA,16865,Central Virginia,1,51085
+2021-2022,113,Harrisonburg City,6659,1,6660,Valley,5,51660
+2021-2022,43,Henrico County,49991,NA,49991,Central Virginia,1,51087
+2021-2022,44,Henry County,7025,NA,7025,Western Virginia,6,51089
+2021-2022,45,Highland County,178,NA,178,Valley,5,51091
+2021-2022,114,Hopewell City,4075,2,4077,Central Virginia,1,51670
+2021-2022,46,Isle of Wight County,5619,NA,5619,Tidewater,2,51093
+2021-2022,48,King George County,4467,1,4468,Northern Neck,3,51099
+2021-2022,50,King William County,1983,1,1984,Northern Neck,3,51101
+2021-2022,49,King and Queen County,867,NA,867,Northern Neck,3,51097
+2021-2022,51,Lancaster County,1002,NA,1002,Northern Neck,3,51103
+2021-2022,52,Lee County,2937,NA,2937,Southwest,7,51105
+2021-2022,137,Lexington City,476,NA,476,Valley,5,51678
+2021-2022,53,Loudoun County,81186,325,81511,Northern Virginia,4,51107
+2021-2022,54,Louisa County,5168,NA,5168,Valley,5,51109
+2021-2022,55,Lunenburg County,1607,NA,1607,Southside,8,51111
+2021-2022,115,Lynchburg City,7830,49,7879,Valley,5,51680
+2021-2022,56,Madison County,1619,45,1664,Northern Virginia,4,51113
+2021-2022,143,Manassas City,7159,433,7592,Northern Virginia,4,51683
+2021-2022,144,Manassas Park City,3508,NA,3508,Northern Virginia,4,51685
+2021-2022,116,Martinsville City,1817,NA,1817,Western Virginia,6,51690
+2021-2022,57,Mathews County,903,NA,903,Northern Neck,3,51115
+2021-2022,58,Mecklenburg County,4438,2,4440,Southside,8,51117
+2021-2022,59,Middlesex County,1202,NA,1202,Northern Neck,3,51119
+2021-2022,60,Montgomery County,9698,6,9704,Western Virginia,6,51121
+2021-2022,62,Nelson County,1538,NA,1538,Valley,5,51125
+2021-2022,63,New Kent County,3273,NA,3273,Central Virginia,1,51127
+2021-2022,117,Newport News City,26672,5,26677,Tidewater,2,51700
+2021-2022,118,Norfolk City,27478,NA,27478,Tidewater,2,51710
+2021-2022,65,Northampton County,1350,NA,1350,Tidewater,2,51131
+2021-2022,66,Northumberland County,1181,NA,1181,Northern Neck,3,51133
+2021-2022,119,Norton City,828,NA,828,Southwest,7,51720
+2021-2022,67,Nottoway County,1824,NA,1824,Southside,8,51135
+2021-2022,68,Orange County,5027,1,5028,Northern Virginia,4,51137
+2021-2022,69,Page County,3136,NA,3136,Northern Virginia,4,51139
+2021-2022,70,Patrick County,2538,NA,2538,Western Virginia,6,51141
+2021-2022,120,Petersburg City,4179,NA,4179,Central Virginia,1,51730
+2021-2022,71,Pittsylvania County,7915,NA,7915,Western Virginia,6,51143
+2021-2022,142,Poquoson City,2056,32,2088,Tidewater,2,51735
+2021-2022,121,Portsmouth City,13517,NA,13517,Tidewater,2,51740
+2021-2022,72,Powhatan County,4295,10,4305,Central Virginia,1,51145
+2021-2022,73,Prince Edward County,1914,3,1917,Southside,8,51147
+2021-2022,74,Prince George County,6139,2,6141,Central Virginia,1,51149
+2021-2022,75,Prince William County,90116,19,90135,Northern Virginia,4,51153
+2021-2022,77,Pulaski County,4041,NA,4041,Southwest,7,51155
+2021-2022,122,Radford City,2701,NA,2701,Southwest,7,51750
+2021-2022,78,Rappahannock County,753,NA,753,Northern Virginia,4,51157
+2021-2022,123,Richmond City,21177,2,21179,Central Virginia,1,51760
+2021-2022,79,Richmond County,1350,NA,1350,Northern Neck,3,51159
+2021-2022,124,Roanoke City,13701,21,13722,Western Virginia,6,51770
+2021-2022,80,Roanoke County,13731,NA,13731,Western Virginia,6,51161
+2021-2022,81,Rockbridge County,2630,4,2634,Valley,5,51163
+2021-2022,82,Rockingham County,11289,21,11310,Valley,5,51165
+2021-2022,83,Russell County,3456,NA,3456,Southwest,7,51167
+2021-2022,139,Salem City,3799,NA,3799,Western Virginia,6,51775
+2021-2022,84,Scott County,3535,2,3537,Southwest,7,51169
+2021-2022,85,Shenandoah County,5679,NA,5679,Northern Virginia,4,51171
+2021-2022,86,Smyth County,4052,NA,4052,Southwest,7,51173
+2021-2022,87,Southampton County,2600,NA,2600,Tidewater,2,51175
+2021-2022,88,Spotsylvania County,23782,12,23794,Northern Neck,3,51177
+2021-2022,89,Stafford County,30456,17,30473,Northern Neck,3,51179
+2021-2022,126,Staunton City,2740,NA,2740,Valley,5,51790
+2021-2022,127,Suffolk City,14048,NA,14048,Tidewater,2,51800
+2021-2022,90,Surry County,657,NA,657,Central Virginia,1,51181
+2021-2022,91,Sussex County,975,NA,975,Central Virginia,1,51183
+2021-2022,92,Tazewell County,5420,NA,5420,Southwest,7,51185
+2021-2022,128,Virginia Beach City,65498,NA,65498,Tidewater,2,51810
+2021-2022,93,Warren County,5170,2,5172,Northern Virginia,4,51187
+2021-2022,94,Washington County,6732,3,6735,Southwest,7,51191
+2021-2022,130,Waynesboro City,3021,1,3022,Valley,5,51820
+2021-2022,207,West Point,813,NA,813,Northern Neck,3,51101
+2021-2022,95,Westmoreland County,1531,NA,1531,Northern Neck,3,51193
+2021-2022,131,Williamsburg-James City County,11088,234,11322,Tidewater,2,51830
+2021-2022,132,Winchester City,4143,NA,4143,Northern Virginia,4,51840
+2021-2022,96,Wise County,5765,NA,5765,Southwest,7,51195
+2021-2022,97,Wythe County,3831,2,3833,Southwest,7,51197
+2021-2022,98,York County,12554,320,12874,Tidewater,2,51199
+2022-2023,1,Accomack County,4726,1,4727,Tidewater,2,51001
+2022-2023,2,Albemarle County,13952,18,13970,Valley,5,51003
+2022-2023,101,Alexandria City,16046,43,16089,Northern Virginia,4,51510
+2022-2023,3,Alleghany Highlands,2878,2,2880,Western Virginia,6,51005
+2022-2023,4,Amelia County,1663,NA,1663,Southside,8,51007
+2022-2023,5,Amherst County,3987,NA,3987,Valley,5,51009
+2022-2023,6,Appomattox County,2361,NA,2361,Southside,8,51011
+2022-2023,7,Arlington County,27582,NA,27582,Northern Virginia,4,51013
+2022-2023,8,Augusta County,10076,1,10077,Valley,5,51015
+2022-2023,9,Bath County,504,NA,504,Valley,5,51017
+2022-2023,10,Bedford County,9089,1,9090,Valley,5,51019
+2022-2023,11,Bland County,796,NA,796,Southwest,7,51021
+2022-2023,12,Botetourt County,4494,NA,4494,Western Virginia,6,51023
+2022-2023,102,Bristol City,2195,NA,2195,Southwest,7,51520
+2022-2023,13,Brunswick County,1405,NA,1405,Southside,8,51025
+2022-2023,14,Buchanan County,2462,NA,2462,Southwest,7,51027
+2022-2023,15,Buckingham County,1992,NA,1992,Southside,8,51029
+2022-2023,103,Buena Vista City,890,NA,890,Valley,5,51530
+2022-2023,16,Campbell County,7873,NA,7873,Valley,5,51031
+2022-2023,17,Caroline County,4337,NA,4337,Northern Neck,3,51033
+2022-2023,18,Carroll County,3505,2,3507,Southwest,7,51035
+2022-2023,19,Charles City County,562,NA,562,Central Virginia,1,51036
+2022-2023,20,Charlotte County,1668,NA,1668,Southside,8,51037
+2022-2023,104,Charlottesville City,4485,6,4491,Valley,5,51540
+2022-2023,136,Chesapeake City,40821,NA,40821,Tidewater,2,51550
+2022-2023,21,Chesterfield County,63916,46,63962,Central Virginia,1,51041
+2022-2023,22,Clarke County,1892,2,1894,Northern Virginia,4,51043
+2022-2023,202,Colonial Beach,574,NA,574,Northern Neck,3,51193
+2022-2023,106,Colonial Heights City,2843,NA,2843,Central Virginia,1,51570
+2022-2023,23,Craig County,476,NA,476,Western Virginia,6,51045
+2022-2023,24,Culpeper County,8353,NA,8353,Northern Virginia,4,51047
+2022-2023,25,Cumberland County,1283,NA,1283,Southside,8,51049
+2022-2023,108,Danville City,5685,NA,5685,Western Virginia,6,51590
+2022-2023,26,Dickenson County,1946,NA,1946,Southwest,7,51051
+2022-2023,27,Dinwiddie County,4257,NA,4257,Central Virginia,1,51053
+2022-2023,28,Essex County,1181,NA,1181,Northern Neck,3,51057
+2022-2023,29,Fairfax County,180100,27,180127,Northern Virginia,4,51059
+2022-2023,109,Falls Church City,2507,NA,2507,Northern Virginia,4,51610
+2022-2023,30,Fauquier County,10839,NA,10839,Northern Virginia,4,51061
+2022-2023,31,Floyd County,1746,4,1750,Western Virginia,6,51063
+2022-2023,32,Fluvanna County,3439,NA,3439,Valley,5,51065
+2022-2023,135,Franklin City,1023,NA,1023,Tidewater,2,51620
+2022-2023,33,Franklin County,6252,NA,6252,Western Virginia,6,51067
+2022-2023,34,Frederick County,13960,2,13962,Northern Virginia,4,51069
+2022-2023,110,Fredericksburg City,3762,NA,3762,Northern Neck,3,51630
+2022-2023,111,Galax City,1393,1,1394,Southwest,7,51640
+2022-2023,35,Giles County,3460,2,3462,Southwest,7,51071
+2022-2023,36,Gloucester County,5059,34,5093,Northern Neck,3,51073
+2022-2023,37,Goochland County,2643,NA,2643,Central Virginia,1,51075
+2022-2023,38,Grayson County,1561,NA,1561,Southwest,7,51077
+2022-2023,39,Greene County,2838,NA,2838,Valley,5,51079
+2022-2023,40,Greensville County,2034,NA,2034,Southside,8,51081
+2022-2023,41,Halifax County,4621,4,4625,Southside,8,51083
+2022-2023,112,Hampton City,19796,NA,19796,Tidewater,2,51650
+2022-2023,42,Hanover County,17066,NA,17066,Central Virginia,1,51085
+2022-2023,113,Harrisonburg City,6682,2,6684,Valley,5,51660
+2022-2023,43,Henrico County,50389,NA,50389,Central Virginia,1,51087
+2022-2023,44,Henry County,7010,NA,7010,Western Virginia,6,51089
+2022-2023,45,Highland County,200,NA,200,Valley,5,51091
+2022-2023,114,Hopewell City,3984,1,3985,Central Virginia,1,51670
+2022-2023,46,Isle of Wight County,5627,2,5629,Tidewater,2,51093
+2022-2023,48,King George County,4521,NA,4521,Northern Neck,3,51099
+2022-2023,50,King William County,2084,NA,2084,Northern Neck,3,51101
+2022-2023,49,King and Queen County,858,NA,858,Northern Neck,3,51097
+2022-2023,51,Lancaster County,1039,NA,1039,Northern Neck,3,51103
+2022-2023,52,Lee County,2949,NA,2949,Southwest,7,51105
+2022-2023,137,Lexington City,487,NA,487,Valley,5,51678
+2022-2023,53,Loudoun County,81746,336,82082,Northern Virginia,4,51107
+2022-2023,54,Louisa County,5173,NA,5173,Valley,5,51109
+2022-2023,55,Lunenburg County,1575,NA,1575,Southside,8,51111
+2022-2023,115,Lynchburg City,7856,47,7903,Valley,5,51680
+2022-2023,56,Madison County,1680,3,1683,Northern Virginia,4,51113
+2022-2023,143,Manassas City,7418,293,7711,Northern Virginia,4,51683
+2022-2023,144,Manassas Park City,3434,NA,3434,Northern Virginia,4,51685
+2022-2023,116,Martinsville City,1810,NA,1810,Western Virginia,6,51690
+2022-2023,57,Mathews County,911,NA,911,Northern Neck,3,51115
+2022-2023,58,Mecklenburg County,3972,1,3973,Southside,8,51117
+2022-2023,59,Middlesex County,1244,NA,1244,Northern Neck,3,51119
+2022-2023,60,Montgomery County,9730,NA,9730,Western Virginia,6,51121
+2022-2023,62,Nelson County,1480,NA,1480,Valley,5,51125
+2022-2023,63,New Kent County,3436,NA,3436,Central Virginia,1,51127
+2022-2023,117,Newport News City,26558,4,26562,Tidewater,2,51700
+2022-2023,118,Norfolk City,27309,NA,27309,Tidewater,2,51710
+2022-2023,65,Northampton County,1359,NA,1359,Tidewater,2,51131
+2022-2023,66,Northumberland County,1200,NA,1200,Northern Neck,3,51133
+2022-2023,119,Norton City,815,NA,815,Southwest,7,51720
+2022-2023,67,Nottoway County,1811,NA,1811,Southside,8,51135
+2022-2023,68,Orange County,5041,1,5042,Northern Virginia,4,51137
+2022-2023,69,Page County,3031,2,3033,Northern Virginia,4,51139
+2022-2023,70,Patrick County,2482,NA,2482,Western Virginia,6,51141
+2022-2023,120,Petersburg City,4272,NA,4272,Central Virginia,1,51730
+2022-2023,71,Pittsylvania County,7918,1,7919,Western Virginia,6,51143
+2022-2023,142,Poquoson City,2055,30,2085,Tidewater,2,51735
+2022-2023,121,Portsmouth City,13371,NA,13371,Tidewater,2,51740
+2022-2023,72,Powhatan County,4241,10,4251,Central Virginia,1,51145
+2022-2023,73,Prince Edward County,1887,2,1889,Southside,8,51147
+2022-2023,74,Prince George County,6106,NA,6106,Central Virginia,1,51149
+2022-2023,75,Prince William County,91166,14,91180,Northern Virginia,4,51153
+2022-2023,77,Pulaski County,3988,NA,3988,Southwest,7,51155
+2022-2023,122,Radford City,3690,NA,3690,Southwest,7,51750
+2022-2023,78,Rappahannock County,735,1,736,Northern Virginia,4,51157
+2022-2023,123,Richmond City,21705,NA,21705,Central Virginia,1,51760
+2022-2023,79,Richmond County,1346,NA,1346,Northern Neck,3,51159
+2022-2023,124,Roanoke City,13636,71,13707,Western Virginia,6,51770
+2022-2023,80,Roanoke County,13818,1,13819,Western Virginia,6,51161
+2022-2023,81,Rockbridge County,2548,2,2550,Valley,5,51163
+2022-2023,82,Rockingham County,11504,12,11516,Valley,5,51165
+2022-2023,83,Russell County,3375,NA,3375,Southwest,7,51167
+2022-2023,139,Salem City,3750,NA,3750,Western Virginia,6,51775
+2022-2023,84,Scott County,4026,2,4028,Southwest,7,51169
+2022-2023,85,Shenandoah County,5630,NA,5630,Northern Virginia,4,51171
+2022-2023,86,Smyth County,3983,NA,3983,Southwest,7,51173
+2022-2023,87,Southampton County,2579,NA,2579,Tidewater,2,51175
+2022-2023,88,Spotsylvania County,24216,44,24260,Northern Neck,3,51177
+2022-2023,89,Stafford County,31145,15,31160,Northern Neck,3,51179
+2022-2023,126,Staunton City,2695,NA,2695,Valley,5,51790
+2022-2023,127,Suffolk City,14490,NA,14490,Tidewater,2,51800
+2022-2023,90,Surry County,685,NA,685,Central Virginia,1,51181
+2022-2023,91,Sussex County,998,NA,998,Central Virginia,1,51183
+2022-2023,92,Tazewell County,5422,NA,5422,Southwest,7,51185
+2022-2023,128,Virginia Beach City,65550,NA,65550,Tidewater,2,51810
+2022-2023,93,Warren County,5168,2,5170,Northern Virginia,4,51187
+2022-2023,94,Washington County,6742,3,6745,Southwest,7,51191
+2022-2023,130,Waynesboro City,3042,1,3043,Valley,5,51820
+2022-2023,207,West Point,810,NA,810,Northern Neck,3,51101
+2022-2023,95,Westmoreland County,1561,NA,1561,Northern Neck,3,51193
+2022-2023,131,Williamsburg-James City County,11387,255,11642,Tidewater,2,51830
+2022-2023,132,Winchester City,4268,NA,4268,Northern Virginia,4,51840
+2022-2023,96,Wise County,5913,NA,5913,Southwest,7,51195
+2022-2023,97,Wythe County,3879,1,3880,Southwest,7,51197
+2022-2023,98,York County,12642,315,12957,Tidewater,2,51199
+2023-2024,1,Accomack County,4726,NA,4726,Tidewater,2,51001
+2023-2024,2,Albemarle County,13821,14,13835,Valley,5,51003
+2023-2024,101,Alexandria City,16415,24,16439,Northern Virginia,4,51510
+2023-2024,3,Alleghany Highlands,2835,1,2836,Western Virginia,6,51005
+2023-2024,4,Amelia County,1606,NA,1606,Southside,8,51007
+2023-2024,5,Amherst County,3965,NA,3965,Valley,5,51009
+2023-2024,6,Appomattox County,2372,NA,2372,Southside,8,51011
+2023-2024,7,Arlington County,27534,2,27536,Northern Virginia,4,51013
+2023-2024,8,Augusta County,10139,5,10144,Valley,5,51015
+2023-2024,9,Bath County,509,NA,509,Valley,5,51017
+2023-2024,10,Bedford County,9061,NA,9061,Valley,5,51019
+2023-2024,11,Bland County,793,NA,793,Southwest,7,51021
+2023-2024,12,Botetourt County,4488,NA,4488,Western Virginia,6,51023
+2023-2024,102,Bristol City,2154,NA,2154,Southwest,7,51520
+2023-2024,13,Brunswick County,1395,NA,1395,Southside,8,51025
+2023-2024,14,Buchanan County,2378,NA,2378,Southwest,7,51027
+2023-2024,15,Buckingham County,1966,NA,1966,Southside,8,51029
+2023-2024,103,Buena Vista City,856,NA,856,Valley,5,51530
+2023-2024,16,Campbell County,7896,NA,7896,Valley,5,51031
+2023-2024,17,Caroline County,4564,NA,4564,Northern Neck,3,51033
+2023-2024,18,Carroll County,3442,2,3444,Southwest,7,51035
+2023-2024,19,Charles City County,530,NA,530,Central Virginia,1,51036
+2023-2024,20,Charlotte County,1705,NA,1705,Southside,8,51037
+2023-2024,104,Charlottesville City,4433,11,4444,Valley,5,51540
+2023-2024,136,Chesapeake City,40640,NA,40640,Tidewater,2,51550
+2023-2024,21,Chesterfield County,64132,51,64183,Central Virginia,1,51041
+2023-2024,22,Clarke County,1921,3,1924,Northern Virginia,4,51043
+2023-2024,202,Colonial Beach,605,NA,605,Northern Neck,3,51193
+2023-2024,106,Colonial Heights City,2931,NA,2931,Central Virginia,1,51570
+2023-2024,23,Craig County,470,NA,470,Western Virginia,6,51045
+2023-2024,24,Culpeper County,8368,NA,8368,Northern Virginia,4,51047
+2023-2024,25,Cumberland County,1233,NA,1233,Southside,8,51049
+2023-2024,108,Danville City,5580,NA,5580,Western Virginia,6,51590
+2023-2024,26,Dickenson County,1883,NA,1883,Southwest,7,51051
+2023-2024,27,Dinwiddie County,4258,NA,4258,Central Virginia,1,51053
+2023-2024,28,Essex County,1163,NA,1163,Northern Neck,3,51057
+2023-2024,29,Fairfax County,180947,23,180970,Northern Virginia,4,51059
+2023-2024,109,Falls Church City,2616,NA,2616,Northern Virginia,4,51610
+2023-2024,30,Fauquier County,10845,NA,10845,Northern Virginia,4,51061
+2023-2024,31,Floyd County,1713,NA,1713,Western Virginia,6,51063
+2023-2024,32,Fluvanna County,3372,NA,3372,Valley,5,51065
+2023-2024,135,Franklin City,1015,NA,1015,Tidewater,2,51620
+2023-2024,33,Franklin County,6160,NA,6160,Western Virginia,6,51067
+2023-2024,34,Frederick County,14172,1,14173,Northern Virginia,4,51069
+2023-2024,110,Fredericksburg City,3578,NA,3578,Northern Neck,3,51630
+2023-2024,111,Galax City,1417,1,1418,Southwest,7,51640
+2023-2024,35,Giles County,3499,NA,3499,Southwest,7,51071
+2023-2024,36,Gloucester County,4990,26,5016,Northern Neck,3,51073
+2023-2024,37,Goochland County,2572,NA,2572,Central Virginia,1,51075
+2023-2024,38,Grayson County,1576,NA,1576,Southwest,7,51077
+2023-2024,39,Greene County,2818,NA,2818,Valley,5,51079
+2023-2024,40,Greensville County,2027,NA,2027,Southside,8,51081
+2023-2024,41,Halifax County,4576,2,4578,Southside,8,51083
+2023-2024,112,Hampton City,19661,NA,19661,Tidewater,2,51650
+2023-2024,42,Hanover County,16820,NA,16820,Central Virginia,1,51085
+2023-2024,113,Harrisonburg City,6787,4,6791,Valley,5,51660
+2023-2024,43,Henrico County,50464,NA,50464,Central Virginia,1,51087
+2023-2024,44,Henry County,6938,NA,6938,Western Virginia,6,51089
+2023-2024,45,Highland County,212,NA,212,Valley,5,51091
+2023-2024,114,Hopewell City,3946,NA,3946,Central Virginia,1,51670
+2023-2024,46,Isle of Wight County,5592,2,5594,Tidewater,2,51093
+2023-2024,48,King George County,4543,1,4544,Northern Neck,3,51099
+2023-2024,50,King William County,2106,NA,2106,Northern Neck,3,51101
+2023-2024,49,King and Queen County,855,NA,855,Northern Neck,3,51097
+2023-2024,51,Lancaster County,1020,NA,1020,Northern Neck,3,51103
+2023-2024,52,Lee County,2971,NA,2971,Southwest,7,51105
+2023-2024,137,Lexington City,511,NA,511,Valley,5,51678
+2023-2024,53,Loudoun County,81693,335,82028,Northern Virginia,4,51107
+2023-2024,54,Louisa County,5211,NA,5211,Valley,5,51109
+2023-2024,55,Lunenburg County,1582,NA,1582,Southside,8,51111
+2023-2024,115,Lynchburg City,7727,68,7795,Valley,5,51680
+2023-2024,56,Madison County,1669,2,1671,Northern Virginia,4,51113
+2023-2024,143,Manassas City,7350,326,7676,Northern Virginia,4,51683
+2023-2024,144,Manassas Park City,3410,NA,3410,Northern Virginia,4,51685
+2023-2024,116,Martinsville City,1807,NA,1807,Western Virginia,6,51690
+2023-2024,57,Mathews County,841,NA,841,Northern Neck,3,51115
+2023-2024,58,Mecklenburg County,3937,1,3938,Southside,8,51117
+2023-2024,59,Middlesex County,1226,NA,1226,Northern Neck,3,51119
+2023-2024,60,Montgomery County,9591,NA,9591,Western Virginia,6,51121
+2023-2024,62,Nelson County,1495,NA,1495,Valley,5,51125
+2023-2024,63,New Kent County,3536,NA,3536,Central Virginia,1,51127
+2023-2024,117,Newport News City,26217,2,26219,Tidewater,2,51700
+2023-2024,118,Norfolk City,26884,NA,26884,Tidewater,2,51710
+2023-2024,65,Northampton County,1334,NA,1334,Tidewater,2,51131
+2023-2024,66,Northumberland County,1162,1,1163,Northern Neck,3,51133
+2023-2024,119,Norton City,807,NA,807,Southwest,7,51720
+2023-2024,67,Nottoway County,1818,NA,1818,Southside,8,51135
+2023-2024,68,Orange County,5081,1,5082,Northern Virginia,4,51137
+2023-2024,69,Page County,3011,NA,3011,Northern Virginia,4,51139
+2023-2024,70,Patrick County,2379,NA,2379,Western Virginia,6,51141
+2023-2024,120,Petersburg City,4464,NA,4464,Central Virginia,1,51730
+2023-2024,71,Pittsylvania County,7860,1,7861,Western Virginia,6,51143
+2023-2024,142,Poquoson City,2038,32,2070,Tidewater,2,51735
+2023-2024,121,Portsmouth City,13162,NA,13162,Tidewater,2,51740
+2023-2024,72,Powhatan County,4218,4,4222,Central Virginia,1,51145
+2023-2024,73,Prince Edward County,1814,2,1816,Southside,8,51147
+2023-2024,74,Prince George County,6181,NA,6181,Central Virginia,1,51149
+2023-2024,75,Prince William County,90631,23,90654,Northern Virginia,4,51153
+2023-2024,77,Pulaski County,4361,NA,4361,Southwest,7,51155
+2023-2024,122,Radford City,3207,NA,3207,Southwest,7,51750
+2023-2024,78,Rappahannock County,774,NA,774,Northern Virginia,4,51157
+2023-2024,123,Richmond City,21259,NA,21259,Central Virginia,1,51760
+2023-2024,79,Richmond County,1374,NA,1374,Northern Neck,3,51159
+2023-2024,124,Roanoke City,13638,71,13709,Western Virginia,6,51770
+2023-2024,80,Roanoke County,13803,NA,13803,Western Virginia,6,51161
+2023-2024,81,Rockbridge County,2496,NA,2496,Valley,5,51163
+2023-2024,82,Rockingham County,11542,28,11570,Valley,5,51165
+2023-2024,83,Russell County,3454,NA,3454,Southwest,7,51167
+2023-2024,139,Salem City,4318,NA,4318,Western Virginia,6,51775
+2023-2024,84,Scott County,4268,6,4274,Southwest,7,51169
+2023-2024,85,Shenandoah County,5691,2,5693,Northern Virginia,4,51171
+2023-2024,86,Smyth County,3894,NA,3894,Southwest,7,51173
+2023-2024,87,Southampton County,2523,NA,2523,Tidewater,2,51175
+2023-2024,88,Spotsylvania County,24033,31,24064,Northern Neck,3,51177
+2023-2024,89,Stafford County,31588,112,31700,Northern Neck,3,51179
+2023-2024,126,Staunton City,2698,NA,2698,Valley,5,51790
+2023-2024,127,Suffolk City,14520,NA,14520,Tidewater,2,51800
+2023-2024,90,Surry County,694,NA,694,Central Virginia,1,51181
+2023-2024,91,Sussex County,994,NA,994,Central Virginia,1,51183
+2023-2024,92,Tazewell County,5307,NA,5307,Southwest,7,51185
+2023-2024,128,Virginia Beach City,65078,NA,65078,Tidewater,2,51810
+2023-2024,93,Warren County,5132,4,5136,Northern Virginia,4,51187
+2023-2024,94,Washington County,6709,4,6713,Southwest,7,51191
+2023-2024,130,Waynesboro City,3060,NA,3060,Valley,5,51820
+2023-2024,207,West Point,840,NA,840,Northern Neck,3,51101
+2023-2024,95,Westmoreland County,1579,NA,1579,Northern Neck,3,51193
+2023-2024,131,Williamsburg-James City County,11415,279,11694,Tidewater,2,51830
+2023-2024,132,Winchester City,4236,NA,4236,Northern Virginia,4,51840
+2023-2024,96,Wise County,5883,NA,5883,Southwest,7,51195
+2023-2024,97,Wythe County,3802,1,3803,Southwest,7,51197
+2023-2024,98,York County,12735,375,13110,Tidewater,2,51199
+2024-2025,1,Accomack County,4623,NA,4623,Tidewater,2,51001
+2024-2025,2,Albemarle County,14164,9,14173,Valley,5,51003
+2024-2025,101,Alexandria City,16586,27,16613,Northern Virginia,4,51510
+2024-2025,3,Alleghany Highlands,2804,1,2805,Western Virginia,6,51005
+2024-2025,4,Amelia County,1600,NA,1600,Southside,8,51007
+2024-2025,5,Amherst County,3900,NA,3900,Valley,5,51009
+2024-2025,6,Appomattox County,2421,NA,2421,Southside,8,51011
+2024-2025,7,Arlington County,27985,1,27986,Northern Virginia,4,51013
+2024-2025,8,Augusta County,10131,1,10132,Valley,5,51015
+2024-2025,9,Bath County,509,NA,509,Valley,5,51017
+2024-2025,10,Bedford County,8932,NA,8932,Valley,5,51019
+2024-2025,11,Bland County,818,NA,818,Southwest,7,51021
+2024-2025,12,Botetourt County,4424,NA,4424,Western Virginia,6,51023
+2024-2025,102,Bristol City,2167,NA,2167,Southwest,7,51520
+2024-2025,13,Brunswick County,1369,NA,1369,Southside,8,51025
+2024-2025,14,Buchanan County,2316,NA,2316,Southwest,7,51027
+2024-2025,15,Buckingham County,1868,NA,1868,Southside,8,51029
+2024-2025,103,Buena Vista City,886,NA,886,Valley,5,51530
+2024-2025,16,Campbell County,7777,NA,7777,Valley,5,51031
+2024-2025,17,Caroline County,4576,NA,4576,Northern Neck,3,51033
+2024-2025,18,Carroll County,3437,1,3438,Southwest,7,51035
+2024-2025,19,Charles City County,523,NA,523,Central Virginia,1,51036
+2024-2025,20,Charlotte County,1707,NA,1707,Southside,8,51037
+2024-2025,104,Charlottesville City,4439,4,4443,Valley,5,51540
+2024-2025,136,Chesapeake City,40685,NA,40685,Tidewater,2,51550
+2024-2025,21,Chesterfield County,64194,60,64254,Central Virginia,1,51041
+2024-2025,22,Clarke County,1883,5,1888,Northern Virginia,4,51043
+2024-2025,202,Colonial Beach,593,NA,593,Northern Neck,3,51193
+2024-2025,106,Colonial Heights City,2971,NA,2971,Central Virginia,1,51570
+2024-2025,23,Craig County,507,NA,507,Western Virginia,6,51045
+2024-2025,24,Culpeper County,8381,NA,8381,Northern Virginia,4,51047
+2024-2025,25,Cumberland County,1278,NA,1278,Southside,8,51049
+2024-2025,108,Danville City,5565,NA,5565,Western Virginia,6,51590
+2024-2025,26,Dickenson County,1801,NA,1801,Southwest,7,51051
+2024-2025,27,Dinwiddie County,4149,NA,4149,Central Virginia,1,51053
+2024-2025,28,Essex County,1092,NA,1092,Northern Neck,3,51057
+2024-2025,29,Fairfax County,179548,1010,180558,Northern Virginia,4,51059
+2024-2025,109,Falls Church City,2677,NA,2677,Northern Virginia,4,51610
+2024-2025,30,Fauquier County,10861,NA,10861,Northern Virginia,4,51061
+2024-2025,31,Floyd County,1666,NA,1666,Western Virginia,6,51063
+2024-2025,32,Fluvanna County,3317,NA,3317,Valley,5,51065
+2024-2025,135,Franklin City,1125,NA,1125,Tidewater,2,51620
+2024-2025,33,Franklin County,6109,NA,6109,Western Virginia,6,51067
+2024-2025,34,Frederick County,14447,2,14449,Northern Virginia,4,51069
+2024-2025,110,Fredericksburg City,3632,NA,3632,Northern Neck,3,51630
+2024-2025,111,Galax City,1434,NA,1434,Southwest,7,51640
+2024-2025,35,Giles County,3575,NA,3575,Southwest,7,51071
+2024-2025,36,Gloucester County,4919,37,4956,Northern Neck,3,51073
+2024-2025,37,Goochland County,2643,NA,2643,Central Virginia,1,51075
+2024-2025,38,Grayson County,1561,NA,1561,Southwest,7,51077
+2024-2025,39,Greene County,2781,1,2782,Valley,5,51079
+2024-2025,40,Greensville County,2017,NA,2017,Southside,8,51081
+2024-2025,41,Halifax County,4497,1,4498,Southside,8,51083
+2024-2025,112,Hampton City,19474,1,19475,Tidewater,2,51650
+2024-2025,42,Hanover County,16768,NA,16768,Central Virginia,1,51085
+2024-2025,113,Harrisonburg City,6822,1,6823,Valley,5,51660
+2024-2025,43,Henrico County,50916,NA,50916,Central Virginia,1,51087
+2024-2025,44,Henry County,6916,NA,6916,Western Virginia,6,51089
+2024-2025,45,Highland County,208,NA,208,Valley,5,51091
+2024-2025,114,Hopewell City,3951,NA,3951,Central Virginia,1,51670
+2024-2025,46,Isle of Wight County,5519,NA,5519,Tidewater,2,51093
+2024-2025,48,King George County,4592,3,4595,Northern Neck,3,51099
+2024-2025,50,King William County,2114,NA,2114,Northern Neck,3,51101
+2024-2025,49,King and Queen County,611,NA,611,Northern Neck,3,51097
+2024-2025,51,Lancaster County,1018,NA,1018,Northern Neck,3,51103
+2024-2025,52,Lee County,2966,NA,2966,Southwest,7,51105
+2024-2025,137,Lexington City,538,NA,538,Valley,5,51678
+2024-2025,53,Loudoun County,81547,31,81578,Northern Virginia,4,51107
+2024-2025,54,Louisa County,5334,NA,5334,Valley,5,51109
+2024-2025,55,Lunenburg County,1577,NA,1577,Southside,8,51111
+2024-2025,115,Lynchburg City,7657,46,7703,Valley,5,51680
+2024-2025,56,Madison County,1585,1,1586,Northern Virginia,4,51113
+2024-2025,143,Manassas City,7347,316,7663,Northern Virginia,4,51683
+2024-2025,144,Manassas Park City,3392,1,3393,Northern Virginia,4,51685
+2024-2025,116,Martinsville City,1793,NA,1793,Western Virginia,6,51690
+2024-2025,57,Mathews County,791,NA,791,Northern Neck,3,51115
+2024-2025,58,Mecklenburg County,3907,NA,3907,Southside,8,51117
+2024-2025,59,Middlesex County,1249,NA,1249,Northern Neck,3,51119
+2024-2025,60,Montgomery County,9484,NA,9484,Western Virginia,6,51121
+2024-2025,62,Nelson County,1492,1,1493,Valley,5,51125
+2024-2025,63,New Kent County,3572,NA,3572,Central Virginia,1,51127
+2024-2025,117,Newport News City,25930,3,25933,Tidewater,2,51700
+2024-2025,118,Norfolk City,26807,NA,26807,Tidewater,2,51710
+2024-2025,65,Northampton County,1300,NA,1300,Tidewater,2,51131
+2024-2025,66,Northumberland County,1162,NA,1162,Northern Neck,3,51133
+2024-2025,119,Norton City,855,NA,855,Southwest,7,51720
+2024-2025,67,Nottoway County,1793,NA,1793,Southside,8,51135
+2024-2025,68,Orange County,5079,1,5080,Northern Virginia,4,51137
+2024-2025,69,Page County,2928,1,2929,Northern Virginia,4,51139
+2024-2025,70,Patrick County,2278,NA,2278,Western Virginia,6,51141
+2024-2025,120,Petersburg City,4582,NA,4582,Central Virginia,1,51730
+2024-2025,71,Pittsylvania County,7830,1,7831,Western Virginia,6,51143
+2024-2025,142,Poquoson City,2030,35,2065,Tidewater,2,51735
+2024-2025,121,Portsmouth City,12911,NA,12911,Tidewater,2,51740
+2024-2025,72,Powhatan County,4077,4,4081,Central Virginia,1,51145
+2024-2025,73,Prince Edward County,1845,NA,1845,Southside,8,51147
+2024-2025,74,Prince George County,6220,1,6221,Central Virginia,1,51149
+2024-2025,75,Prince William County,90366,263,90629,Northern Virginia,4,51153
+2024-2025,77,Pulaski County,4385,NA,4385,Southwest,7,51155
+2024-2025,122,Radford City,3321,12,3333,Southwest,7,51750
+2024-2025,78,Rappahannock County,773,1,774,Northern Virginia,4,51157
+2024-2025,123,Richmond City,21427,NA,21427,Central Virginia,1,51760
+2024-2025,79,Richmond County,1400,NA,1400,Northern Neck,3,51159
+2024-2025,124,Roanoke City,13876,7,13883,Western Virginia,6,51770
+2024-2025,80,Roanoke County,13736,NA,13736,Western Virginia,6,51161
+2024-2025,81,Rockbridge County,2489,NA,2489,Valley,5,51163
+2024-2025,82,Rockingham County,11686,21,11707,Valley,5,51165
+2024-2025,83,Russell County,3345,NA,3345,Southwest,7,51167
+2024-2025,139,Salem City,3984,NA,3984,Western Virginia,6,51775
+2024-2025,84,Scott County,4166,15,4181,Southwest,7,51169
+2024-2025,85,Shenandoah County,5708,5,5713,Northern Virginia,4,51171
+2024-2025,86,Smyth County,4133,NA,4133,Southwest,7,51173
+2024-2025,87,Southampton County,2363,NA,2363,Tidewater,2,51175
+2024-2025,88,Spotsylvania County,24055,40,24095,Northern Neck,3,51177
+2024-2025,89,Stafford County,31857,135,31992,Northern Neck,3,51179
+2024-2025,126,Staunton City,2694,NA,2694,Valley,5,51790
+2024-2025,127,Suffolk City,14565,3,14568,Tidewater,2,51800
+2024-2025,90,Surry County,694,NA,694,Central Virginia,1,51181
+2024-2025,91,Sussex County,1047,NA,1047,Central Virginia,1,51183
+2024-2025,92,Tazewell County,5139,NA,5139,Southwest,7,51185
+2024-2025,128,Virginia Beach City,64823,NA,64823,Tidewater,2,51810
+2024-2025,93,Warren County,5027,4,5031,Northern Virginia,4,51187
+2024-2025,94,Washington County,7273,11,7284,Southwest,7,51191
+2024-2025,130,Waynesboro City,3044,NA,3044,Valley,5,51820
+2024-2025,207,West Point,843,NA,843,Northern Neck,3,51101
+2024-2025,95,Westmoreland County,1574,NA,1574,Northern Neck,3,51193
+2024-2025,131,Williamsburg-James City County,11379,350,11729,Tidewater,2,51830
+2024-2025,132,Winchester City,4362,NA,4362,Northern Virginia,4,51840
+2024-2025,96,Wise County,5779,NA,5779,Southwest,7,51195
+2024-2025,97,Wythe County,3735,3,3738,Southwest,7,51197
+2024-2025,98,York County,13107,118,13225,Tidewater,2,51199

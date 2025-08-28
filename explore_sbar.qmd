@@ -1,0 +1,145 @@
+---
+title: "Exploring Student Behavior and Administrative Response Data"
+editor: source
+format:
+  html:
+    theme: cosmo
+    toc: true
+filters:
+  - accordion
+---
+
+The [Student Behavior and Administrative Response](https://www.doe.virginia.gov/data-policy-funding/data-reports/data-collection/student-behavior-and-administrative-response-collection) report represents the number of reported incidents of problematic student behavior that occurred on Virginia public school property, on a school bus, or at a school-sponsored activity for each school year. Participation is mandatory for public schools, and the report provides safety indicators for Virginia’s School Quality Profile.
+
+Rates are calculated using the annual [fall enrollment](https://p1pe.doe.virginia.gov/apex_captcha/home.do?apexTypeId=304) counts from the Virginia Department of Education.
+
+The SBAR data is aggregated by state, [region](https://www.doe.virginia.gov/about-vdoe/virginia-school-directories/virginia-public-school-listing-by-region), division/county, and school. It is available for the 2021-2022, 2022-2023, and 2023-2024 school years.
+
+## Data Components
+
+According to our [PHI Data Components diagram](https://docs.google.com/presentation/d/1jfh1NoCpxkOeeoXxONXP2NGjU9_UwGUjncOE0TjsgIM/edit?usp=sharing), the following three indicators come from the SBAR data:
+
+1.  The number of reported incidents of **bullying**
+
+2.  The number of reported incidents that contribute to a **hostile or unsafe school environment**
+
+3.  The number of reported **acts of violence**
+
+These three groups are *mutually exclusive and custom curated*. More details on the categorization criteria are described in each section below.
+
+A list of all behavior codes can be found here: [SBAR Behavior Codes](https://docs.google.com/spreadsheets/d/1M3MbeIxVj7tKs50iHRmrGv77sPN6EMLXO2VU1IsEeXg/edit?usp=sharing)
+
+```{r libraries}
+#| echo: false
+#| message: false
+
+library(ggspatial)
+library(ggrepel)
+library(leaflet)
+library(leaflegend)
+library(patchwork)
+library(paletteer)
+library(plotly)
+#library(rcartocolor)
+library(sf)
+library(tidycensus)
+library(tidyverse)
+
+```
+
+```{r data}
+#| echo: false
+#| message: false
+
+# SBAR:
+sbar_div <- read_csv("data/sbar_division.csv")
+sbar_state <- read_csv("data/sbar_state.csv")
+sbar_sch <- read_csv("data/sbar_school.csv")
+sbar_behavior_codes <- read_csv("data/sbar_behavior_codes.csv")
+
+# ACS:
+acs_div <- readRDS("data/acs_division.RDS")
+acs_state <- readRDS("data/acs_state.RDS")
+acs_region <- readRDS("data/acs_region.RDS")
+
+# Combine Williamsburg City and James City County (joint school district):
+to_collapse <- acs_div %>%
+  filter(county == "James City County" | county == "Williamsburg city")
+
+ok_already <- acs_div %>%
+  filter(county != "James City County", county != "Williamsburg city")
+
+collapsed <- to_collapse %>%
+  summarise(
+    pop_est = sum(pop_est, na.rm = TRUE),
+    grade1to4 = sum(grade1to4, na.rm = TRUE),
+    grade5to8 = sum(grade5to8, na.rm = TRUE),
+    grade9to12 = sum(grade5to8, na.rm = TRUE),
+    enrolled = sum(enrolled, na.rm = TRUE),
+    geometry = st_union(geometry)) %>%
+  mutate(county = "Williamsburg-James City County",
+         GEOID = "51830")
+
+acs_div <- collapsed %>%
+  bind_rows(ok_already)
+
+```
+
+## Bullying
+
+There are 4 behavior codes specifically involved with bullying:
+
+1.  Bullying with no physical injury (RB1)
+2.  Cyberbullying (RB2)
+3.  Bullying Behavior without physical injury that continues after intervention (BSC6)
+4.  Cyberbullying that continues after intervention (BSC7)
+
+## Hostile Environments
+
+There are 40 behavior codes specifically involved with hostile or unsafe school environments. These codes were selected based on the propensity for causing harm or creating an unsafe or hostile environment.
+
+1.  Posting, distributing, displaying, or sharing inappropriate material or literature, including using electronics means (RB3)
+2.  Saying or writing either directly or through electronic communication sexually suggestive comments, innuendos, propositions, or other remarks of a sexual nature (RB4)
+3.  Teasing, taunting, engaging in a verbal confrontation, verbally inciting a fight (RB7)
+4.  Using profane or vulgar language or gestures (swearing, cursing, hate speech, gang signs or gestures) (RB8)
+5.  Using slurs based upon the actual or perceived race, ethnicity, color, national origin, citizenship/immigration status, weight, gender, gender identity, gender expression, sexual orientation, or disability (RB9)
+6.  Unwanted or inappropriate physical contact (RB11)
+7.  Alcohol: Possessing, using, or being under the influence of alcohol (BSC1)
+8.  Alcohol: Distributing alcohol to other students (BSC2)
+9.  Drugs: Possessing drug paraphernalia (BSC3)
+10. Drugs: Violating school board non-prescription (Over the counter) medication policy or look-alike drug policy (BSC4)
+11. Harassment: Repeatedly annoying or attacking a student or a group of students or personnel creating an intimidating or hostile educational or work environment (BSC8)
+12. Fighting that results in no injury as determined by the school administration (BSC14)
+13. Inciting or causing a substantial disturbance to the operation of school or the safety of staff and/or students (BSC15)
+14. Throwing an object that has the potential to cause a disturbance, injury, or property damage (BSC16)
+15. Shoving, pushing, striking, biting another a student with no visible injury (BSC17)
+16. Exposing body parts, lewd or indecent public behavior (BSC18)
+17. Physical contact of a sexual nature – patting body parts, pinching, tugging clothing (BSC19)
+18. Stalking as described in the Code of Virginia section 18.2-60.3 (BSC21)
+19. Stealing money or property using physical force (no weapon involved) (BSC 22)
+20. Possessing dangerous instruments/substances that could be used to inflict harm upon another (BSC26)
+21. Weapons: Possessing any weapon (other than a firearm) as defined by § 18.2-308.1. (BSC27)
+22. Drugs: Possessing controlled substances, illegal drugs inhalants, or synthetic hallucinogens or unauthorized prescription medications (BESO5)
+23. Drugs: Being under the influence of controlled substances, illegal drugs, inhalants, or synthetic hallucinogens or unauthorized prescription medications (BESO6)
+24. Drugs: Using controlled substances or using illegal drugs or synthetic hallucinogens or unauthorized prescription medications (BESO7)
+25. Fire: Attempting to set, aiding in setting, or setting a fire (BESO9)
+26. Gang-Related Behavior: Engaging in threatening or dangerous behavior that is gang-related as defined in §18.2-46.1 (BESO10)
+27. Hazing as defined in §18.2-56 and noted in § 22.1-279.6. (BESO11)
+28. Threatening, intimidating, or instigating violence, injury or harm to a staff member or members (BESO12)
+29. Threatening, intimidating, or instigating violence, injury or harm to another student(s) or other(s) (not including written threats) (BESO13)
+30. Threatening, intimidation, or instigating violence, injury or harm to another student(s) or other(s) in writing. If the written threat is to a staff member, a report to law enforcement is required unless the student making the threat has a disability. (BESO14)
+31. Using an object not generally considered to be a weapon to threaten or attempt to injure school personnel (BESO15)
+32. Using an object not generally considered to be a weapon to threaten or attempt to injure students or others (BESO16)
+33. Bomb threat –Making a bomb threat (BESO17)
+34. A crime in the community where the student was charged with an offense relating to the Commonwealth's laws but is required to be disclosed to the superintendent of the school division pursuant to § 16.1-260(G) (BESO18)
+35. Illegal Possession of Handgun (PD11)
+36. Illegal Possession of Rifle or Shotgun (PD12)
+37. Illegal Possession of Any Other Projectile Weapon (PD13)
+38. Illegal Possession of Bomb (PD14)
+39. Illegal Possession of Other Firearms: firebombs, explosive materials or devices, hoax explosive devices per § 18.2-85, or explosive incendiary devices, as defined in § 18.2-433.1, or chemical bombs per § 18.2-87.1 (PD15)
+40. Illegal Possession of Controlled Drugs and Substances with Intent to Distribute or Sell\
+    The definition of drugs refers to Schedules I, II, and III of the Drug Control Act (§ 54.1-3400 et seq.) and marijuana. (PD16)
+
+## Acts of Violence
+
+There are xx behavior codes associated with acts of violence. These codes are different from the hostile environment indicators because these represent explicit incidents of violence while the other indicators represent intentions of harm.
