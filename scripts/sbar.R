@@ -114,13 +114,24 @@ sbar_div <- sbar_div %>%
 
 write_csv(sbar_div, "data/sbar_division.csv")
 
-# State:
+## Region ----
+
+missing <- sbar_div %>%
+  filter(is.na(region_name)) # most of these are alternative schools 
+  
+sbar_reg <- sbar_div %>%
+  group_by(school_year, behavior_code, behavior, region_name) %>%
+  summarise(total_events = sum(number_of_events, na.rm = T))
+
+write_csv(sbar_reg, "data/sbar_region.csv")
+
+## State ----
 sbar_state <- sbar_state %>%
   clean_names() 
 
 write_csv(sbar_state, "data/sbar_state.csv")
 
-# School:
+## School ----
 sbar_sch <- sbar_sch %>%
   clean_names() %>%
   rename(region_number = region) %>%

@@ -1,12 +1,13 @@
 ---
 title: "Exploring Student Behavior and Administrative Response Data"
 editor: source
+execute:
+  echo: false
+  warning: false
 format:
   html:
     theme: cosmo
     toc: true
-filters:
-  - accordion
 ---
 
 The [Student Behavior and Administrative Response](https://www.doe.virginia.gov/data-policy-funding/data-reports/data-collection/student-behavior-and-administrative-response-collection) report represents the number of reported incidents of problematic student behavior that occurred on Virginia public school property, on a school bus, or at a school-sponsored activity for each school year. Participation is mandatory for public schools, and the report provides safety indicators for Virginia’s School Quality Profile.
@@ -27,6 +28,8 @@ According to our [PHI Data Components diagram](https://docs.google.com/presentat
 
 These three groups are *mutually exclusive and custom curated*. More details on the categorization criteria are described in each section below.
 
+### Behavior Codes
+
 A list of all behavior codes can be found here: [SBAR Behavior Codes](https://docs.google.com/spreadsheets/d/1M3MbeIxVj7tKs50iHRmrGv77sPN6EMLXO2VU1IsEeXg/edit?usp=sharing)
 
 ```{r libraries}
@@ -40,7 +43,7 @@ library(leaflegend)
 library(patchwork)
 library(paletteer)
 library(plotly)
-#library(rcartocolor)
+library(rcartocolor)
 library(sf)
 library(tidycensus)
 library(tidyverse)
@@ -48,21 +51,20 @@ library(tidyverse)
 ```
 
 ```{r data}
-#| echo: false
-#| message: false
 
 # SBAR:
+sbar_behavior_codes <- read_csv("data/sbar_behavior_codes.csv")
 sbar_div <- read_csv("data/sbar_division.csv")
+sbar_reg <- read_csv("data/sbar_region.csv")
 sbar_state <- read_csv("data/sbar_state.csv")
 sbar_sch <- read_csv("data/sbar_school.csv")
-sbar_behavior_codes <- read_csv("data/sbar_behavior_codes.csv")
 
-# ACS:
+# ACS geometries:
 acs_div <- readRDS("data/acs_division.RDS")
 acs_state <- readRDS("data/acs_state.RDS")
 acs_region <- readRDS("data/acs_region.RDS")
 
-# Combine Williamsburg City and James City County (joint school district):
+## Combine Williamsburg City and James City County (joint school district):
 to_collapse <- acs_div %>%
   filter(county == "James City County" | county == "Williamsburg city")
 
@@ -72,10 +74,6 @@ ok_already <- acs_div %>%
 collapsed <- to_collapse %>%
   summarise(
     pop_est = sum(pop_est, na.rm = TRUE),
-    grade1to4 = sum(grade1to4, na.rm = TRUE),
-    grade5to8 = sum(grade5to8, na.rm = TRUE),
-    grade9to12 = sum(grade5to8, na.rm = TRUE),
-    enrolled = sum(enrolled, na.rm = TRUE),
     geometry = st_union(geometry)) %>%
   mutate(county = "Williamsburg-James City County",
          GEOID = "51830")
@@ -83,63 +81,287 @@ collapsed <- to_collapse %>%
 acs_div <- collapsed %>%
   bind_rows(ok_already)
 
-```
+# VDOE enrollment counts:
+enroll_div <- read_csv("data/enroll_division.csv")
+enroll_reg <- read_csv("data/enroll_region.csv")
+enroll_sch <- read_csv("data/enroll_school.csv")
+enroll_state <- read_csv("data/enroll_state.csv")
 
+```
 ## Bullying
 
-There are 4 behavior codes specifically involved with bullying:
+::: {.callout-caution appearance="simple" collapse="true}
+## Bullying is an example of externalizing behavior at the school level.
+
+![](explore_sbar_files/bullying.png)
+:::
+
+::: {.callout-note appearance="simple" collapse="true"}
+## There are 4 behavior codes specifically involved with bullying:
 
 1.  Bullying with no physical injury (RB1)
 2.  Cyberbullying (RB2)
 3.  Bullying Behavior without physical injury that continues after intervention (BSC6)
 4.  Cyberbullying that continues after intervention (BSC7)
+:::
+
+```{r bully_codes}
+
+bullying_codes <- c("RB1", "RB2", "BSC6", "BSC7")
+
+```
+
+### Q1: Which districts and regions have the highest bullying rates?
+
+#### Bullying Rates in the 2023-2024 School Year
+
+::: {.panel-tabset}
+
+##### Division
+
+:::: {.columns}
+::: {.column width="80%"}
+
+```{r bully_mapdiv}
+
+
+bully_summary_div <- sbar_div %>%
+  filter(school_year == "2023-2024",
+         behavior_code %in% bullying_codes,
+         !is.na(GEOID)) %>% # remove 3ish alt schools
+  group_by(division_name, GEOID) %>%
+  summarise(n_events = sum(number_of_events, na.rm = TRUE)) %>%
+  mutate(GEOID = as.character(GEOID))
+
+enroll2324_div <- enroll_div %>%
+  filter(school_year == "2023-2024") %>%
+  select(-pt_count, -ft_count) %>%
+  rename(total_enrolled = total_count) %>%
+  mutate(GEOID = as.character(GEOID))
+  
+bully_div <- acs_div %>%
+  left_join(bully_summary_div) %>% 
+  left_join(enroll2324_div) %>%
+  select(-division_name, -division_number, -contains("region"))
+
+# Rate per 1000 students 
+bully_div <- bully_div %>%
+  mutate(bullying_rate = (n_events / total_enrolled) * 1000)
+
+
+# Map
+pal_purp <- colorNumeric(palette = "Purples", 
+                       domain = bully_div$bullying_rate, reverse = FALSE, na.color = "transparent")
+
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Voyager) %>%
+  addPolygons(data = bully_div,
+              weight = 0.5,
+              smoothFactor = 0.2,
+              fillColor = ~pal_purp(bully_div$bullying_rate),
+              fillOpacity = 0.6,
+              color = "grey",
+              highlightOptions = highlightOptions(
+                fillOpacity = .80,
+                bringToFront = FALSE),
+              popup = paste("<b>", bully_div$county, "</b>", "<br>",
+                            "Bullying rate: ", round(bully_div$bullying_rate, digits = 2), "<br>",
+                            "Number of reported incidents: ", bully_div$n_events, "<br>",
+                            "Total students: ", bully_div$total_enrolled)) %>%
+  addLegend(pal = pal_purp,
+            values = bully_div$bullying_rate,
+            title = "Rate per 1000 Students",
+            position = "topright")
+```
+
+:::
+::: {.column width="20%"}
+
+```{r bully_rank}
+
+bully_median <- data.frame(
+  county = "State Median",
+  bullying_rate = median(bully_div$bullying_rate, na.rm = T))
+
+bully_gap_label <- bully_div %>%
+  select(county, bullying_rate) %>%
+  st_drop_geometry() %>%
+  arrange(desc(bullying_rate)) %>%
+  slice_head(n = 6)
+
+bully_gap_label <- bully_gap_label %>%
+  rbind(bully_median)
+
+bully_div %>%
+  ggplot(aes(y = bullying_rate, x = 0, label = county)) +
+  geom_line(color = "darkgrey", linewidth = 1) +
+  geom_point(aes(color = bullying_rate, size = 3)) +
+  geom_text_repel(data = bully_gap_label, aes(label = county), hjust = -.3, size = 2.7) +
+  geom_text(data = bully_gap_label, aes(label = round(bullying_rate)), hjust = 2, size = 2.7) +
+  scale_color_gradient(low= "#f2f0f7", high="#6a51a3") +
+  theme_void() +
+  theme(legend.position = "none")
+
+```
+:::
+::::
+
+##### Region
+
+```{r bully_mapreg}
+
+bully_summary_reg <- sbar_reg %>%
+  filter(school_year == "2023-2024",
+         behavior_code %in% bullying_codes,
+         !is.na(region_name)) %>% # drop alt schools
+  group_by(region_name) %>%
+  summarise(n_events = sum(total_events, na.rm = TRUE))
+
+enroll2324_reg <- enroll_reg %>%
+  filter(school_year == "2023-2024") %>%
+  select(-pt_count, -ft_count) %>%
+  rename(total_enrolled = total_count)
+  
+bully_reg <- acs_region %>%
+  left_join(bully_summary_reg) %>% 
+  left_join(enroll2324_reg) 
+
+# Bullying rate per 1000 students 
+bully_reg <- bully_reg %>%
+  mutate(bullying_rate = (n_events / total_enrolled) * 1000)
+
+# Map
+pal_purp2 <- colorNumeric(palette = "Purples", 
+                       domain = bully_reg$bullying_rate, reverse = FALSE, na.color = "transparent")
+
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Voyager) %>%
+  addPolygons(data = bully_reg,
+              weight = 0.5,
+              smoothFactor = 0.2,
+              fillColor = ~pal_purp2(bully_reg$bullying_rate),
+              fillOpacity = 0.6,
+              color = "grey",
+              highlightOptions = highlightOptions(
+                fillOpacity = .80,
+                bringToFront = FALSE),
+              popup = paste("<b>", bully_reg$region_name, "</b>", "<br>",
+                            "Bullying rate: ", round(bully_reg$bullying_rate, digits = 2), "<br>",
+                            "Number of reported incidents: ", bully_reg$n_events, "<br>",
+                            "Total students: ", bully_reg$total_enrolled)) %>%
+  addLegend(pal = pal_purp2,
+            values = bully_reg$bullying_rate,
+            title = "Rate per 1000 Students",
+            position = "topright") 
+
+```
+
+:::
 
 ## Hostile Environments
 
-There are 40 behavior codes specifically involved with hostile or unsafe school environments. These codes were selected based on the propensity for causing harm or creating an unsafe or hostile environment.
+::: {.callout-caution appearance="simple" collapse="true}
+## Incidents that create a hostile or unsafe school environment are an example of externalizing behaviors at the school level. 
+
+![](explore_sbar_files/hostile.png)
+:::
+
+::: {.callout-note appearance="simple" collapse="true"}
+## There are 40 behavior codes specifically involved with hostile or unsafe school environments. These codes were selected based on the propensity for causing harm or creating an unsafe or hostile environment.
+
+[Relationship Behaviors]{.underline}:
 
 1.  Posting, distributing, displaying, or sharing inappropriate material or literature, including using electronics means (RB3)
 2.  Saying or writing either directly or through electronic communication sexually suggestive comments, innuendos, propositions, or other remarks of a sexual nature (RB4)
 3.  Teasing, taunting, engaging in a verbal confrontation, verbally inciting a fight (RB7)
 4.  Using profane or vulgar language or gestures (swearing, cursing, hate speech, gang signs or gestures) (RB8)
 5.  Using slurs based upon the actual or perceived race, ethnicity, color, national origin, citizenship/immigration status, weight, gender, gender identity, gender expression, sexual orientation, or disability (RB9)
-6.  Unwanted or inappropriate physical contact (RB11)
-7.  Alcohol: Possessing, using, or being under the influence of alcohol (BSC1)
-8.  Alcohol: Distributing alcohol to other students (BSC2)
-9.  Drugs: Possessing drug paraphernalia (BSC3)
-10. Drugs: Violating school board non-prescription (Over the counter) medication policy or look-alike drug policy (BSC4)
-11. Harassment: Repeatedly annoying or attacking a student or a group of students or personnel creating an intimidating or hostile educational or work environment (BSC8)
-12. Fighting that results in no injury as determined by the school administration (BSC14)
-13. Inciting or causing a substantial disturbance to the operation of school or the safety of staff and/or students (BSC15)
-14. Throwing an object that has the potential to cause a disturbance, injury, or property damage (BSC16)
-15. Shoving, pushing, striking, biting another a student with no visible injury (BSC17)
-16. Exposing body parts, lewd or indecent public behavior (BSC18)
-17. Physical contact of a sexual nature – patting body parts, pinching, tugging clothing (BSC19)
-18. Stalking as described in the Code of Virginia section 18.2-60.3 (BSC21)
-19. Stealing money or property using physical force (no weapon involved) (BSC 22)
-20. Possessing dangerous instruments/substances that could be used to inflict harm upon another (BSC26)
-21. Weapons: Possessing any weapon (other than a firearm) as defined by § 18.2-308.1. (BSC27)
-22. Drugs: Possessing controlled substances, illegal drugs inhalants, or synthetic hallucinogens or unauthorized prescription medications (BESO5)
-23. Drugs: Being under the influence of controlled substances, illegal drugs, inhalants, or synthetic hallucinogens or unauthorized prescription medications (BESO6)
-24. Drugs: Using controlled substances or using illegal drugs or synthetic hallucinogens or unauthorized prescription medications (BESO7)
-25. Fire: Attempting to set, aiding in setting, or setting a fire (BESO9)
-26. Gang-Related Behavior: Engaging in threatening or dangerous behavior that is gang-related as defined in §18.2-46.1 (BESO10)
-27. Hazing as defined in §18.2-56 and noted in § 22.1-279.6. (BESO11)
-28. Threatening, intimidating, or instigating violence, injury or harm to a staff member or members (BESO12)
-29. Threatening, intimidating, or instigating violence, injury or harm to another student(s) or other(s) (not including written threats) (BESO13)
-30. Threatening, intimidation, or instigating violence, injury or harm to another student(s) or other(s) in writing. If the written threat is to a staff member, a report to law enforcement is required unless the student making the threat has a disability. (BESO14)
-31. Using an object not generally considered to be a weapon to threaten or attempt to injure school personnel (BESO15)
-32. Using an object not generally considered to be a weapon to threaten or attempt to injure students or others (BESO16)
-33. Bomb threat –Making a bomb threat (BESO17)
-34. A crime in the community where the student was charged with an offense relating to the Commonwealth's laws but is required to be disclosed to the superintendent of the school division pursuant to § 16.1-260(G) (BESO18)
-35. Illegal Possession of Handgun (PD11)
-36. Illegal Possession of Rifle or Shotgun (PD12)
-37. Illegal Possession of Any Other Projectile Weapon (PD13)
-38. Illegal Possession of Bomb (PD14)
-39. Illegal Possession of Other Firearms: firebombs, explosive materials or devices, hoax explosive devices per § 18.2-85, or explosive incendiary devices, as defined in § 18.2-433.1, or chemical bombs per § 18.2-87.1 (PD15)
-40. Illegal Possession of Controlled Drugs and Substances with Intent to Distribute or Sell\
-    The definition of drugs refers to Schedules I, II, and III of the Drug Control Act (§ 54.1-3400 et seq.) and marijuana. (PD16)
+6.  Harassment: Repeatedly annoying or attacking a student or a group of students or personnel creating an intimidating or hostile educational or work environment (BSC8)
+7.  Unwanted or inappropriate physical contact (RB11)
+8.  Exposing body parts, lewd or indecent public behavior (BSC18)
+
+[Drugs and Alcohol]{.underline}:
+
+9.  Alcohol: Possessing, using, or being under the influence of alcohol (BSC1)
+10. Alcohol: Distributing alcohol to other students (BSC2)
+11. Drugs: Possessing drug paraphernalia (BSC3)
+12. Drugs: Violating school board non-prescription (Over the counter) medication policy or look-alike drug policy (BSC4)
+13. Drugs: Possessing controlled substances, illegal drugs inhalants, or synthetic hallucinogens or unauthorized prescription medications (BESO5)
+14. Drugs: Being under the influence of controlled substances, illegal drugs, inhalants, or synthetic hallucinogens or unauthorized prescription medications (BESO6)
+15. Drugs: Using controlled substances or using illegal drugs or synthetic hallucinogens or unauthorized prescription medications (BESO7)
+16. Illegal Possession of Controlled Drugs and Substances with Intent to Distribute or Sell. The definition of drugs refers to Schedules I, II, and III of the Drug Control Act (§ 54.1-3400 et seq.) and marijuana. (PD16)
+
+[Threats and Weapons Possession]{.underline}:
+
+17. Fighting that results in no injury as determined by the school administration (BSC14)
+18. Inciting or causing a substantial disturbance to the operation of school or the safety of staff and/or students (BSC15)
+19. Throwing an object that has the potential to cause a disturbance, injury, or property damage (BSC16)
+20. Shoving, pushing, striking, biting another a student with no visible injury (BSC17)
+21. Physical contact of a sexual nature – patting body parts, pinching, tugging clothing (BSC19)
+22. Stalking as described in the Code of Virginia section 18.2-60.3 (BSC21)
+23. Stealing money or property using physical force (no weapon involved) (BSC22)
+24. Possessing dangerous instruments/substances that could be used to inflict harm upon another (BSC26)
+25. Weapons: Possessing any weapon (other than a firearm) as defined by § 18.2-308.1. (BSC27)
+26. Fire: Attempting to set, aiding in setting, or setting a fire (BESO9)
+27. Gang-Related Behavior: Engaging in threatening or dangerous behavior that is gang-related as defined in §18.2-46.1 (BESO10)
+28. Hazing as defined in §18.2-56 and noted in § 22.1-279.6. (BESO11)
+29. Threatening, intimidating, or instigating violence, injury or harm to a staff member or members (BESO12)
+30. Threatening, intimidating, or instigating violence, injury or harm to another student(s) or other(s) (not including written threats) (BESO13)
+31. Threatening, intimidation, or instigating violence, injury or harm to another student(s) or other(s) in writing. If the written threat is to a staff member, a report to law enforcement is required unless the student making the threat has a disability. (BESO14)
+32. Using an object not generally considered to be a weapon to threaten or attempt to injure school personnel (BESO15)
+33. Using an object not generally considered to be a weapon to threaten or attempt to injure students or others (BESO16)
+34. Bomb threat –Making a bomb threat (BESO17)
+35. A crime in the community where the student was charged with an offense relating to the Commonwealth's laws but is required to be disclosed to the superintendent of the school division pursuant to § 16.1-260(G) (BESO18)
+36. Illegal Possession of Handgun (PD11)
+37. Illegal Possession of Rifle or Shotgun (PD12)
+38. Illegal Possession of Any Other Projectile Weapon (PD13)
+39. Illegal Possession of Bomb (PD14)
+40. Illegal Possession of Other Firearms: firebombs, explosive materials or devices, hoax explosive devices per § 18.2-85, or explosive incendiary devices, as defined in § 18.2-433.1, or chemical bombs per § 18.2-87.1 (PD15)
+:::
+
+```{r hostile_codes}
+
+hostile_codes <- c("RB3", "RB4", "RB7", "RB8", "RB9", "RB11", "BSC1", "BSC2", "BSC3", "BSC4",
+                   "BSC8", "BSC14", "BSC15", "BSC16", "BSC17", "BSC18", "BSC19", "BSC21", "BSC22",
+                   "BSC26", "BSC27", "BESO5", "BESO6", "BESO7", "BESO9", "BESO10", "BESO11",
+                   "BESO12", "BESO13", "BESO14", "BESO15", "BESO16", "BESO17", "BESO18",
+                   "PD11", "PD12", "PD13", "PD14", "PD15", "POD16")
+
+
+```
+
 
 ## Acts of Violence
 
-There are xx behavior codes associated with acts of violence. These codes are different from the hostile environment indicators because these represent explicit incidents of violence while the other indicators represent intentions of harm.
+::: {.callout-caution appearance="simple" collapse="true}
+## Violent incidents are externalizing behaviors on the community level.    
+
+![](explore_sbar_files/violence.png)
+:::
+
+
+::: {.callout-note appearance="simple" collapse="true"}
+## There are 14 behavior codes associated with acts of violence. These codes are different from the hostile environment indicators because these represent explicit incidents of violence while the other indicators represent intentions of harm.
+
+1.  Assault: Intending to cause physical injury to another person (BESO1)
+2.  Assault and Battery: Causing physical injury to another person (BESO2)
+3.  Fighting: The use of physical violence between students or on another person where there is minor injury as determined by the school administration (BESO3)
+4.  Striking Staff: The use of force against a staff member when no injury is caused (BESO4)
+5.  Homicide - Firearm: Homicide includes any death resulting from causes other than natural, accidental, or suicide. (PD1)
+6.  Homicide - Other Weapon: Homicide includes any death resulting from causes other than natural, accidental, or suicide. (PD2)
+7.  Sexual Assault: A sexual assault offense is defined as sexual penetration without consent and includes statutory rape and carnal knowledge of a minor. (PD3)
+8.  Attempted Sexual Assault: A sexual assault offense is defined as sexual penetration without consent and includes statutory rape and carnal knowledge of a minor. (PD4)
+9.  Use of a Bomb: Use of bomb includes any explosive device. (PD5)
+10. Assault with Firearm or Weapon: Assault with a firearm or other weapon includes the intentional causing of bodily harm to an individual with a weapon (PD6)
+11. Actual or Attempted Robbery (PD7)
+12. Kidnapping/Abduction (PD8)
+13. Malicious Wounding without a Weapon: Malicious wounding without a weapon includes intentionally causing another person bodily injury, with the intent to maim, disfigure, disable, or kill. (PD9)
+14. Aggravated Sexual Battery on a Student: Aggravated sexual battery includes sexual battery and abuse against a person less than fifteen years of age. (PD10)
+:::
+
+```{r violence_codes}
+
+violence_codes <- c("BESO1", "BESO2", "BESO3", "BESO4", "PD1", "PD2", "PD3", "PD4",
+                    "PD5", "PD6", "PD7", "PD8", "PD9", "PD10")
+
+```
