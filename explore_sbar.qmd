@@ -113,7 +113,7 @@ bullying_codes <- c("RB1", "RB2", "BSC6", "BSC7")
 
 ### Q1: Which districts and regions have the highest bullying rates?
 
-#### Bullying Rates in the 2023-2024 School Year
+#### Bullying Rates in the 2023-2024 School Year 
 
 ::: {.panel-tabset}
 
@@ -123,7 +123,6 @@ bullying_codes <- c("RB1", "RB2", "BSC6", "BSC7")
 ::: {.column width="80%"}
 
 ```{r bully_mapdiv}
-
 
 bully_summary_div <- sbar_div %>%
   filter(school_year == "2023-2024",
@@ -177,7 +176,7 @@ leaflet() %>%
 :::
 ::: {.column width="20%"}
 
-```{r bully_rank}
+```{r bully_rank, fig.height=20}
 
 bully_median <- data.frame(
   county = "State Median",
@@ -195,12 +194,13 @@ bully_gap_label <- bully_gap_label %>%
 bully_div %>%
   ggplot(aes(y = bullying_rate, x = 0, label = county)) +
   geom_line(color = "darkgrey", linewidth = 1) +
-  geom_point(aes(color = bullying_rate, size = 3)) +
-  geom_text_repel(data = bully_gap_label, aes(label = county), hjust = -.3, size = 2.7) +
-  geom_text(data = bully_gap_label, aes(label = round(bullying_rate)), hjust = 2, size = 2.7) +
+  geom_point(aes(color = bullying_rate), size = 20) +
+  geom_text_repel(data = bully_gap_label, aes(label = county), hjust = -.5, size = 12) +
+  geom_text(data = bully_gap_label, aes(label = round(bullying_rate)), hjust = 2, size = 11) +
   scale_color_gradient(low= "#f2f0f7", high="#6a51a3") +
   theme_void() +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  xlim(-.5, 3)
 
 ```
 :::
@@ -254,6 +254,112 @@ leaflet() %>%
             title = "Rate per 1000 Students",
             position = "topright") 
 
+```
+
+:::
+
+### Q2: Which schools within a particular district had the highest bullying rates last year? 
+
+#### Bullying Rates in the 2023-2024 School Year
+
+::: {.panel-tabset}
+
+#### Charlottesville City and Albemarle County
+
+```{r bully_local}
+
+pal_sch_type <- c("Elementary" = "#66c2a5", "Middle" = "#beaed4", "High" = "#fdc086")
+
+bully_summary_sch <- sbar_sch %>%
+  filter(school_year == "2023-2024",
+         division_name %in% c("Albemarle County", "Charlottesville City"),
+         behavior_code %in% bullying_codes) %>%
+  group_by(school_name) %>%
+  summarise(n_events = sum(number_of_events, na.rm = TRUE))
+
+enroll2324_sch<- enroll_sch %>%
+  filter(school_year == "2023-2024",
+         division_name %in% c("Albemarle County", "Charlottesville City")) %>%
+  select(-pt_count, -ft_count) %>%
+  rename(total_enrolled = total_count)
+  
+bully_sch <- bully_summary_sch %>% 
+  left_join(enroll2324_sch)
+
+# Bullying rate per 1000 students 
+bully_sch <- bully_sch %>%
+  mutate(bullying_rate = (n_events / total_enrolled) * 1000)
+
+# Id school type
+bully_sch <- bully_sch %>%
+  mutate(school_level = case_when(
+    grepl("Elem", school_name) ~ "Elementary",
+    grepl("Middle", school_name) ~ "Middle",
+    grepl("High", school_name) ~ "High",
+    TRUE ~ "Unknown"
+  ))
+
+# Lollipop plot
+bully_sch %>%
+  arrange(desc(bullying_rate)) %>%
+  mutate(school_name = fct_reorder(school_name, bullying_rate)) %>%
+  ggplot(aes(school_name, bullying_rate)) +
+  geom_segment(aes(xend = school_name, yend = 0)) +
+  geom_point(aes(color = school_level), size = 4) +
+  scale_color_manual(values = pal_sch_type) +
+  coord_flip() +
+  theme_bw() +
+  labs(x = "",
+       y = "Bullying Rate per 1000 Students",
+       color = "School Level")
+```
+
+#### Sussex County 
+
+```{r bully_sussex}
+
+bully_summary_sus <- sbar_sch %>%
+  filter(school_year == "2023-2024",
+         division_name %in% c("Sussex County"),
+         behavior_code %in% bullying_codes) %>%
+  group_by(school_name) %>%
+  summarise(n_events = sum(number_of_events, na.rm = TRUE))
+
+enroll2324_sus<- enroll_sch %>%
+  filter(school_year == "2023-2024",
+         division_name %in% c("Sussex County")) %>%
+  select(-pt_count, -ft_count) %>%
+  rename(total_enrolled = total_count)
+  
+bully_sus <- bully_summary_sus %>% 
+  left_join(enroll2324_sus)
+
+# Bullying rate per 1000 students 
+bully_sus <- bully_sus %>%
+  mutate(bullying_rate = (n_events / total_enrolled) * 1000)
+
+# Id school type
+bully_sus <- bully_sus %>%
+  mutate(school_level = case_when(
+    grepl("Elem", school_name) ~ "Elementary",
+    grepl("Middle", school_name) ~ "Middle",
+    grepl("High", school_name) ~ "High",
+    TRUE ~ "Unknown"
+  ))
+
+# Lollipop plot
+bully_sus %>%
+  arrange(desc(bullying_rate)) %>%
+  mutate(school_name = fct_reorder(school_name, bullying_rate)) %>%
+  ggplot(aes(school_name, bullying_rate)) +
+  geom_segment(aes(xend = school_name, yend = 0)) +
+  geom_point(aes(color = school_level), size = 4) +
+  scale_color_manual(values = pal_sch_type) +
+  coord_flip() +
+  theme_bw() +
+  labs(x = "",
+       y = "Bullying Rate per 1000 Students",
+       color = "School Level")
 ```
 
 :::
