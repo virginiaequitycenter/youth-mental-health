@@ -70,12 +70,14 @@ bully_school <- sbar_sch %>%
   right_join(enroll_sch %>% 
               select(school_year, division_number, school_number, school_name, enrolled = total_count),
             by = c("school_year", "division_number", "school_number")) %>% 
+  # I think we want school_name.y and school number 
+  select(-school_name.x) %>%
   mutate(n_events = ifelse(is.na(n_events), 0, n_events),
          bullying_rate = (n_events / enrolled) * 1000,
          school_level = case_when(
-           grepl("Elem", school_name.x) ~ "Elementary",
-           grepl("Middle", school_name.x) ~ "Middle",
-           grepl("High", school_name.x) ~ "High",
+           grepl("Elem", school_name.y) ~ "Elementary",
+           grepl("Middle", school_name.y) ~ "Middle",
+           grepl("High", school_name.y) ~ "High",
            TRUE ~ "Unknown"
          ))
 
@@ -168,12 +170,14 @@ hostenv_school <- sbar_sch %>%
   right_join(enroll_sch %>% 
                select(school_year, division_number, school_number, school_name, enrolled = total_count),
              by = c("school_year", "division_number", "school_number")) %>% 
+  # I think we want school_name.y and school number
+  select(-school_name.x) %>%
   mutate(n_events = ifelse(is.na(n_events), 0, n_events),
          hostenv_rate = (n_events / enrolled) * 1000,
          school_level = case_when(
-           grepl("Elem", school_name.x) ~ "Elementary",
-           grepl("Middle", school_name.x) ~ "Middle",
-           grepl("High", school_name.x) ~ "High",
+           grepl("Elem", school_name.y) ~ "Elementary",
+           grepl("Middle", school_name.y) ~ "Middle",
+           grepl("High", school_name.y) ~ "High",
            TRUE ~ "Unknown"
          ))
 
