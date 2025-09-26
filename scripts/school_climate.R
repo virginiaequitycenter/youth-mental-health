@@ -87,5 +87,8 @@ climate_reg_22 <- climate_22 %>%
 climate_sch_22 <- climate_22 %>%
   filter(!grepl("Average", school_name))
 
+# Variables ----
 
+# Create key for student variables of interest listed here:
+# https://docs.google.com/spreadsheets/d/1PnVFH4DsR9IBsQnsbyemPaoPpTkJfjiPt0ilWQ85yik/edit?usp=sharing
 
