@@ -11,5 +11,5 @@
 
 # Ignore test and temp scripts 
 /scripts/explore*
-explore_sbar_files/
+explore_sbar*
 *.html

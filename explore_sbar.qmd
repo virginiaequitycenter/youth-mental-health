@@ -36,7 +36,6 @@ A list of all behavior codes can be found here: [SBAR Behavior Codes](https://do
 #| echo: false
 #| message: false
 
-library(ggspatial)
 library(ggrepel)
 library(leaflet)
 library(leaflegend)
@@ -48,18 +47,29 @@ library(sf)
 library(tidycensus)
 library(tidyverse)
 
+pal_sch_type <- c("Elementary" = "#66c2a5", "Middle" = "#beaed4", "High" = "#fdc086")
+
 ```
 
 ```{r data}
 
-# SBAR:
+# SBAR ----
 sbar_behavior_codes <- read_csv("data/sbar_behavior_codes.csv")
 sbar_div <- read_csv("data/sbar_division.csv")
 sbar_reg <- read_csv("data/sbar_region.csv")
 sbar_state <- read_csv("data/sbar_state.csv")
 sbar_sch <- read_csv("data/sbar_school.csv")
 
-# ACS geometries:
+# Id school type:
+sbar_sch <- sbar_sch %>%
+  mutate(school_level = case_when(
+    grepl("Elem", school_name) ~ "Elementary",
+    grepl("Middle", school_name) ~ "Middle",
+    grepl("High", school_name) ~ "High",
+    TRUE ~ "Unknown"
+  ))
+
+# ACS geometries ----
 acs_div <- readRDS("data/acs_division.RDS")
 acs_state <- readRDS("data/acs_state.RDS")
 acs_region <- readRDS("data/acs_region.RDS")
@@ -81,7 +91,7 @@ collapsed <- to_collapse %>%
 acs_div <- collapsed %>%
   bind_rows(ok_already)
 
-# VDOE enrollment counts:
+# VDOE enrollment counts ----
 enroll_div <- read_csv("data/enroll_division.csv")
 enroll_reg <- read_csv("data/enroll_region.csv")
 enroll_sch <- read_csv("data/enroll_school.csv")
@@ -268,13 +278,11 @@ leaflet() %>%
 
 ```{r bully_local}
 
-pal_sch_type <- c("Elementary" = "#66c2a5", "Middle" = "#beaed4", "High" = "#fdc086")
-
 bully_summary_sch <- sbar_sch %>%
   filter(school_year == "2023-2024",
          division_name %in% c("Albemarle County", "Charlottesville City"),
          behavior_code %in% bullying_codes) %>%
-  group_by(school_name) %>%
+  group_by(school_name, school_level) %>%
   summarise(n_events = sum(number_of_events, na.rm = TRUE))
 
 enroll2324_sch<- enroll_sch %>%
@@ -290,20 +298,10 @@ bully_sch <- bully_summary_sch %>%
 bully_sch <- bully_sch %>%
   mutate(bullying_rate = (n_events / total_enrolled) * 1000)
 
-# Id school type
-bully_sch <- bully_sch %>%
-  mutate(school_level = case_when(
-    grepl("Elem", school_name) ~ "Elementary",
-    grepl("Middle", school_name) ~ "Middle",
-    grepl("High", school_name) ~ "High",
-    TRUE ~ "Unknown"
-  ))
-
 # Lollipop plot
 bully_sch %>%
   arrange(desc(bullying_rate)) %>%
-  mutate(school_name = fct_reorder(school_name, bullying_rate)) %>%
-  ggplot(aes(school_name, bullying_rate)) +
+  ggplot(aes(x = fct_reorder(school_name, bullying_rate), y = bullying_rate)) +
   geom_segment(aes(xend = school_name, yend = 0)) +
   geom_point(aes(color = school_level), size = 4) +
   scale_color_manual(values = pal_sch_type) +
@@ -318,11 +316,32 @@ bully_sch %>%
 
 ```{r bully_sussex}
 
+# Get state medians for elementary, middle, and high school:
+bully_levels <- sbar_sch %>%
+  filter(school_year == "2023-2024",
+         behavior_code %in% bullying_codes) %>%
+    group_by(school_name, school_level) %>%
+  summarise(n_events = sum(number_of_events, na.rm = TRUE))
+
+enroll2324 <- enroll_sch %>%
+  filter(school_year == "2023-2024") %>%
+  select(school_name, total_count)
+  
+bully_levels <- bully_levels %>%
+  left_join(enroll2324)
+
+bully_levels <- bully_levels %>%
+  group_by(school_level) %>%
+  summarise(total_incidents = sum(n_events, na.rm = TRUE), 
+            total_enrolled = sum(total_count, na.rm = TRUE)) %>%
+  mutate(bullying_rate = (total_incidents/total_enrolled) * 1000)
+
+# Sussex:
 bully_summary_sus <- sbar_sch %>%
   filter(school_year == "2023-2024",
          division_name %in% c("Sussex County"),
          behavior_code %in% bullying_codes) %>%
-  group_by(school_name) %>%
+  group_by(school_name, school_level) %>%
   summarise(n_events = sum(number_of_events, na.rm = TRUE))
 
 enroll2324_sus<- enroll_sch %>%
@@ -338,22 +357,13 @@ bully_sus <- bully_summary_sus %>%
 bully_sus <- bully_sus %>%
   mutate(bullying_rate = (n_events / total_enrolled) * 1000)
 
-# Id school type
-bully_sus <- bully_sus %>%
-  mutate(school_level = case_when(
-    grepl("Elem", school_name) ~ "Elementary",
-    grepl("Middle", school_name) ~ "Middle",
-    grepl("High", school_name) ~ "High",
-    TRUE ~ "Unknown"
-  ))
-
 # Lollipop plot
 bully_sus %>%
   arrange(desc(bullying_rate)) %>%
-  mutate(school_name = fct_reorder(school_name, bullying_rate)) %>%
-  ggplot(aes(school_name, bullying_rate)) +
+  ggplot(aes(fct_reorder(school_name, bullying_rate), bullying_rate)) +
   geom_segment(aes(xend = school_name, yend = 0)) +
   geom_point(aes(color = school_level), size = 4) +
+  #geom_segment(data = bully_levels, aes(xend = school_level, yend = 0), color = "grey") +
   scale_color_manual(values = pal_sch_type) +
   coord_flip() +
   theme_bw() +
@@ -432,7 +442,6 @@ hostile_codes <- c("RB3", "RB4", "RB7", "RB8", "RB9", "RB11", "BSC1", "BSC2", "B
                    "BSC26", "BSC27", "BESO5", "BESO6", "BESO7", "BESO9", "BESO10", "BESO11",
                    "BESO12", "BESO13", "BESO14", "BESO15", "BESO16", "BESO17", "BESO18",
                    "PD11", "PD12", "PD13", "PD14", "PD15", "POD16")
-
 
 ```
 

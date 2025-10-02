@@ -7,8 +7,6 @@ library(here)
 library(httr)
 library(janitor)
 library(readxl)
-library(sf)
-library(tidycensus)
 library(tidyverse)
 
 # Download data ----
@@ -77,13 +75,11 @@ sbar_state <- map_dfr(files_state, ~read_excel(.x, sheet = "Events by Behavior")
 files_sch <- list.files("data/raw", pattern = "^sbar_sch", full.names = TRUE)
 sbar_sch <- map_dfr(files_sch, ~read_excel(.x, sheet = "Events by Behavior"))
 
-# Tidy & Save ----
-
+# Tidy ----
 regions <- read_csv("data/vdoe_regions.csv")
 
 ## Division ----
-
-# Deal with missing, renamed, etc. school districts 
+# Deal with missing, renamed, etc. school districts:
 sbar_div <- sbar_div %>%
   clean_names() %>%
   rename(region_number = region) %>%
@@ -94,12 +90,12 @@ sbar_div <- sbar_div %>%
     grepl("West Point", division_name) ~ "King William County",
     TRUE ~ division_name))
   
-# Join with regions to get GEOID 
+# Join with regions:
 sbar_div <- sbar_div %>%
   select(-region_number) %>%
   left_join(regions, by = join_by(division_name == district_name))
 
-# Fix combined Williamsburg/James City County District 
+# Fix combined Williamsburg/James City County District: 
 sbar_div <- sbar_div %>%
   mutate(
     region_name = case_when(
@@ -110,34 +106,37 @@ sbar_div <- sbar_div %>%
       TRUE ~ region_number),
     GEOID = case_when(
       division_name == "Williamsburg-James City County" ~ 51830,
-      TRUE ~ GEOID))
-
-write_csv(sbar_div, "data/sbar_division.csv")
+      TRUE ~ GEOID),
+    locality_grouping = "division") %>%
+  rename(n_events = number_of_events)
 
 ## Region ----
-
 missing <- sbar_div %>%
   filter(is.na(region_name)) # most of these are alternative schools 
   
 sbar_reg <- sbar_div %>%
-  group_by(school_year, behavior_code, behavior, region_name) %>%
-  summarise(total_events = sum(number_of_events, na.rm = T))
-
-write_csv(sbar_reg, "data/sbar_region.csv")
+  group_by(school_year, behavior_code, behavior_category, behavior_category_code, 
+           behavior, region_name, region_number) %>%
+  summarise(n_events = sum(n_events, na.rm = T)) %>%
+  mutate(locality_grouping = "region")
 
 ## State ----
 sbar_state <- sbar_state %>%
-  clean_names() 
-
-write_csv(sbar_state, "data/sbar_state.csv")
-
+  clean_names() %>%
+  rename(n_events = number_of_events) %>%
+  mutate(locality_grouping = "state")
+  
 ## School ----
 sbar_sch <- sbar_sch %>%
   clean_names() %>%
-  rename(region_number = region) %>%
-  left_join(regions)
+  rename(region_number = region,
+         n_events = number_of_events) %>%
+  left_join(regions, by = c("region_number", "division_name" = "district_name")) %>%
+  mutate(locality_grouping = "school")
 
-write_csv(sbar_sch, "data/sbar_school.csv")
+# Combine & Save ----
+sbar <- bind_rows(sbar_div, sbar_reg, sbar_sch, sbar_state)
+write_csv(sbar, "data/sbar.csv")
 
 # Behavior Codes ----
 
