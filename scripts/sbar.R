@@ -1,5 +1,5 @@
 # Script to pull and prep Student Behavior and Administrative Response data for 
-# Virginia public schools from the 2022 to 2024 school years 
+# Virginia public schools from the 2021-22 to 2023-24 school years 
 # Homepage: https://www.doe.virginia.gov/data-policy-funding/data-reports/data-collection/special-education
 
 # Libraries ----
@@ -9,7 +9,8 @@ library(janitor)
 library(readxl)
 library(tidyverse)
 
-# Download data ----
+# Student Behavior ----
+## Download data ----
 # Data pulled from https://www.doe.virginia.gov/data-policy-funding/data-reports/data-collection/special-education
 
 # Create vectors of urls:
@@ -65,7 +66,7 @@ walk2(urls_div, dest_div, custom_dl_func)
 walk2(urls_state, dest_state, custom_dl_func)
 walk2(urls_sch, dest_sch, custom_dl_func)
 
-# Read ----
+## Read ----
 files_div <- list.files("data/raw", pattern = "^sbar_div", full.names = TRUE)
 sbar_div <- map_dfr(files_div, ~read_excel(.x, sheet = "Events by Behavior"))
 
@@ -75,10 +76,10 @@ sbar_state <- map_dfr(files_state, ~read_excel(.x, sheet = "Events by Behavior")
 files_sch <- list.files("data/raw", pattern = "^sbar_sch", full.names = TRUE)
 sbar_sch <- map_dfr(files_sch, ~read_excel(.x, sheet = "Events by Behavior"))
 
-# Tidy ----
+## Tidy ----
 regions <- read_csv("data/vdoe_regions.csv")
 
-## Division ----
+### Division ----
 # Deal with missing, renamed, etc. school districts:
 sbar_div <- sbar_div %>%
   clean_names() %>%
@@ -104,13 +105,10 @@ sbar_div <- sbar_div %>%
     region_number = case_when(
       division_name == "Williamsburg-James City County" ~ 2,
       TRUE ~ region_number),
-    GEOID = case_when(
-      division_name == "Williamsburg-James City County" ~ 51830,
-      TRUE ~ GEOID),
     locality_grouping = "division") %>%
   rename(n_events = number_of_events)
 
-## Region ----
+### Region ----
 missing <- sbar_div %>%
   filter(is.na(region_name)) # most of these are alternative schools 
   
@@ -120,13 +118,13 @@ sbar_reg <- sbar_div %>%
   summarise(n_events = sum(n_events, na.rm = T)) %>%
   mutate(locality_grouping = "region")
 
-## State ----
+### State ----
 sbar_state <- sbar_state %>%
   clean_names() %>%
   rename(n_events = number_of_events) %>%
   mutate(locality_grouping = "state")
   
-## School ----
+### School ----
 sbar_sch <- sbar_sch %>%
   clean_names() %>%
   rename(region_number = region,
@@ -134,9 +132,9 @@ sbar_sch <- sbar_sch %>%
   left_join(regions, by = c("region_number", "division_name" = "district_name")) %>%
   mutate(locality_grouping = "school")
 
-# Combine & Save ----
+## Combine & Save ----
 sbar <- bind_rows(sbar_div, sbar_reg, sbar_sch, sbar_state)
-write_csv(sbar, "data/sbar.csv")
+write_csv(sbar, "data/sbar_behavior.csv")
 
 # Behavior Codes ----
 
@@ -162,3 +160,27 @@ beh <- beh %>%
   filter(!is.na(description) & !is.na(behavior_code))
 
 write_csv(beh, "data/sbar_behavior_codes.csv")
+
+# Administrative Response ----
+## Download ----
+
+# In the Fall of 2025, the SBAR Administrative Response data became downloadable via their Build-A-Table tool:
+# https://p1pe.doe.virginia.gov/apex_captcha/home.do?apexTypeId=351
+
+# Table criteria:
+# - School years: All (2023-2024, 2022-2023, and 2021-2022)
+# - Report level: All (State, Division, and School)
+# - SBAR Report: Sanctions Report
+# - SBAR Behavior Categories/Types: All Sanction Types 
+
+## Tidy ----
+response <- read_csv("data/raw/sbar_statistics.csv") %>%
+  clean_names() %>%
+  mutate(locality_grouping = tolower(level)) %>%
+  rename(n_sanctions = number_of_sanctions, n_students_sanctioned = number_of_students) %>%
+  select(-level) %>%
+  left_join(regions, by = join_by(division_name))
+
+## Save ----
+write_csv(response, "data/sbar_response.csv")
+            
