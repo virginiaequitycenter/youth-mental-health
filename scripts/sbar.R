@@ -94,7 +94,7 @@ sbar_div <- sbar_div %>%
 # Join with regions:
 sbar_div <- sbar_div %>%
   select(-region_number) %>%
-  left_join(regions, by = join_by(division_name == district_name))
+  left_join(regions, by = join_by(division_name))
 
 # Fix combined Williamsburg/James City County District: 
 sbar_div <- sbar_div %>%
