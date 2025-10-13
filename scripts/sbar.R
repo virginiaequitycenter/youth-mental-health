@@ -9,6 +9,11 @@ library(janitor)
 library(readxl)
 library(tidyverse)
 
+# For consistency on regions across datasets, we're using the regions data from:
+# https://www.doe.virginia.gov/about-vdoe/virginia-school-directories/virginia-public-school-listing-by-region
+
+regions <- read_csv("data/vdoe_regions_divisions.csv")
+
 # Student Behavior ----
 ## Download data ----
 # Data pulled from https://www.doe.virginia.gov/data-policy-funding/data-reports/data-collection/special-education
@@ -77,42 +82,35 @@ files_sch <- list.files("data/raw", pattern = "^sbar_sch", full.names = TRUE)
 sbar_sch <- map_dfr(files_sch, ~read_excel(.x, sheet = "Events by Behavior"))
 
 ## Tidy ----
-regions <- read_csv("data/vdoe_regions.csv")
-
 ### Division ----
-# Deal with missing, renamed, etc. school districts:
+# Deal with combined Alleghany/Covington school divisions: 
 sbar_div <- sbar_div %>%
   clean_names() %>%
-  rename(region_number = region) %>%
-  mutate(division_name = case_when(
-    grepl("Alleghany", division_name) ~ "Alleghany Highlands County",
-    grepl("Colonial Beach", division_name) ~ "Westmoreland County",
-    grepl("Enterprise", division_name) ~ "Newport News City",
-    grepl("West Point", division_name) ~ "King William County",
-    TRUE ~ division_name))
+  rename(region_number = region, n_events = number_of_events) %>%
+  mutate(
+    division_name = case_when(
+      grepl("Alleghany|Covington", division_name) ~ "Alleghany County",
+      TRUE ~ division_name),
+    division_number = case_when(
+      division_name == "Alleghany County" & division_number == 107 ~ 3,
+      TRUE ~ division_number
+    )) %>%
+  group_by(school_year, division_number, division_name, behavior_category_code,
+           behavior_code, behavior_category, behavior) %>%
+  summarise(n_events = sum(n_events, na.rm = T)) %>%
+  mutate(locality_grouping = "division")
   
 # Join with regions:
 sbar_div <- sbar_div %>%
-  select(-region_number) %>%
-  left_join(regions, by = join_by(division_name))
+  left_join(regions, by = c("division_name", "division_number"))
 
-# Fix combined Williamsburg/James City County District: 
-sbar_div <- sbar_div %>%
-  mutate(
-    region_name = case_when(
-      division_name == "Williamsburg-James City County" ~ "Tidewater",
-      TRUE ~ region_name),
-    region_number = case_when(
-      division_name == "Williamsburg-James City County" ~ 2,
-      TRUE ~ region_number),
-    locality_grouping = "division") %>%
-  rename(n_events = number_of_events)
+# Explore missing values: 
+missing <- sbar_div %>%
+  filter(if_any(everything(), is.na)) # Alternative and technical schools, drop for now
 
 ### Region ----
-missing <- sbar_div %>%
-  filter(is.na(region_name)) # most of these are alternative schools 
-  
 sbar_reg <- sbar_div %>%
+  filter(!is.na(region_name)) %>% 
   group_by(school_year, behavior_code, behavior_category, behavior_category_code, 
            behavior, region_name, region_number) %>%
   summarise(n_events = sum(n_events, na.rm = T)) %>%
@@ -129,8 +127,20 @@ sbar_sch <- sbar_sch %>%
   clean_names() %>%
   rename(region_number = region,
          n_events = number_of_events) %>%
-  left_join(regions, by = c("region_number", "division_name" = "district_name")) %>%
+  mutate(
+    division_name = case_when(
+      grepl("Alleghany|Covington", division_name) ~ "Alleghany County",
+      TRUE ~ division_name),
+    division_number = case_when(
+      division_number == 107 ~ 3,
+      TRUE ~ division_number
+    )) %>%
+  left_join(regions, by = c("region_number", "division_name", "division_number")) %>%
   mutate(locality_grouping = "school")
+
+# Spot check missing values 
+missing <- sbar_sch %>%
+  filter(if_any(everything(), is.na))
 
 ## Combine & Save ----
 sbar <- bind_rows(sbar_div, sbar_reg, sbar_sch, sbar_state)
@@ -179,8 +189,19 @@ response <- read_csv("data/raw/sbar_statistics.csv") %>%
   mutate(locality_grouping = tolower(level)) %>%
   rename(n_sanctions = number_of_sanctions, n_students_sanctioned = number_of_students) %>%
   select(-level) %>%
-  left_join(regions, by = join_by(division_name))
+  left_join(regions, by = join_by(division_name, division_number))
 
-## Save ----
+# Calculate region-level summaries 
+res_region <- response %>%
+  group_by(school_year, sanction_code, sanction_description, region_name, region_number) %>%
+  summarise(
+    n_sanctions = sum(n_sanctions, na.rm = T),
+    n_students_sanctioned = sum(n_students_sanctioned, na.rm = T)) %>%
+  mutate(locality_grouping = "region") %>%
+  drop_na(region_name) # remove alt schools
+
+## Combine & Save ----
+
+response <- bind_rows(response, res_region)
 write_csv(response, "data/sbar_response.csv")
             

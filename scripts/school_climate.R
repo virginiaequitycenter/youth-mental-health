@@ -1,6 +1,8 @@
 # Download and clean the 2022 and 2023 School Survey of Climate and Working Conditions
 # Homepage: https://www.dcjs.virginia.gov/virginia-center-school-and-campus-safety/programs/virginia-school-survey-climate-and-working
 
+# TODO: confirm why there are no regional summaries for 2023 
+
 # Libraries ----
 library(boxr)
 library(janitor)

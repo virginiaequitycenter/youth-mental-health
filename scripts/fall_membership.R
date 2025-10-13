@@ -9,6 +9,11 @@
 library(tidyverse)
 library(janitor)
 
+# For consistency on regions across datasets, we're using the regions data from:
+# https://www.doe.virginia.gov/about-vdoe/virginia-school-directories/virginia-public-school-listing-by-region
+
+regions <- read_csv("data/vdoe_regions_divisions.csv")
+
 # Division ----
 # Build-a-table criteria:
 # - School Years: 2024-2025, 2023-2024, 2022-2023, 2021-2022
@@ -18,44 +23,30 @@ library(janitor)
 # - Reporting Categories: All
 
 enroll_div <- read_csv("data/raw/fall_membership_statistics_division.csv") %>%
-  clean_names()
+  clean_names() %>%
+  left_join(regions, by = c("division_number", "division_name"))
 
-vdoe_regions <- read_csv("data/vdoe_regions.csv")
-
-# Join with regions (to get regional summaries)
-enroll_div <- enroll_div %>%
-  left_join(vdoe_regions, by = join_by(division_name == district_name))
-
-# Deal with districts that have missing regions
+# Deal with districts that have missing regions due to combined city/county districts 
 missing <- enroll_div %>%
-  filter(is.na(region_name))
+  filter(is.na(region_name)) # Alleghany Highlands and Covington City 
 
 enroll_div <- enroll_div %>%
   mutate(
     region_name = case_when(
-      division_name %in% c("Alleghany Highlands", "Alleghany County") ~ "Western Virginia",
-      division_name %in% c("Colonial Beach", "West Point") ~ "Northern Neck",
-      division_name == "Williamsburg-James City County" ~ "Tidewater", 
+      division_name %in% c("Alleghany Highlands", "Covington City") ~ "Western Virginia",
       TRUE ~ region_name),
     region_number = case_when(
       division_name %in% c("Alleghany Highlands", "Alleghany County") ~ 6,
-      division_name %in% c("Colonial Beach", "West Point") ~ 3,
-      division_name == "Williamsburg-James City County" ~ 2,
       TRUE ~ region_number),
-    GEOID = case_when(
-      division_name %in% c("Alleghany Highlands", "Alleghany County") ~ 51005,
-      division_name == "Colonial Beach" ~ 51193,
-      division_name == "West Point" ~ 51101,
-      division_name == "Williamsburg-James City County" ~ 51830, #VDOE defaults to Williamsburg 
-      TRUE ~ GEOID),
     locality_grouping = "division")
 
 # Region ----
 enroll_region <- enroll_div %>%
-  group_by(school_year, region_name, region_number) %>%
-  summarise(total_count = sum(total_count, na.rm = T),
+  group_by(school_year, region_name) %>%
+  summarise(total_count = sum(total_count),
             ft_count = sum(ft_count, na.rm = T),
-            pt_count = sum(pt_count, na.rm = T)) %>%
+            pt_count = sum(pt_count, na.rm = T),
+            region_number = max(region_number, na.rm = T)) %>%
   mutate(locality_grouping = "region")
 
 # School ----
@@ -68,8 +59,7 @@ enroll_region <- enroll_div %>%
 # - Reporting Categories: All
 
 enroll_school <- read_csv("data/raw/fall_membership_statistics_school.csv") %>%
-  clean_names() %>%
-  left_join(vdoe_regions, by = join_by(division_name == district_name)) %>%
+  clean_names() %>% left_join(regions, by = c("division_name", "division_number")) %>%
   mutate(locality_grouping = "school")
 
 # State ----
