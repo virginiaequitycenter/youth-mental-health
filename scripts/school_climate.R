@@ -80,11 +80,26 @@ rename_climate_data <- function(df, mapping) {
 climate_23 <- rename_climate_data(climate_23, rename_map_23)
 climate_22 <- rename_climate_data(climate_22, rename_map_22)
 
+missing <- climate_23 %>%
+  filter(is.na(region_id))
+
+# Calculate region averages for 2023 (this is provided in the 2022 data, but not in the 2023 summary)
+reg_23 <- climate_23 %>%
+  group_by(region_id) %>%
+  summarise(
+    s_num = sum(s_num, na.rm = T),
+    across(
+      .cols = starts_with("pct") | starts_with("avg"),
+      .fns = ~mean(.x, na.rm = T)
+    )) %>%
+  filter(!is.na(region_id)) %>%
+  mutate(locality_grouping = "region")
+
 # Combine & Save ----
-climate <- bind_rows(climate_22, climate_23)
+climate <- bind_rows(climate_22, climate_23, reg_23)
 
 # Add region name:
-vdoe_regions <- read_csv("data/vdoe_regions.csv") %>%
+vdoe_regions <- read_csv("data/vdoe_regions_divisions.csv") %>%
   select(region_name, region_number) %>%
   distinct()
 
@@ -97,6 +112,9 @@ climate <- climate %>%
     school_name == "Division Average" ~ "division",
     !is.na(school_id) ~ "school")) %>%
     distinct()
+
+# Note that some of the regions provided are not used in other places (EX. 9-12, 999)
+# so they come up as having NA region names 
 
 # Save:
 write_csv(climate, "data/climate.csv")
