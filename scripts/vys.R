@@ -352,3 +352,86 @@ write_csv(vys_high, "data/vys_high.csv")
 # - Many of the responses are optional, so there might be areas where the data was not collected (and as
 # a result subgroup counts do not add up to the total.
 
+
+# Example viz ----
+
+
+# 1. Middle school students reporting poor mental health by geography:
+
+vys_middle <- read_csv("data/vys_middle.csv")
+
+mh <- vys_middle %>%
+  filter(str_detect(question, "QN45"))
+
+mh_state_pct <- mh %>% filter(geography == "State") %>% select(pct_tot_total) %>% pull()
+m_labs <- mh %>% filter(geography != "State") %>% select(geography, n_tot_total) %>%
+  mutate(lab = paste0("N = ", n_tot_total))
+
+mh %>%
+  filter(geography != "State") %>%
+  ggplot(aes(x = geography, y = pct_tot_total)) +
+  geom_col(fill = "#253568") +
+  geom_hline(yintercept = mh %>% filter(geography == "State") %>% select(pct_tot_total) %>% pull()) +
+  geom_text(aes(label = m_labs$lab), vjust = -.5, size = 3) +
+  annotate("text", x = "Central", y = 19, label = "State Summary", size = 3) +
+  scale_y_continuous(labels = function(x) paste0(x, "%")) +
+  labs(x = NULL,
+       y = "Percent of Students",
+       title = "Middle school students who reported poor mental health most of the time",
+       subtitle = "2023",
+       caption = "Note that these are voluntary, self-reported results that are randomly administered")
+
+
+# 2. High school students who did not go to school because they felt unsafe, by grade:
+
+vys_high <- read_csv("data/vys_high.csv")
+
+unsafe_long_pct <- vys_high %>%
+  filter(str_detect(question, "QN14"),
+         geography == "State") %>%
+  select(pct_tot_9th:pct_tot_12th) %>%
+  pivot_longer(
+    everything(),
+    names_to = "grade",
+    values_to = "pct_tot") %>%
+  mutate(
+    grade = factor(
+      sub("^pct_tot_", "", grade),
+      levels = unique(sub("^pct_tot_", "", grade))))
+
+unsafe_long_n <- vys_high %>%
+  filter(str_detect(question, "QN14"),
+         geography == "State") %>%
+  select(n_tot_9th:n_tot_12th) %>%
+  pivot_longer(
+    everything(),
+    names_to = "grade",
+    values_to = "n_tot") %>%
+  mutate(
+    grade = factor(
+      sub("^n_tot_", "", grade),
+      levels = unique(sub("^n_tot_", "", grade))))
+
+plt_dat <- left_join(unsafe_long_pct, unsafe_long_n) %>%
+  mutate(lab = paste0("N = ", n_tot))
+
+unsafe_avg <- vys_high %>% 
+  filter(str_detect(question, "QN14"),
+         geography == "State") %>%
+  select(pct_tot_total) %>% 
+  pull()
+
+
+plt_dat %>%
+  ggplot(aes(x = grade, y = pct_tot)) +
+  geom_col(fill = "#253568") +
+  geom_hline(yintercept = unsafe_avg) +
+  geom_text(aes(label = lab), vjust = -.5, size = 3) +
+  #annotate("text", x = "Central", y = 19, label = "State Summary", size = 3) +
+  scale_y_continuous(labels = function(x) paste0(x, "%")) +
+  labs(x = NULL,
+       y = "Percent of Students",
+       title = "High school students who did not go to school because they felt unsafe",
+       subtitle = "2023",
+       caption = "Note that these are voluntary, self-reported results that are randomly administered")
+
