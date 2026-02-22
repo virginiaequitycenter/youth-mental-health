@@ -15,6 +15,7 @@ library(janitor)
 regions <- read_csv("data/vdoe_regions_divisions.csv")
 
 # Division ----
+## All Students ----
 # Build-a-table criteria:
 # - School Years: 2024-2025, 2023-2024, 2022-2023, 2021-2022
 # - Report Level: Division
@@ -40,16 +41,50 @@ enroll_div <- enroll_div %>%
       TRUE ~ region_number),
     locality_grouping = "division")
 
+## Economically Disadvantaged Students ----
+# Build-a-table criteria:
+# - School Years: 2024-2025, 2023-2024, 2022-2023, 2021-2022
+# - Report Level: Division
+#    - Divisions: All
+# - Student Characteristics: All 
+# - Reporting Categories: 
+#     - Disadvantaged: Yes
+
+disadv_div <- read_csv("data/raw/disadv_div_raw.csv") %>%
+  clean_names() %>%
+  left_join(regions, by = c("division_number", "division_name"))
+
+# Deal with districts that have missing regions due to combined city/county districts 
+missing <- disadv_div %>%
+  filter(is.na(region_name)) # Alleghany Highlands and Covington City 
+
+disadv_div <- disadv_div %>%
+  mutate(
+    region_name = case_when(
+      division_name %in% c("Alleghany Highlands", "Covington City") ~ "Western Virginia",
+      TRUE ~ region_name),
+    region_number = case_when(
+      division_name %in% c("Alleghany Highlands", "Alleghany County") ~ 6,
+      TRUE ~ region_number),
+    locality_grouping = "division") %>%
+  select(-disadvantaged, -ft_count, -pt_count, n_disadv_students = total_count)
+
+# Join
+enroll_div <- left_join(enroll_div, disadv_div)
+
 # Region ----
-enroll_region <- enroll_div %>%
+# Not available for download, so manually calculated:
+enroll_reg <- enroll_div %>%
   group_by(school_year, region_name) %>%
   summarise(total_count = sum(total_count),
             ft_count = sum(ft_count, na.rm = T),
             pt_count = sum(pt_count, na.rm = T),
+            n_disadv_students = sum(n_disadv_students, na.rm = T),
             region_number = max(region_number, na.rm = T)) %>%
   mutate(locality_grouping = "region")
 
 # School ----
+## All Students ----
 # Build-a-table criteria:
 # - School Years: 2024-2025, 2023-2024, 2022-2023, 2021-2022
 # - Report Level: School
@@ -58,11 +93,31 @@ enroll_region <- enroll_div %>%
 # - Student Characteristics: All 
 # - Reporting Categories: All
 
-enroll_school <- read_csv("data/raw/fall_membership_statistics_school.csv") %>%
+enroll_sch <- read_csv("data/raw/fall_membership_statistics_school.csv") %>%
   clean_names() %>% left_join(regions, by = c("division_name", "division_number")) %>%
   mutate(locality_grouping = "school")
 
+## Economically Disadvantaged ----
+# Build-a-table criteria:
+# - School Years: 2024-2025, 2023-2024, 2022-2023, 2021-2022
+# - Report Level: School
+#    - Divisions: All
+#    - Schools: All
+# - Student Characteristics: All 
+# - Reporting Categories: 
+#     - Disadvantaged: Yes
+
+disadv_sch <- read_csv("data/raw/disadv_sch_raw.csv") %>%
+  clean_names() %>% left_join(regions, by = c("division_name", "division_number")) %>%
+  mutate(locality_grouping = "school") %>%
+  select(-disadvantaged, -ft_count, -pt_count, n_disadv_students = total_count)
+
+enroll_sch <- left_join(enroll_sch, disadv_sch) %>%
+  mutate(n_disadv_students = as.numeric(ifelse(grepl(">", n_disadv_students), 
+                                               NA, n_disadv_students)))
+
 # State ----
+## All Students ----
 # Build-a-table criteria:
 # - School Years: 2024-2025, 2023-2024, 2022-2023, 2021-2022
 # - Report Level: State
@@ -73,7 +128,22 @@ enroll_state <- read_csv("data/raw/fall_membership_statistics_state.csv") %>%
   clean_names() %>%
   mutate(locality_grouping = "state")
 
+## Economically Disadvantaged ----
+# Build-a-table criteria:
+# - School Years: 2024-2025, 2023-2024, 2022-2023, 2021-2022
+# - Report Level: State
+# - Student Characteristics: All 
+# - Reporting Categories: 
+#     - Disadvantaged: Yes
+
+disadv_state <- read_csv("data/raw/disadv_state_raw.csv") %>%
+  clean_names() %>%
+  mutate(locality_grouping = "state") %>%
+  select(-disadvantaged, -ft_count, -pt_count, n_disadv_students = total_count)
+
+enroll_state <- left_join(enroll_state, disadv_state)
+
 # Combine & Save ----
-fall_membership <- bind_rows(enroll_div, enroll_region, enroll_school, enroll_state)
+fall_membership <- bind_rows(enroll_div, enroll_reg, enroll_sch, enroll_state)
 
 write_csv(fall_membership, "data/fall_membership.csv")
