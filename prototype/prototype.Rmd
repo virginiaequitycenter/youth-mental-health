@@ -1,0 +1,373 @@
+---
+title: "Prototype Data Dictionary"
+output:
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float: 
+      collapsed: false
+      smooth_scroll: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rlang)
+#library(tidycensus)
+library(tidyverse)
+```
+
+Script to isolate measures of interest and develop initial visualizations.
+
+# Prototype Variables
+
+| Measure | Variable | Data Source | Grouping | Years |
+|---------------|---------------|---------------|---------------|---------------|
+| **Bullying Reports** | Rate of reported incidents by staff per students enrolled | SBAR (VDOE) | School, county/district, VDOE region, state | 21-22, 22-23, 23-24, 24-25 |
+| **Bullying Perception** | Average level of students believing bullying is a problem at their school | School Climate Survey (DCJS) | School, county/district, VDOE region, state | 21-22, 22-23 |
+| **Trusted Adults** | Average level of positive relationships between students and adults at their school | School Climate Survey (DCJS) | School, county/district, VDOE region, state | 21-22, 22-23 |
+| **Peer Relationships** | Average level of positive student relationships at their school | School Climate Survey (DCJS) | School, county/district, VDOE region, state | 21-22, 22-23 |
+| **Mental Health Training** | \% of students that participated in suicide prevention and mental health training | School Climate Survey (DCJS) | School, county/district, VDOE region, state | 21-22, 22-23 |
+| **% Living Below Poverty Threshold** | \% of children living at or below the poverty line | ACS 5-year | County/district, VDOE region, state | 2019-2023 |
+| **Economic Disadvantage** | \% of students that are economically disadvantaged | Fall Enrollment (VDOE) | County/district, VDOE region, state | 21-22, 22-23, 23-24, 24-25 |
+| **Mental Health Staffing** | Rate of mental-health staff per students enrolled | Staffing and Vacancies Report (VDOE) | School, county/district, VDOE region, state | 21-22, 22-23, 23-24, 24-25 |
+| ~~Satisfaction with School-based Mental Health Supports~~ | ~~% of students that are satisfied with the mental health support at school~~ | ~~School Climate Survey (DCJS)~~ | ~~School, county/district, VDOE region, state~~ | ~~21-22, 22-23~~ |
+
+------------------------------------------------------------------------
+
+# Data notes
+
+## Bullying
+
+### Bullying Reports
+
+This data comes from the Student Behavior and Administrative Response (SBAR) report. SBAR data is a collection of all incidents reported by school officials of problematic student behavior. These incidents may have occurred on school property, on a school bus, or at a school-sponsored activity. See [SBAR Behavior Codes](https://github.com/virginiaequitycenter/youth-mental-health/blob/main/data/sbar_behavior_codes.csv) for a list of all SBAR behavior codes.
+
+Bullying incidents are defined as the total number of incidents with one of the following behavior codes:
+
+-   RB1: Bullying with no physical injury
+
+-   RB2: Cyberbullying
+
+-   BSC6: Bullying behavior without physical injury that continues after intervention
+
+-   BSC7: Cyberbullying that continues after intervention
+
+Enrollment counts include both full and part-time students.
+
+Rates are calculated as number of incidents per 1000 students in a particular geographic grouping. In the case of schools, where there may be significantly than 1000 students enrolled, we may need to rethink rate calculation or provide important context about how to interpret the rates.
+
+```{r bullying, message=FALSE}
+
+# Read:
+bullying_codes <- c("RB1", "RB2", "BSC6", "BSC7")
+
+sbar <- read_csv("../data/sbar_behavior.csv") %>%
+  filter(behavior_code %in% bullying_codes)
+
+enroll <- read_csv("../data/fall_membership.csv") %>%
+  rename(total_enrolled = total_count)
+
+# Function to get bullying rates for different geo groupings (division, region, and school):
+calc_bully_rate <- function(sbar, enroll, grouping_value, grouping_var) {
+  
+  grouping_var <- enquo(grouping_var)
+  grouping_name <- as_name(grouping_var)
+  
+  sbar_sum <- sbar %>%
+    filter(locality_grouping == grouping_value) %>%
+    group_by(school_year, !!grouping_var) %>%
+    summarise(n_bullying_incidents = sum(n_events, na.rm = TRUE),.groups = "drop")
+  
+  enroll_sum <- enroll %>%
+    filter(locality_grouping == grouping_value) %>%
+    select(school_year, total_enrolled, !!grouping_var)
+  
+  rates <- left_join(sbar_sum,enroll_sum, by = c("school_year", grouping_name)) %>%
+    mutate(
+      bully_rate_per_1k = (n_bullying_incidents / total_enrolled) * 1000,
+      locality_grouping = grouping_value)
+  
+  return(rates)
+}
+
+# Region:
+bully_reg <- calc_bully_rate(sbar, enroll, "region", region_name)
+
+# Division:
+bully_div <- calc_bully_rate(sbar, enroll, "division", division_name)
+
+# School:
+bully_sch <- calc_bully_rate(sbar, enroll, "school", school_name)
+
+# State (no grouping, so calculated separately):
+sbar_state <- sbar %>%
+  filter(locality_grouping == "state") %>%
+  group_by(school_year) %>%
+  summarise(n_bullying_incidents = sum(n_events)) 
+
+enroll_state <- enroll %>%
+  filter(locality_grouping == "state") %>%
+  select(school_year, total_enrolled) 
+
+bully_state <- left_join(sbar_state, enroll_state) %>%
+  mutate(bully_rate_per_1k = (n_bullying_incidents / total_enrolled) * 1000,
+         locality_grouping = "state")
+
+# Combine & save:
+bullying <- bind_rows(bully_state, bully_reg, bully_div, bully_sch) 
+
+#write_csv(bullying, "../prototype/bullying.csv")
+
+```
+
+### Bullying Perception
+
+This data comes from the School Climate Survey. It is important to note that the School Climate Survey is not administered to all students at all schools, so it is not representative of the full Virginia youth population. The School Climate Survey isis administered to middle schools in odd years and high schools in even years, so the 2023 data represents middle school student responses and the 2022 data represents high school student responses.
+
+The perception of bullying is measured as the average level of students indicating that bulling is a problem at their school, and what they observe other being bullied about, with 1 indicating that there is no problem and 6 indicating that students strongly perceive that there is a problem.
+
+It is measured on a Likert scale for the following questions and then averaged:
+
+> How strongly do you agree or disagree with the following statement about this school:
+>
+> 1.  Bullying is a problem at this school.
+>
+> 2.  Students at this school are bullied about their race or ethnicity.
+>
+> 3.  Students at this school are bullied about their sexual orientation.
+>
+> 4.  Students at this school are bullied about their physical appearance.
+>
+> 5.  Students at this school are bulled for having too little or too much money.
+>
+> 6.  Students at this school are bullied about their disability
+
+Where Strongly Disagree = 1, Disagree = 2, Slightly Disagree = 3, Slightly Agree = 4, Agree = 5, Strongly Agree = 6. The scores are then averaged for a particular area.
+
+## Trusted Adults
+
+This data comes from the School Climate Survey. It is a measure of the average level of positive student and adult relationships at school. It is measured on a Likert scale for the following questions and then averaged:
+
+> How strongly do you agree or disagree with the following statements about this school:
+>
+> 1.  Adults at this school care about me.
+>
+> 2.  Adults at this school treat me with respect.
+>
+> 3.  Adults at this school want me to succeed.
+>
+> 4.  Adults at this school listen to what I have to say.
+>
+> 5.  I respect the adults at this school.
+>
+> 6.  If I am absent there is a teacher or some other adult at school that will notice my absence.
+
+Where Strongly Disagree = 1, Disagree = 2, Somewhat Disagree = 3, Somewhat Agree = 4, Agree = 5, Strongly Agree = 6. The scores are then averaged for a particular area. Scores closer to 1 indicate more negative student-adult relationships and scores closer to 6 indicate more positive student-adult relationships.
+
+## Peer Relationships
+
+This data comes from the School Climate Survey. It is a measure of the average level of positive student relationships at school. It is measured on a Likert scale for the following questions and then averaged:
+
+> How strongly do you agree or disagree with the following statements about this school:
+>
+> 1.  I get along well with other students at this school.
+>
+> 2.  I care about other students at this school.
+>
+> 3.  I feel as if other students at this school care about me.
+
+Where Strongly Disagree = 1, Disagree = 2, Slightly Disagree = 3, Somewhat Agree = 4, Agree = 5, Slightly Agree = 6. The scores are then averaged for a particular area. Scores closer to 6 indicate more positive student relationships and scores closer to 1 indicate a lack of positive student relationships.
+
+## Mental Health Training
+
+This data comes from the School Climate Survey. It is a measure of the percentage of students that have participated in suicide prevention or mental health training at their school. It is recorded as a Yes or No response to the following question:
+
+> Have you participated in any suicide prevention or mental health training?
+
+Where Yes = 1 and No = 0. The measure is the percentage of students that selected Yes.
+
+```{r climate, message=FALSE}
+
+# Read and select variables of interest:
+climate <- read_csv("../data/climate.csv") %>%
+  select(yr, locality_grouping, region_name, division_name, school_name,
+         n_students_surveyed = s_num, avg_bully_prob, avg_adult_relationships = avg_adult_rel,
+         avg_peer_relationships = avg_peer_rel, pct_mental_health_training = pct_sui_training) %>%
+  mutate(
+    school_year = recode(yr,
+                         `2022` = "2021-2022",
+                         `2023` = "2022-2023"),
+    across(c(region_name, division_name, school_name),
+           ~ if_else(locality_grouping == "state",
+                     NA_character_, .))) %>%
+  select(-yr) %>%
+  filter(!(locality_grouping == "region" & is.na(region_name)))
+
+#write_csv(climate, "../prototype/climate.csv")
+
+```
+
+## Mental Health Staffing
+
+This data comes from the VDOE Staffing and Vacancies Report. It is a count of the number of filled positions related to youth mental health and the number of vacant positions. The rate of mental health staff members to 1000 students enrolled is calculated.
+
+The following position titles are considered to be related to student mental health:
+
+-   School Counselor (Elementary, Middle, and Secondary)
+
+-   Licensed Behavior Analysts
+
+-   Licensed Assistant Behavior Analysts
+
+-   Other Licensed Health and Behavioral Positions
+
+-   Psychologists
+
+-   Student Support Services Personnel
+
+```{r staffing, message=FALSE}
+
+# Read:
+staffing <- read_csv("../data/staffing.csv")
+
+# Function to get mental health staffing rates for different geo groupings (division, region, and school):
+calc_staff_rate <- function(staffing, enroll, grouping_value, grouping_var) {
+  
+  grouping_var <- enquo(grouping_var)
+  grouping_name <- as_name(grouping_var)
+  
+  staff_sum <- staffing %>%
+    filter(locality_grouping == grouping_value) %>%
+    group_by(school_year, !!grouping_var) %>%
+    summarize(total_positions = sum(number_of_positions_by_fte, na.rm = T),
+              vacancies = sum(number_of_unfilled_positions_by_fte, na.rm = T), .groups = "drop")
+  
+  enroll_sum <- enroll %>%
+    filter(locality_grouping == grouping_value) %>%
+    select(school_year, total_enrolled, !!grouping_var)
+  
+  staff_reg_rates <- left_join(staff_sum,enroll_sum, by = c("school_year", grouping_name)) %>%
+    mutate(
+      pct_vacant = (vacancies / total_positions) * 100,
+      filled_positions = total_positions - vacancies,
+      staff_per_1k_students = (filled_positions / total_enrolled) * 1000,
+      locality_grouping = grouping_value)
+
+return(staff_reg_rates)
+}
+
+# Region:
+staff_rates_reg <- calc_staff_rate(staffing, enroll, "region", region_name)
+
+# Division:
+staff_rates_div <- calc_staff_rate(staffing, enroll, "division", division_name)
+
+# School:
+staff_rates_sch <- calc_staff_rate(staffing, enroll, "school", school_name)
+
+# State (no grouping, so calculated separately):
+staff_state <- staffing %>%
+  filter(locality_grouping == "state") %>%
+  group_by(school_year) %>%
+  summarize(total_positions = sum(number_of_positions_by_fte, na.rm = T),
+            vacancies = sum(number_of_unfilled_positions_by_fte, na.rm = T))
+
+enroll_state <- enroll %>%
+  filter(locality_grouping == "state") %>%
+  select(school_year, total_enrolled, locality_grouping)
+
+staff_rates_state <- left_join(staff_state, enroll_state) %>%
+  mutate(pct_vacant = (vacancies / total_positions) * 100,
+         filled_positions = total_positions - vacancies,
+         staff_per_1k_students = (filled_positions / total_enrolled) * 1000)
+
+# Combine & Save:
+mental_health_staff <- bind_rows(staff_rates_state,
+                                 staff_rates_reg, 
+                                 staff_rates_div,
+                                 staff_rates_sch) %>%
+  select(-total_positions, -vacancies, -pct_vacant)
+
+  
+#write_csv(mental_health_staff, "../prototype/mental_health_staff.csv")
+
+```
+
+## Economic Disadvantage
+
+### Fall Enrollment
+
+This is a measure of the percentage of students enrolled in the beginning of the school year that are indicated as being economically disadvantaged. The VDOE defines a student as being economically disadvantaged if they meet any of the following criteria:
+
+-   is eligible for Free/Reduced Meals,
+
+-   receives Temporary Assistance for Needy Families (TANF), or
+
+-   is eligible for Medicaid.
+
+```{r disadv, message=F}
+
+disadv_state <- enroll %>%
+  filter(locality_grouping == "state") %>%
+  group_by(school_year) %>%
+  mutate(pct_disadv = (n_disadv_students / total_enrolled) * 100) 
+
+disadv_reg <- enroll %>%
+  filter(locality_grouping == "region") %>%
+  group_by(region_name, school_year) %>%
+  mutate(pct_disadv = (n_disadv_students / total_enrolled) * 100) 
+
+disadv_div <- enroll %>%
+  filter(locality_grouping == "division") %>%
+  group_by(division_name, school_year) %>%
+  mutate(pct_disadv = (n_disadv_students / total_enrolled) * 100)
+
+disadv_sch <- enroll %>%
+  filter(locality_grouping == "school") %>%
+  group_by(school_name, school_year) %>%
+  mutate(pct_disadv = (n_disadv_students / total_enrolled) * 100)
+
+disadv <- bind_rows(disadv_state, disadv_reg, disadv_div, disadv_sch)
+
+#write_csv(disadv, "../prototype/disadv.csv")
+  
+```
+
+### *To do: ACS % below poverty threshold*
+
+# Variable List
+
+All data is grouped by a particular locality_grouping (state, region, division, or school) for a particular school year.
+
+```{r, combine, message=FALSE}
+
+prototype_data <- disadv %>%
+  left_join(bullying) %>%
+  left_join(climate) %>%
+  left_join(mental_health_staff) %>%
+  select(-ft_count, -pt_count, -region_number, -division_number)
+
+write_csv(prototype_data, "../prototype/prototype_data.csv")
+
+```
+
+| Variable Name | Measure | Additional Notes |
+|--------------------|---------------------------------|----------------------|
+| school_year | The specific school year (eg. 2021-2022). | Data not available for all school years. |
+| locality_grouping | The grouping level for the data summaries (eg. if the locality grouping is region, the summaries are for the specific region listed under region_name.) | Can be one of: state, region, division, or school. |
+| division_name | The name of the public school division. Often is the same as the city/county. | A list of all division names can be found here: <https://www.doe.virginia.gov/about-vdoe/virginia-school-directories/virginia-public-school-listing-by-division> |
+| region_name | The name of the VDOE public school region (eg. Tidewater). | A list of all regions can be found here: <https://www.doe.virginia.gov/about-vdoe/virginia-school-directories/virginia-public-school-division-staff-listing-by-region> |
+| school_name | The name of the school. If this value is blank, it's because the summary is for a larger geographic grouping. | Because some of the schools have changed names over the years, school number is also recorded. |
+| school_number | The numeric id for each public school in Virginia (eg. Charlottesville High School = 140). | This is not the same as the NCES school id (not included). |
+| total_enrolled | The total number of full and part time students enrolled at the beginning of the school year. | This data is collected in the fall at the start of the school year. |
+| n_disadv_students | The total number of economically disadvantaged students. | This data is collected in the fall at the start of the school year. |
+| pct_disadv | The percentage of students indicated as being economically disadvantaged at the start of the school year. | This value is calculated. |
+| n_bullying_incidents | The number of reported bullying incidents. | This information is from SBAR data. |
+| bully_rate_per_1k | The rate of reported incidents of bullying per 1000 students enrolled. | This value is calculated. |
+| n_students_surveyed | The number of students that took the School Climate Survey. | See notes above for more details about survey administration. |
+| avg_bully_prob | The average measure of students' perception of the problem of bullying at their school. | Measured as an average score across 6 questions (see *Bullying Perception* above), where 1 = no problem and 6 = significant problem. |
+| avg_adult_relationships | The average measure of students' positive student-adult relationships at their school. | Measured as an average score across 6 questions (see *Trusted Adult* above), where 1 = negative relationship and 6 = positive relationships. |
+| avg_peer_relationships | The average measure of students' positive peer relationships at their school. | Measured as an average score across 3 questions (see *Peer Relationships* above), where 1 = negative relationship and 6 = positive relationships. |
+| pct_mental_health_training | The percent of students that participated in suicide or other mental health training at their school. | This value is calculated. |
+| filled_positions | The total number of filled positions that are related to student mental health. | See *Mental Health Staffing* above for a list of position types. |
+| staff_per_1k_students | The rate of mental health staff per 1000 students enrolled. | This value is calculated. |
