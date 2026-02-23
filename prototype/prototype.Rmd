@@ -114,9 +114,9 @@ bully_state <- left_join(sbar_state, enroll_state) %>%
          locality_grouping = "state")
 
 # Combine & save:
-bullying <- bind_rows(bully_state, bully_reg, bully_div, bully_sch) 
-
-#write_csv(bullying, "../prototype/bullying.csv")
+# bullying <- bind_rows(bully_state, bully_reg, bully_div, bully_sch) 
+# 
+# write_csv(bullying, "../prototype/bullying.csv")
 
 ```
 
@@ -196,12 +196,22 @@ climate <- read_csv("../data/climate.csv") %>%
   mutate(
     school_year = recode(yr,
                          `2022` = "2021-2022",
-                         `2023` = "2022-2023"),
-    across(c(region_name, division_name, school_name),
-           ~ if_else(locality_grouping == "state",
-                     NA_character_, .))) %>%
-  select(-yr) %>%
-  filter(!(locality_grouping == "region" & is.na(region_name)))
+                         `2023` = "2022-2023")) %>%
+  select(-yr)
+
+climate_state <- climate %>%
+  filter(locality_grouping == "state")
+
+climate_reg <- climate %>%
+  filter(locality_grouping == "region")
+
+climate_div <- climate %>%
+  filter(locality_grouping == "division") %>%
+  mutate(division_name = str_remove(division_name, " Public Schools"))
+
+climate_sch <- climate %>%
+  filter(locality_grouping == "school") %>%
+  mutate(division_name = str_remove(division_name, " Public Schools"))
 
 #write_csv(climate, "../prototype/climate.csv")
 
@@ -282,14 +292,14 @@ staff_rates_state <- left_join(staff_state, enroll_state) %>%
          staff_per_1k_students = (filled_positions / total_enrolled) * 1000)
 
 # Combine & Save:
-mental_health_staff <- bind_rows(staff_rates_state,
-                                 staff_rates_reg, 
-                                 staff_rates_div,
-                                 staff_rates_sch) %>%
-  select(-total_positions, -vacancies, -pct_vacant)
-
-  
-#write_csv(mental_health_staff, "../prototype/mental_health_staff.csv")
+# mental_health_staff <- bind_rows(staff_rates_state,
+#                                  staff_rates_reg, 
+#                                  staff_rates_div,
+#                                  staff_rates_sch) %>%
+#   select(-total_positions, -vacancies, -pct_vacant)
+# 
+#   
+# write_csv(mental_health_staff, "../prototype/mental_health_staff.csv")
 
 ```
 
@@ -327,9 +337,9 @@ disadv_sch <- enroll %>%
   group_by(school_name, school_year) %>%
   mutate(pct_disadv = (n_disadv_students / total_enrolled) * 100)
 
-disadv <- bind_rows(disadv_state, disadv_reg, disadv_div, disadv_sch)
-
-#write_csv(disadv, "../prototype/disadv.csv")
+# disadv <- bind_rows(disadv_state, disadv_reg, disadv_div, disadv_sch)
+# 
+# write_csv(disadv, "../prototype/disadv.csv")
   
 ```
 
@@ -341,10 +351,33 @@ All data is grouped by a particular locality_grouping (state, region, division, 
 
 ```{r, combine, message=FALSE}
 
-prototype_data <- disadv %>%
-  left_join(bullying) %>%
-  left_join(climate) %>%
-  left_join(mental_health_staff) %>%
+# State
+state <- bully_state %>%
+  left_join(climate_state) %>%
+  left_join(staff_rates_state) %>%
+  left_join(disadv_state)
+  
+# Region
+reg <- climate_reg %>%
+  filter(!is.na(region_name)) %>%
+  full_join(bully_reg) %>%
+  full_join(staff_rates_reg) %>%
+  full_join(disadv_reg)
+
+# Division
+div <- climate_div %>%
+  full_join(bully_div) %>%
+  full_join(disadv_div) %>%
+  full_join(staff_rates_div)
+
+# School 
+sch <- climate_sch %>%
+  full_join(bully_sch) %>%
+  full_join(disadv_sch) %>%
+  full_join(staff_rates_sch)
+
+
+prototype_data <- bind_rows(state, reg, div, sch) %>%
   select(-ft_count, -pt_count, -region_number, -division_number)
 
 write_csv(prototype_data, "../prototype/prototype_data.csv")
@@ -352,7 +385,7 @@ write_csv(prototype_data, "../prototype/prototype_data.csv")
 ```
 
 | Variable Name | Measure | Additional Notes |
-|--------------------|---------------------------------|----------------------|
+|--------------------|-------------------------------|---------------------|
 | school_year | The specific school year (eg. 2021-2022). | Data not available for all school years. |
 | locality_grouping | The grouping level for the data summaries (eg. if the locality grouping is region, the summaries are for the specific region listed under region_name.) | Can be one of: state, region, division, or school. |
 | division_name | The name of the public school division. Often is the same as the city/county. | A list of all division names can be found here: <https://www.doe.virginia.gov/about-vdoe/virginia-school-directories/virginia-public-school-listing-by-division> |
