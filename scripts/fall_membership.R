@@ -12,7 +12,27 @@ library(janitor)
 # For consistency on regions across datasets, we're using the regions data from:
 # https://www.doe.virginia.gov/about-vdoe/virginia-school-directories/virginia-public-school-listing-by-region
 
-regions <- read_csv("data/vdoe_regions_divisions.csv")
+regions <- read_csv("data/vdoe_regions_divisions.csv") %>%
+  mutate(division_number = str_pad(as.character(division_number), 3, pad = "0"))
+
+# School Key ----
+# Create a key of division names/numbers, school names/numbers, and additional information 
+# To use as key when joining multiple datasets where school names may be different 
+# Downloaded from: School List with Principal Contact Information CSV on
+# https://www.doe.virginia.gov/about-vdoe/virginia-school-directories 
+
+school_key <- read_csv("data/raw/Public_School_report.csv", 
+                           col_types = cols(`NCES School Num` = col_character(), 
+                                            `School  Num` = col_character()), 
+                           skip = 2) %>%
+  janitor::clean_names() %>%
+  select(-division_description, -schedule, -principal, -address1, -address2, -state, -phone_number) %>%
+  mutate(division_name = str_trim(str_remove(division_name, "Public Schools")),
+         sch_id = paste0(division_num, school_num)) %>% 
+  left_join(regions) %>%
+  select(-division_num)
+
+write_csv(school_key, "data/school_key.csv")
 
 # Division ----
 ## All Students ----
@@ -25,21 +45,18 @@ regions <- read_csv("data/vdoe_regions_divisions.csv")
 
 enroll_div <- read_csv("data/raw/fall_membership_statistics_division.csv") %>%
   clean_names() %>%
-  left_join(regions, by = c("division_number", "division_name"))
-
-# Deal with districts that have missing regions due to combined city/county districts 
-missing <- enroll_div %>%
-  filter(is.na(region_name)) # Alleghany Highlands and Covington City 
-
-enroll_div <- enroll_div %>%
-  mutate(
-    region_name = case_when(
-      division_name %in% c("Alleghany Highlands", "Covington City") ~ "Western Virginia",
-      TRUE ~ region_name),
-    region_number = case_when(
-      division_name %in% c("Alleghany Highlands", "Alleghany County") ~ 6,
-      TRUE ~ region_number),
-    locality_grouping = "division")
+  left_join(regions, by = c("division_number", "division_name")) %>%
+  mutate(division_number = str_pad(as.character(division_number), 3, pad = "0"),
+         division_name = case_when(
+           division_number == "003" ~ "Alleghany County",
+           TRUE ~ division_name),
+         region_name = case_when(
+           division_name %in% c("Covington City", "Alleghany County") ~ "Western Virginia",
+           TRUE ~ region_name),
+         region_number = case_when(
+           division_name %in% c("Covington City", "Alleghany County") ~ 6,
+           TRUE ~ region_number),
+         locality_grouping = "division")
 
 ## Economically Disadvantaged Students ----
 # Build-a-table criteria:
@@ -52,21 +69,18 @@ enroll_div <- enroll_div %>%
 
 disadv_div <- read_csv("data/raw/disadv_div_raw.csv") %>%
   clean_names() %>%
-  left_join(regions, by = c("division_number", "division_name"))
-
-# Deal with districts that have missing regions due to combined city/county districts 
-missing <- disadv_div %>%
-  filter(is.na(region_name)) # Alleghany Highlands and Covington City 
-
-disadv_div <- disadv_div %>%
-  mutate(
-    region_name = case_when(
-      division_name %in% c("Alleghany Highlands", "Covington City") ~ "Western Virginia",
-      TRUE ~ region_name),
-    region_number = case_when(
-      division_name %in% c("Alleghany Highlands", "Alleghany County") ~ 6,
-      TRUE ~ region_number),
-    locality_grouping = "division") %>%
+  left_join(regions, by = c("division_number", "division_name")) %>%
+  mutate(division_number = str_pad(as.character(division_number), 3, pad = "0"),
+         division_name = case_when(
+           division_number == "003" ~ "Alleghany County",
+           TRUE ~ division_name),
+         region_name = case_when(
+           division_name %in% c("Covington City", "Alleghany County") ~ "Western Virginia",
+           TRUE ~ region_name),
+         region_number = case_when(
+           division_name %in% c("Covington City", "Alleghany County") ~ 6,
+           TRUE ~ region_number),
+         locality_grouping = "division") %>%
   select(-disadvantaged, -ft_count, -pt_count, n_disadv_students = total_count)
 
 # Join
@@ -94,8 +108,15 @@ enroll_reg <- enroll_div %>%
 # - Reporting Categories: All
 
 enroll_sch <- read_csv("data/raw/fall_membership_statistics_school.csv") %>%
-  clean_names() %>% left_join(regions, by = c("division_name", "division_number")) %>%
-  mutate(locality_grouping = "school")
+  clean_names() %>%
+  mutate(
+    division_number = str_pad(as.character(division_number), 3, pad = "0"),
+    school_number = str_pad(as.character(school_number), 4, pad = "0"),
+    sch_id = paste0(division_number, school_number),
+    locality_grouping = "school") %>%
+  select(-division_number, -division_name, -school_name) %>%
+  left_join(school_key, by = "sch_id") %>%
+  select(-school_number, -school_num)
 
 ## Economically Disadvantaged ----
 # Build-a-table criteria:
@@ -108,13 +129,20 @@ enroll_sch <- read_csv("data/raw/fall_membership_statistics_school.csv") %>%
 #     - Disadvantaged: Yes
 
 disadv_sch <- read_csv("data/raw/disadv_sch_raw.csv") %>%
-  clean_names() %>% left_join(regions, by = c("division_name", "division_number")) %>%
-  mutate(locality_grouping = "school") %>%
-  select(-disadvantaged, -ft_count, -pt_count, n_disadv_students = total_count)
+  clean_names() %>%
+  mutate(
+    division_number = str_pad(as.character(division_number), 3, pad = "0"),
+    school_number = str_pad(as.character(school_number), 4, pad = "0"),
+    sch_id = paste0(division_number, school_number),
+    locality_grouping = "school",
+    n_disadv_students = as.numeric(ifelse(grepl(">", total_count), 
+                                          NA, total_count))) %>%
+  select(-division_number, -division_name, -school_name, -ft_count, -pt_count, -total_count, -disadvantaged) %>%
+  left_join(school_key, by = "sch_id") %>%
+  select(-school_number, -school_num)
 
-enroll_sch <- left_join(enroll_sch, disadv_sch) %>%
-  mutate(n_disadv_students = as.numeric(ifelse(grepl(">", n_disadv_students), 
-                                               NA, n_disadv_students)))
+enroll_sch <- enroll_sch %>%
+  left_join(disadv_sch)
 
 # State ----
 ## All Students ----
@@ -147,24 +175,3 @@ enroll_state <- left_join(enroll_state, disadv_state)
 fall_membership <- bind_rows(enroll_div, enroll_reg, enroll_sch, enroll_state)
 
 write_csv(fall_membership, "data/fall_membership.csv")
-
-# School Key ----
-# Create a key of division names/numbers, school names/numbers, and additional information 
-# To use as key when joining multiple datasets where school names may be different 
-# Downloaded from: School List with Principal Contact Information CSV on
-# https://www.doe.virginia.gov/about-vdoe/virginia-school-directories 
-
-school_key_raw <- read_csv("data/raw/Public_School_report.csv", 
-                       col_types = cols(`NCES School Num` = col_character(), 
-                                        `School  Num` = col_character()), 
-                       skip = 2) %>%
-  janitor::clean_names() %>%
-  select(-division_description, -schedule, -principal, -address1, -address2, -state, -phone_number) %>%
-  mutate(division_name = str_trim(str_remove(division_name, "Public Schools")))
-
-vdoe_regions <- read_csv("data/vdoe_regions.csv")
-
-school_key <- school_key_raw %>% 
-  left_join(vdoe_regions)
-
-write_csv(school_key, "data/school_key.csv")
