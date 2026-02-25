@@ -147,3 +147,24 @@ enroll_state <- left_join(enroll_state, disadv_state)
 fall_membership <- bind_rows(enroll_div, enroll_reg, enroll_sch, enroll_state)
 
 write_csv(fall_membership, "data/fall_membership.csv")
+
+# School Key ----
+# Create a key of division names/numbers, school names/numbers, and additional information 
+# To use as key when joining multiple datasets where school names may be different 
+# Downloaded from: School List with Principal Contact Information CSV on
+# https://www.doe.virginia.gov/about-vdoe/virginia-school-directories 
+
+school_key_raw <- read_csv("data/raw/Public_School_report.csv", 
+                       col_types = cols(`NCES School Num` = col_character(), 
+                                        `School  Num` = col_character()), 
+                       skip = 2) %>%
+  janitor::clean_names() %>%
+  select(-division_description, -schedule, -principal, -address1, -address2, -state, -phone_number) %>%
+  mutate(division_name = str_trim(str_remove(division_name, "Public Schools")))
+
+vdoe_regions <- read_csv("data/vdoe_regions.csv")
+
+school_key <- school_key_raw %>% 
+  left_join(vdoe_regions)
+
+write_csv(school_key, "data/school_key.csv")
