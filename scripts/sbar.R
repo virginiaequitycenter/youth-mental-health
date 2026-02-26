@@ -12,7 +12,11 @@ library(tidyverse)
 # For consistency on regions across datasets, we're using the regions data from:
 # https://www.doe.virginia.gov/about-vdoe/virginia-school-directories/virginia-public-school-listing-by-region
 
-regions <- read_csv("data/vdoe_regions_divisions.csv")
+regions <- read_csv("data/vdoe_regions_divisions.csv") %>%
+  mutate(division_number = str_pad(as.character(division_number), 3, pad = "0"))
+
+# And for consistency across school names we're using the school key from fall_membership.R:
+school_key <- read_csv("data/school_key.csv")
 
 # Student Behavior ----
 ## Download data ----
@@ -58,7 +62,7 @@ if (!dir.exists(here("data/raw"))) {
 # 7. Copy the text after USER-AGENT and paste it into field below
 
 headers = c(
-  'user-agent' = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'
+  'user-agent' = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1'
 )
 
 custom_dl_func = function(file, dest) {
@@ -83,37 +87,33 @@ sbar_sch <- map_dfr(files_sch, ~read_excel(.x, sheet = "Events by Behavior"))
 
 ## Tidy ----
 ### Division ----
-# Deal with combined Alleghany/Covington school divisions: 
 sbar_div <- sbar_div %>%
   clean_names() %>%
   rename(region_number = region, n_events = number_of_events) %>%
-  mutate(
-    division_name = case_when(
-      grepl("Alleghany|Covington", division_name) ~ "Alleghany County",
-      TRUE ~ division_name),
-    division_number = case_when(
-      division_name == "Alleghany County" & division_number == 107 ~ 3,
-      TRUE ~ division_number
-    )) %>%
-  group_by(school_year, division_number, division_name, behavior_category_code,
-           behavior_code, behavior_category, behavior) %>%
-  summarise(n_events = sum(n_events, na.rm = T)) %>%
-  mutate(locality_grouping = "division")
-  
-# Join with regions:
-sbar_div <- sbar_div %>%
-  left_join(regions, by = c("division_name", "division_number"))
+  mutate(division_number = str_pad(as.character(division_number), 3, pad = "0"),
+         division_name = case_when(
+           division_number == "003" ~ "Alleghany County",
+           TRUE ~ division_name)) %>%
+  left_join(regions, by = c("division_number", "division_name", "region_number")) %>%
+  mutate(region_name = case_when(
+    division_name == "Covington City" ~ "Western Virginia",
+    TRUE ~ region_name
+  ))
 
-# Explore missing values: 
-missing <- sbar_div %>%
-  filter(if_any(everything(), is.na)) # Alternative and technical schools, drop for now
+# Alternative, technical, or adult education schools typically have region as NA,
+# so let's drop them for now 
+nas <- sbar_div %>% filter(if_any(everything(), is.na))
+
+sbar_div <- sbar_div %>%
+  filter(!is.na(region_number)) %>%
+  mutate(locality_grouping = "division")
 
 ### Region ----
+# Region-level summaries are not available for download, so we create those ourselves 
 sbar_reg <- sbar_div %>%
-  filter(!is.na(region_name)) %>% 
-  group_by(school_year, behavior_code, behavior_category, behavior_category_code, 
-           behavior, region_name, region_number) %>%
-  summarise(n_events = sum(n_events, na.rm = T)) %>%
+  group_by(school_year, region_name, region_number, behavior_code, behavior_category, 
+           behavior_category_code, behavior) %>%
+  summarise(n_events = sum(n_events, na.rm = T))%>%
   mutate(locality_grouping = "region")
 
 ### State ----
@@ -127,20 +127,28 @@ sbar_sch <- sbar_sch %>%
   clean_names() %>%
   rename(region_number = region,
          n_events = number_of_events) %>%
-  mutate(
-    division_name = case_when(
-      grepl("Alleghany|Covington", division_name) ~ "Alleghany County",
-      TRUE ~ division_name),
-    division_number = case_when(
-      division_number == 107 ~ 3,
-      TRUE ~ division_number
-    )) %>%
-  left_join(regions, by = c("region_number", "division_name", "division_number")) %>%
-  mutate(locality_grouping = "school")
+  mutate(division_number = str_pad(as.character(division_number), 3, pad = "0"),
+         school_number = str_pad(as.character(school_number), 4, pad = "0"),
+         sch_id = paste0(division_number, school_number),
+         division_name = case_when(
+           division_number == "003" ~ "Alleghany County",
+           TRUE ~ division_name))
+         
+# Join with regions to get region names
+sbar_sch <- sbar_sch %>%
+  left_join(regions) %>%
+  mutate(region_name = case_when(
+    division_name == "Covington City" ~ "Western Virginia",
+    TRUE ~ region_name
+  ))
 
-# Spot check missing values 
-missing <- sbar_sch %>%
-  filter(if_any(everything(), is.na))
+# Join with school_key to get school names 
+sbar_sch <- sbar_sch %>%
+  left_join(school_key)
+
+# Spot check missing values
+nas <- sbar_sch %>% filter(if_any(c(region_number, region_name, division_number, 
+                                    division_name, school_name), is.na))
 
 ## Combine & Save ----
 sbar <- bind_rows(sbar_div, sbar_reg, sbar_sch, sbar_state)
