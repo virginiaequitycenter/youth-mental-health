@@ -144,7 +144,8 @@ sbar_sch <- sbar_sch %>%
 
 # Join with school_key to get school names 
 sbar_sch <- sbar_sch %>%
-  left_join(school_key)
+  left_join(school_key) %>%
+  mutate(locality_grouping = "school")
 
 # Spot check missing values
 nas <- sbar_sch %>% filter(if_any(c(region_number, region_name, division_number, 
