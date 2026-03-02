@@ -12,8 +12,7 @@ library(janitor)
 # For consistency on regions across datasets, we're using the regions data from:
 # https://www.doe.virginia.gov/about-vdoe/virginia-school-directories/virginia-public-school-listing-by-region
 
-regions <- read_csv("data/vdoe_regions_divisions.csv") %>%
-  mutate(division_number = str_pad(as.character(division_number), 3, pad = "0"))
+regions <- read_csv("data/vdoe_regions_divisions.csv") 
 
 # School Key ----
 # Create a key of division names/numbers, school names/numbers, and additional information 

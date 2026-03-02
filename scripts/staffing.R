@@ -7,7 +7,7 @@ library(janitor)
 library(tidyverse)
 
 # To standardize on region names across datasets:
-regions <- read_csv("data/vdoe_regions.csv")
+regions <- read_csv("data/vdoe_regions_divisions.csv")
 
 # And for consistency across school names we're using the school key from fall_membership.R:
 school_key <- read_csv("data/school_key.csv")
