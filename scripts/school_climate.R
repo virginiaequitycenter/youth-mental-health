@@ -16,6 +16,9 @@ regions <- read_csv("data/vdoe_regions_divisions.csv")
 # And for consistency across school names we're using the school key from fall_membership.R:
 school_key <- read_csv("data/school_key.csv")
 
+school_names_new <- school_key %>%
+  select(school_name, sch_id)
+
 # Instructions for setting up Box developer account and connecting it to RStudio: 
 # https://r-box.github.io/boxr/articles/boxr-app-interactive.html#create
 box_auth()
@@ -150,9 +153,11 @@ climate_23_sch <- climate_23_sch %>%
   select(-region_number, -division_name) %>%
   left_join(regions, by = "division_number")
 
-# # Then join with school_key to standardize on school names
-# climate_23_sch_test2 <- climate_23_sch %>%
-#   left_join(school_key %>% select(-region_name, -region_number, -division_number, -division_name), by = "sch_id")
+# Then join with school_names_new to standardize on school names
+climate_23_sch <- climate_23_sch %>%
+  select(-school_name) %>%
+  left_join(school_names_new) %>%
+  filter(!is.na(school_name))
 
 ## 2022 ----
 climate_22 <- climate_22 %>%
@@ -197,7 +202,8 @@ climate_22_reg <- climate_22 %>%
   mutate(division_name = NA, 
          school_name = NA, 
          sch_id = NA) %>%
-  left_join(regions %>% select(region_name, region_number) %>% distinct())
+  left_join(regions %>% select(region_name, region_number) %>% distinct()) %>%
+  filter(!is.na(region_name))
 
 # School
 climate_22_sch <- climate_22 %>%
@@ -207,6 +213,12 @@ climate_22_sch <- climate_22 %>%
 climate_22_sch <- climate_22_sch %>%
   select(-region_number, -division_name) %>%
   left_join(regions, by = "division_number")
+
+# Join with school_names_new to standardize on school names 
+climate_22_sch <- climate_22_sch %>%
+  select(-school_name) %>%
+  left_join(school_names_new) %>%
+  filter(!is.na(school_name))
 
 # Combine & Save ----
 climate <- bind_rows(

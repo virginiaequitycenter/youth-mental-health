@@ -6,14 +6,9 @@ NA,NA,NA,183837,2023,19.3,6.3,8.1,25.5,5.5,29,7.8,32.6,33.4,40.5,11,35.6,57.9,2,
 4,NA,NA,79484,2022,14.4,5.1,11,9.3,2.9,17.7,5.1,23.6,35.3,45.8,10.6,40.9,53.4,1,77,27.5,4.4,4.6,2.4,3,4,region,NA,NA,NA,Northern Virginia
 6,NA,NA,16756,2022,17.2,4.6,15.9,17.2,5.6,29.6,6.9,31.4,44.5,42.5,15.8,39.7,59.8,1.2,74.1,19.9,4.1,4.5,2.6,3.5,3.6,region,NA,NA,NA,Western Virginia
 8,NA,NA,5466,2022,17.3,6.1,13.7,18.3,5,27.7,7.1,29.8,43.7,37.5,15.5,36.2,61.6,1.3,72,15.5,3.9,4.3,2.9,3.7,3.2,region,NA,NA,NA,Southside
-12,NA,NA,1254,2022,8.8,0.7,4.6,6.9,1.4,14,3.5,20.7,41.1,61,11.7,60.5,55.8,0.8,83.3,50.7,5,5.1,1.3,1.9,4.8,region,NA,NA,NA,NA
 7,NA,NA,11596,2022,18.9,4.1,17,21.6,5.2,33,5.8,32.8,44.5,46.1,14.5,39.1,59.4,1.2,78.7,18,4.2,4.6,2.5,3.5,3.7,region,NA,NA,NA,Southwest
 3,NA,NA,18637,2022,16.6,5.9,15,14.1,4.3,25.3,6.1,32.2,44.5,41.3,14.3,35.5,57.5,1.1,73.5,21.8,4.1,4.4,2.7,3.3,3.6,region,NA,NA,NA,Northern Neck
 1,NA,NA,28147,2022,14.6,5.4,12.2,11.2,3.4,20.5,6,26.2,38.3,43.6,12,41.4,55.5,1.2,75.2,23.9,4.2,4.5,2.7,3.2,3.7,region,NA,NA,NA,Central Virginia
-10,NA,NA,218,2022,11,2,3.8,7.8,0.9,9.6,4.6,23.4,38.1,53.2,13.3,41.4,62.1,1.2,77.5,23.4,4.5,5,1.5,2,4.7,region,NA,NA,NA,NA
-9,NA,NA,173,2022,10.3,3.3,8.7,7.5,6.9,24.3,7.5,16.8,33.5,47.4,14.5,16,80,1.2,79.8,14.5,4.8,5.2,2,2.6,4.5,region,NA,NA,NA,NA
-13,NA,NA,749,2022,6.4,3.8,3.8,5.9,1.9,7.6,2.1,10.3,29.5,46.2,7.2,42.6,64.8,0.6,78.4,21.9,4.9,5.1,1.5,2,4.9,region,NA,NA,NA,NA
-11,NA,NA,303,2022,20.7,4,12.4,19.8,14.9,25.7,7.9,22.8,37.6,42.6,19.8,45,50,1.6,71.3,18.8,3.6,4.7,2.7,3.1,3.5,region,NA,NA,NA,NA
 1,NA,NA,23258,2023,21.886666666666667,6.453333333333333,9.86,30.106666666666666,7.28,34.07333333333333,9.286666666666667,36.67333333333333,38.913333333333334,39.70666666666666,14.266666666666667,36.78,57.5,2.16,72.79333333333334,14.766666666666667,4.113333333333333,4.48,2.9,3.6533333333333333,3.4466666666666668,region,NA,NA,NA,Central Virginia
 2,NA,NA,31000,2023,21.4875,5.6,8.625,28.55625,5.925,30.5,8.5125,35.93125,36.59375,40.80625,13.46875,34.2375,61.09375,2.04375,75.03125,13.55,4.125,4.51875,2.825,3.58125,3.5125,region,NA,NA,NA,Tidewater
 3,NA,NA,14698,2023,22.45294117647059,6.364705882352942,8.994117647058824,33.15294117647059,8.358823529411765,35.84705882352941,9.552941176470588,36.59411764705882,40.82941176470588,39.523529411764706,13.235294117647058,32.59411764705882,59.93529411764706,2.011764705882353,75.3529411764706,13.111764705882353,4.141176470588236,4.4941176470588236,2.7588235294117647,3.652941176470588,3.476470588235294,region,NA,NA,NA,Northern Neck
@@ -300,13 +295,11 @@ NA,NA,NA,48,2023,18,4.4,18.8,37.5,31.2,25,14.6,43.8,37.5,29.2,22.9,54.5,54.5,2,7
 5,Albemarle County,Western Albemarle High,584,2022,11.3,1.9,12.7,10.1,2.1,18.7,5.8,31.7,41.1,52.9,11.3,40.9,43.9,1.1,72.9,16.1,4.6,4.7,2.2,3,4.1,school,002,0140,0020140,Valley
 5,Albemarle County,Albemarle High,1060,2022,16.6,3,13,9.2,2.3,15.7,6.1,32.3,41.1,47.6,13.6,37.5,52.8,1,75.2,17.2,4.4,4.7,2.9,3.1,3.8,school,002,0880,0020880,Valley
 5,Albemarle County,Monticello High,648,2022,15.6,4.8,14.3,9.6,2.9,21.5,4.8,30.9,43.5,42.1,12.5,38.3,58,1.3,71.5,13.7,4.2,4.3,3,3.2,3.6,school,002,1052,0021052,Valley
-5,Albemarle County,Virtual High School,72,2022,12.5,10.5,0,2.8,0,11.1,4.2,9.7,37.5,41.7,5.6,50,25,1,73.6,11.1,4,4.7,2.1,2.6,4.4,school,002,1111,0021111,Valley
-4,Alexandria City,Satellite Campus,2543,2022,17.5,5.2,16.6,11,4.6,17.4,6.3,26,38.7,40,11.4,33.9,54.7,1,67.7,17,4.3,4.7,2.9,3.3,3.8,school,101,0210,1010210,Northern Virginia
+4,Alexandria City,Alexandria City High,2543,2022,17.5,5.2,16.6,11,4.6,17.4,6.3,26,38.7,40,11.4,33.9,54.7,1,67.7,17,4.3,4.7,2.9,3.3,3.8,school,101,0210,1010210,Northern Virginia
 6,Alleghany County,Alleghany High,375,2022,23.2,5.9,19.1,18.7,8.3,38.4,6.1,35.5,49.3,40.5,17.9,28.4,64.2,0.9,79.5,16,3.8,4.1,2.7,3.8,3.1,school,003,0310,0030310,Western Virginia
 8,Amelia County,Amelia County High,350,2022,16.6,3.3,23.9,22.9,5.4,38.6,6.9,36.3,46.3,39.7,13.1,34.8,71.7,1.2,71.4,20.3,4,4.3,2.6,3.7,3.1,school,004,0010,0040010,Southside
 5,Amherst County,Amherst County High,733,2022,19.6,5.5,14.2,19.9,4.6,28.8,6.3,34.2,45.4,38.1,14.6,40.2,68.2,1.2,73.1,14.5,4,4.4,2.7,3.7,3.4,school,005,0750,0050750,Valley
 8,Appomattox County,Appomattox County High,399,2022,19.6,5.7,8.5,20.3,3.3,22.3,3,27.6,38.8,41.1,12.3,38.8,55.1,0.9,81.7,16.3,4.1,4.4,2.7,3.8,3.3,school,006,0260,0060260,Southside
-NA,NA,Appomattox Regional Governor's School,299,2022,9.4,0.8,5.7,10.4,1,18.4,4.3,29.4,51.2,52.8,18.4,43.6,58.2,0.9,75.3,18.7,4.8,5,1.4,2.1,4.7,school,191,9007,1919007,NA
 4,Arlington County,Washington-Liberty High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,007,0080,0070080,Northern Virginia
 4,Arlington County,Yorktown High,1752,2022,10.6,2.8,14.7,9.9,3.4,21.6,7.4,28.7,31.7,52.3,10.4,41.2,63.2,1,74.4,37.4,4.5,4.6,2.4,3.2,3.9,school,007,0330,0070330,Northern Virginia
 4,Arlington County,Wakefield High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,007,0450,0070450,Northern Virginia
@@ -330,7 +323,7 @@ NA,NA,Appomattox Regional Governor's School,299,2022,9.4,0.8,5.7,10.4,1,18.4,4.3
 7,Buchanan County,Hurley High,115,2022,13.4,1.8,10.5,13,6.1,25.2,4.3,14.8,28.7,48.7,6.1,42.9,42.9,2.3,83.5,15.7,4.7,4.9,2,2.3,4.4,school,014,1020,0141020,Southwest
 7,Buchanan County,Twin Valley High,91,2022,14.1,2.5,10,9.9,2.2,20.9,2.2,15.4,30.8,53.8,11,10,70,0.6,87.9,27.5,4.6,5,2.1,2.5,4.4,school,014,1042,0141042,Southwest
 8,Buckingham County,Buckingham County High,335,2022,15,5,12,17.3,3.9,31.3,6.3,27.2,36.4,43,10.1,50,64.7,1,73.7,11.9,3.9,4.4,3,3.7,3.2,school,015,0700,0150700,Southside
-5,Buena Vista City,Parry McCluer High School,183,2022,14.7,2,8.7,20.8,5.5,32.8,6.6,38.3,43.7,49.7,13.7,36,60,1.6,74.3,10.4,4.3,4.8,2.2,3.5,4,school,103,0062,1030062,Valley
+5,Buena Vista City,Parry McCluer High,183,2022,14.7,2,8.7,20.8,5.5,32.8,6.6,38.3,43.7,49.7,13.7,36,60,1.6,74.3,10.4,4.3,4.8,2.2,3.5,4,school,103,0062,1030062,Valley
 5,Campbell County,Altavista High,288,2022,15.5,3.3,13.9,21.2,4.2,32.3,5.9,31.2,39.9,48.3,14.2,39,58.5,1.1,83,20.1,4.3,4.6,2.4,3.6,3.5,school,016,0200,0160200,Valley
 5,Campbell County,Rustburg High,537,2022,17.9,6,9.7,16,2.8,23.5,4.5,31.3,38.5,43.9,11.5,40.3,51.6,0.8,83.4,36.5,4.1,4.4,2.5,3.5,3.6,school,016,0222,0160222,Valley
 5,Campbell County,William Campbell High,200,2022,11.5,3.5,8,17.5,3.5,28.5,5.5,26,35.5,37.5,11,54.5,72.7,1.1,78.5,14.5,4,4.4,2.4,3.5,3.5,school,016,0542,0160542,Valley
@@ -359,9 +352,7 @@ NA,NA,Appomattox Regional Governor's School,299,2022,9.4,0.8,5.7,10.4,1,18.4,4.3
 1,Chesterfield County,James River High,1247,2022,15.4,4.6,18.3,12.8,4,21.7,5.9,31.1,41.9,45.3,11.5,53.5,61.8,0.9,76.6,26.1,4.3,4.5,2.6,3.3,3.8,school,021,0770,0210770,Central Virginia
 1,Chesterfield County,Cosby High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,021,0840,0210840,Central Virginia
 4,Clarke County,Clarke County High,514,2022,16.3,3.7,16.2,13.8,6.6,24.9,7,31.9,38.1,41.2,10.9,44.6,50,1,70.4,13.4,4.3,4.5,2.5,3.3,3.7,school,022,0010,0220010,Northern Virginia
-NA,NA,CodeRVA Regional High School,218,2022,11,2,3.8,7.8,0.9,9.6,4.6,23.4,38.1,53.2,13.3,41.4,62.1,1.2,77.5,23.4,4.5,5,1.5,2,4.7,school,000,1111,0001111,NA
 1,Colonial Heights City,Colonial Heights High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,106,0040,1060040,Central Virginia
-NA,NA,Covington High,175,2022,15.9,3.8,11.4,18.3,8.6,33.1,5.7,32,37.7,50.9,12,33.3,76.2,1.4,76.6,16,4.1,4.6,2.5,3.5,3.6,school,107,0350,1070350,NA
 6,Craig County,Craig County High,128,2022,13,4.3,7.8,18.8,3.9,35.2,4.7,22.7,41.4,35.9,13.3,29.4,70.6,1.1,73.4,17.2,4.4,4.6,2,3.3,3.7,school,023,0011,0230011,Western Virginia
 4,Culpeper County,Eastern View High,1267,2022,21,8.2,19,18.3,5.1,28.9,7.5,33.5,41.2,35.8,14.6,35.7,58.4,1.2,69.1,16.8,3.9,4.2,3.3,3.8,3.1,school,024,0050,0240050,Northern Virginia
 4,Culpeper County,Culpeper County High,832,2022,20.5,5.4,16.2,17.2,4.9,25,6.5,30.4,44.2,39.4,13.7,34.2,50,1.1,72.1,15.6,4.1,4.4,3,3.6,3.5,school,024,0480,0240480,Northern Virginia
@@ -380,7 +371,7 @@ NA,NA,Covington High,175,2022,15.9,3.8,11.4,18.3,8.6,33.1,5.7,32,37.7,50.9,12,33
 4,Fairfax County,Annandale High,1347,2022,12.4,8.7,9.3,6.9,2.2,14,4.8,15.2,33.6,40.2,9.3,38.4,55.2,0.9,75.6,23.1,4.3,4.6,2.5,2.9,4.1,school,029,0660,0290660,Northern Virginia
 4,Fairfax County,McLean High,1757,2022,9.6,3.1,11.7,6.3,2,15.4,5.6,17.3,29.2,57.4,9.7,48.5,56.7,1,81.3,32.8,4.6,4.7,1.8,2.8,4.2,school,029,0790,0290790,Northern Virginia
 4,Fairfax County,Mount Vernon High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,029,0420,0290420,Northern Virginia
-4,Fairfax County,Interagency Agency Alternative Schools,103,2022,18.4,3,5,6.8,1,13.6,4.9,13.6,50.5,63.1,24.3,76,76,1.1,81.6,27.2,4.3,5.2,1.7,2.3,4.6,school,029,1015,0291015,Northern Virginia
+4,Fairfax County,Interagency Alternative Secondary Center,103,2022,18.4,3,5,6.8,1,13.6,4.9,13.6,50.5,63.1,24.3,76,76,1.1,81.6,27.2,4.3,5.2,1.7,2.3,4.6,school,029,1015,0291015,Northern Virginia
 4,Fairfax County,Lewis High,1291,2022,13.2,7.7,11.9,8.9,3.3,18.1,6.5,17.3,30.6,35.7,7.1,45.7,58.7,1.2,76.7,17.7,4.3,4.5,2.5,2.9,3.9,school,029,1020,0291020,Northern Virginia
 4,Fairfax County,Madison High,1580,2022,10.3,3.5,10.6,7.3,2.5,16.1,5.3,22.1,29.7,52.7,10.3,45.7,53.7,1,75.8,27.4,4.6,4.7,1.9,2.9,4.3,school,029,1060,0291060,Northern Virginia
 4,Fairfax County,West Potomac High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,029,0900,0290900,Northern Virginia
@@ -397,11 +388,10 @@ NA,NA,Covington High,175,2022,15.9,3.8,11.4,18.3,8.6,33.1,5.7,32,37.7,50.9,12,33
 4,Fairfax County,Hayfield Secondary,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,029,1800,0291800,Northern Virginia
 4,Fairfax County,South Lakes High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,029,1990,0291990,Northern Virginia
 4,Fairfax County,Bryant High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,029,2201,0292201,Northern Virginia
-4,Fairfax County,Mountain View AIM/ALC,16,2022,5.6,5.4,6.2,6.2,0,12.5,0,6.2,31.2,25,18.8,0,33.3,1,75,12.5,4.1,4.7,1.7,1.8,4.8,school,029,2213,0292213,Northern Virginia
 4,Fairfax County,Westfield High,1497,2022,14.1,6,9.1,5.7,1.7,14.8,4.7,21.3,32,46.4,10.1,43,56.3,1,76.4,23.2,4.4,4.6,2.6,3,4,school,029,2228,0292228,Northern Virginia
 4,Fairfax County,South County High,1645,2022,10.6,4.3,9.2,7.7,2.7,17.7,5.5,21,29.1,46.8,8.8,43.8,45.8,0.8,76.4,26.9,4.5,4.6,2.2,3.1,4.1,school,029,2241,0292241,Northern Virginia
 4,Fairfax County,Mountain View High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,029,2211,0292211,Northern Virginia
-4,Falls Church City,Meridian High,546,2022,14.4,2,8.1,10.4,2.9,17.2,5.1,22.9,36.3,48.7,11.2,44.3,49.2,0.9,72,18.5,4.6,4.7,1.7,2.8,4.3,school,109,0251,1090251,Northern Virginia
+4,Falls Church City,Meridian High School,546,2022,14.4,2,8.1,10.4,2.9,17.2,5.1,22.9,36.3,48.7,11.2,44.3,49.2,0.9,72,18.5,4.6,4.7,1.7,2.8,4.3,school,109,0251,1090251,Northern Virginia
 4,Fauquier County,Kettle Run High,846,2022,13.9,3.9,19.5,16.5,5,27.1,7,35.1,41,41.4,14.8,38.4,61.6,1.1,73.2,24.3,4.2,4.4,2.1,3.2,3.8,school,030,0510,0300510,Northern Virginia
 4,Fauquier County,Fauquier High,976,2022,16.5,4.4,17,17.1,6.2,25.8,6,29,41.5,38.7,14.2,37.4,54,1.2,74.6,30.7,4.3,4.5,2.6,3.2,4,school,030,0701,0300701,Northern Virginia
 4,Fauquier County,Liberty High,887,2022,19.5,6.2,12.9,17.5,5.1,26.5,6,30.1,41.1,39,13,40.9,55.7,1.5,74.6,21.5,4.1,4.4,2.8,3.5,3.6,school,030,0851,0300851,Northern Virginia
@@ -415,11 +405,10 @@ NA,NA,Covington High,175,2022,15.9,3.8,11.4,18.3,8.6,33.1,5.7,32,37.7,50.9,12,33
 3,Fredericksburg City,James Monroe High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,110,0040,1100040,Northern Neck
 7,Galax City,Galax High,312,2022,17.5,5,11.4,14.1,5.4,26,6.7,22.8,45.5,44.6,10.9,47.1,55.9,1.3,81.1,17.9,4.2,4.5,2.2,3.2,3.7,school,111,0031,1110031,Southwest
 7,Giles County,Giles High,417,2022,19.7,4.8,16.1,28.5,8.4,37.2,5.8,37.6,42,42.4,13.9,37.9,62.1,1.2,78.4,21.3,3.9,4.4,2.4,3.9,3.4,school,035,0461,0350461,Southwest
-7,Giles County,Giles Technology Center,126,2022,4.7,3.2,16.8,15.9,12.7,30.2,6.3,22.2,43.7,39.7,11.9,46.7,73.3,1.7,73,24.6,4.7,5.1,1.9,2.9,4.3,school,035,0462,0350462,Southwest
+7,Giles County,Giles County Tech. Center,126,2022,4.7,3.2,16.8,15.9,12.7,30.2,6.3,22.2,43.7,39.7,11.9,46.7,73.3,1.7,73,24.6,4.7,5.1,1.9,2.9,4.3,school,035,0462,0350462,Southwest
 7,Giles County,Narrows High,167,2022,18.8,3.9,12.6,26.3,7.2,35.9,4.8,31.7,47.3,46.1,15,64,64,1.2,83.2,17.4,4.5,4.9,2.6,3.2,4.2,school,035,0470,0350470,Southwest
 3,Gloucester County,Gloucester High,1056,2022,20.1,5.9,27.5,17.5,6.2,34.1,9,40.9,49.1,39.9,18.5,32.8,62.1,1.2,68.4,22.9,3.9,4,3.1,3.9,3,school,036,0260,0360260,Northern Neck
 1,Goochland County,Goochland High,625,2022,14.3,2.5,19.9,18.4,5.1,32,8.3,38.9,45.6,46.2,17.6,42.7,53.6,1.4,77,22.1,4.3,4.6,2.5,3.3,3.7,school,037,0220,0370220,Central Virginia
-NA,NA,Governor's School for the Arts,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,193,9004,1939004,NA
 7,Grayson County,Grayson County High,311,2022,21.1,3.6,19.6,25.7,8.4,30.2,7.7,31.5,45.3,43.4,16.1,30,64,1.1,80.7,17.7,4.3,4.6,2.5,3.5,3.7,school,038,0421,0380421,Southwest
 5,Greene County,William Monroe High,615,2022,18.4,5.1,10.9,14.3,3.3,25.4,3.3,28.6,41.5,44.2,15,39.1,47.8,1,77.9,11.5,4.2,4.5,2.4,3.4,3.7,school,039,0072,0390072,Valley
 8,Greensville County,Greensville County High,354,2022,14.8,7.4,7.8,11.6,4.5,20.9,5.6,22.9,42.1,31.9,16.7,30.5,57.6,1.3,67.5,13.3,3.5,4.1,3.4,3.6,2.7,school,040,0200,0400200,Southside
@@ -431,10 +420,9 @@ NA,NA,Governor's School for the Arts,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
 1,Hanover County,Atlee High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,042,0062,0420062,Central Virginia
 1,Hanover County,The Georgetown School,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,042,0201,0420201,Central Virginia
 1,Hanover County,The Hanover Center For Trades And Technology,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,042,0202,0420202,Central Virginia
-1,Hanover County,Mechanicsville High School,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,042,0370,0420370,Central Virginia
+1,Hanover County,Mechanicsville High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,042,0370,0420370,Central Virginia
 1,Hanover County,Patrick Henry High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,042,0400,0420400,Central Virginia
 1,Hanover County,Hanover High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,042,0554,0420554,Central Virginia
-1,Hanover County,Hanover On-Line School,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,042,1111,0421111,Central Virginia
 5,Harrisonburg City,Harrisonburg High,1219,2022,19.9,8.5,13.4,8.9,3,21.1,5.4,24.9,42.3,40.9,15.3,34.8,57.2,0.9,70.5,15.1,4.1,4.7,2.8,3.1,4,school,113,0012,1130012,Valley
 1,Henrico County,Academy at Virginia Randolph,83,2022,13.8,6.4,13.6,8.4,6,18.1,8.4,20.5,26.5,42.2,7.2,50,66.7,1.5,63.9,16.9,3.6,4.5,2.4,2.8,3.7,school,043,0040,0430040,Central Virginia
 1,Henrico County,Henrico Virtual Academy,244,2022,10.8,16.1,0,1.6,0.8,5.3,1.6,4.1,36.5,55.7,8.6,28.6,61.9,0.8,85.2,22.1,4,4.9,1.8,2.4,4.5,school,043,0083,0430083,Central Virginia
@@ -453,7 +441,6 @@ NA,NA,Governor's School for the Arts,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
 1,Hopewell City,Hopewell High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,114,0120,1140120,Central Virginia
 2,Isle of Wight County,Windsor High,316,2022,17.4,3.4,8.5,14.6,4.1,30.1,5.1,26.6,38.9,45.3,7.9,36,48,1,74.7,14.6,4.3,4.7,2.2,3.3,3.9,school,046,0250,0460250,Tidewater
 2,Isle of Wight County,Smithfield High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,046,0040,0460040,Tidewater
-NA,NA,Jackson River Technical Center,173,2022,10.3,3.3,8.7,7.5,6.9,24.3,7.5,16.8,33.5,47.4,14.5,16,80,1.2,79.8,14.5,4.8,5.2,2,2.6,4.5,school,194,0002,1940002,NA
 3,King and Queen County,Central High,139,2022,13,3.9,15.2,23.7,10.1,28.1,4.3,29.5,38.1,42.4,9.4,15.4,61.5,1,76.3,15.8,4,4.6,2.2,3.5,3.6,school,049,0280,0490280,Northern Neck
 3,King George County,King George High,896,2022,14.8,5.6,12.3,14,4.9,22.2,5.2,31.2,40.1,42.6,13.2,31.4,50,1.1,75.6,21.2,4.2,4.7,2.5,3.4,3.9,school,048,0120,0480120,Northern Neck
 3,King William County,King William High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,050,0130,0500130,Northern Neck
@@ -462,14 +449,14 @@ NA,NA,Jackson River Technical Center,173,2022,10.3,3.3,8.7,7.5,6.9,24.3,7.5,16.8
 7,Lee County,Thomas Walker High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,052,0880,0520880,Southwest
 4,Loudoun County,Dominion High,821,2022,14.3,3.9,6.7,5.8,2.3,14.7,4.9,18,32.3,51.3,7.1,43.1,44.8,0.7,82.3,28.7,4.5,4.6,2.2,2.8,4.3,school,053,0031,0530031,Northern Virginia
 4,Loudoun County,Potomac Falls High,1021,2022,14.9,3.8,10.6,9.5,2.3,18.3,3.8,24,37.2,51.7,8.2,50,47.6,0.8,78.1,28,4.5,4.7,2.3,2.8,4.2,school,053,0140,0530140,Northern Virginia
-4,Loudoun County,John Champe High School,1459,2022,10.6,3,7.8,8.2,2.3,18.6,6.1,23.6,33.4,48,7.8,36,49.1,1,83.4,35.4,4.5,4.7,2.3,2.9,4.1,school,053,0370,0530370,Northern Virginia
+4,Loudoun County,John Champe High,1459,2022,10.6,3,7.8,8.2,2.3,18.6,6.1,23.6,33.4,48,7.8,36,49.1,1,83.4,35.4,4.5,4.7,2.3,2.9,4.1,school,053,0370,0530370,Northern Virginia
 4,Loudoun County,Loudoun County High,1096,2022,12.5,4.6,11.1,9.3,2.8,17.4,4.6,23.8,32.6,42.6,8.5,49.5,52.7,1.3,81.5,28.6,4.5,4.6,2.5,3.1,3.9,school,053,0660,0530660,Northern Virginia
 4,Loudoun County,Broad Run High,916,2022,11.1,3.2,10.8,9.6,2.5,19,5,26.5,36,48,9.2,38.1,50,0.7,79.3,38.1,4.5,4.7,2.4,2.9,4.2,school,053,0740,0530740,Northern Virginia
 4,Loudoun County,Heritage High,915,2022,12.9,3.8,9.4,7.7,1.5,16.5,2.5,22.4,33,54.8,8.6,46.8,45.6,0.8,82.4,37.6,4.6,4.7,2.1,2.8,4.3,school,053,0900,0530900,Northern Virginia
 4,Loudoun County,Riverside High,979,2022,10.7,2.6,7.3,9.5,2.6,18.3,5.1,22.5,32.2,52,8.5,50.6,51.8,0.7,80.4,28.6,4.6,4.7,2.1,2.9,4.3,school,053,1050,0531050,Northern Virginia
 4,Loudoun County,Rock Ridge High,924,2022,12.1,3.1,7.2,6.6,2.6,17.2,4.2,20.6,31.7,46.9,9.2,42.4,50.6,0.8,82.3,35.2,4.6,4.8,2.1,2.5,4.3,school,053,1060,0531060,Northern Virginia
 4,Loudoun County,Independence High,948,2022,9.9,2.2,4.9,6,1.4,14.7,2.5,22.2,29.4,58,6,54.4,50.9,0.8,83.9,32.2,4.8,4.9,1.7,2.5,4.7,school,053,1110,0531110,Northern Virginia
-4,Loudoun County,Lightridge High School,746,2022,9.3,3.1,5.6,7.9,1.3,16.2,4.3,21.4,28.7,54.4,7.4,38.2,40,0.8,82.7,34.3,4.6,4.9,1.8,2.6,4.4,school,053,1130,0531130,Northern Virginia
+4,Loudoun County,Lightridge High,746,2022,9.3,3.1,5.6,7.9,1.3,16.2,4.3,21.4,28.7,54.4,7.4,38.2,40,0.8,82.7,34.3,4.6,4.9,1.8,2.6,4.4,school,053,1130,0531130,Northern Virginia
 4,Loudoun County,Park View High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,053,0060,0530060,Northern Virginia
 4,Loudoun County,Freedom High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,053,0120,0530120,Northern Virginia
 4,Loudoun County,Tuscarora High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,053,0200,0530200,Northern Virginia
@@ -482,20 +469,16 @@ NA,NA,Jackson River Technical Center,173,2022,10.3,3.3,8.7,7.5,6.9,24.3,7.5,16.8
 5,Lynchburg City,Heritage High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,115,0130,1150130,Valley
 5,Lynchburg City,E.C. Glass High,868,2022,13.4,4.9,14.6,12.8,5.9,24.1,6.3,28.7,42.4,40.1,14.1,41,59,1.1,66.7,16.7,4.1,4.3,2.7,3.4,3.6,school,115,0260,1150260,Valley
 4,Madison County,Madison County High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,056,0221,0560221,Northern Virginia
-NA,NA,Maggie L. Walker Governor's School,667,2022,9.5,0.5,5.2,4.9,1.6,13.3,3.9,20.5,32.7,63.6,7.3,75.5,53.1,0.6,84.7,75,5,5.1,1.2,1.9,4.7,school,195,0020,1950020,NA
 4,Manassas Park City,Manassas Park High,831,2022,19.9,8.2,16.8,11.3,4.9,20.9,6.4,27.7,48.3,34.9,11.9,29.3,58.6,1.2,69,14.8,4.1,4.6,2.6,3.2,3.8,school,144,0030,1440030,Northern Virginia
 4,Manassas City,Osbourn High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,143,0370,1430370,Northern Virginia
 6,Martinsville City,Martinsville High,460,2022,16.5,4.4,13.4,15.9,6.1,25.9,7.6,28.9,45.4,37.2,17,42.3,61.5,1.4,70.9,13,3.9,4.4,2.8,3.6,3.4,school,116,0110,1160110,Western Virginia
 3,Mathews County,Mathews High,190,2022,15.7,1.9,12.2,22.1,5.8,31.6,3.7,32.6,56.3,49.5,16.3,41.9,61.3,1.1,84.2,21.1,4.3,4.6,2.2,3.5,3.5,school,057,0190,0570190,Northern Neck
-8,Mecklenburg County,Bluestone High,531,2022,12.7,8.8,8.2,17.3,8.3,24.9,9.8,23,39.5,29.2,14.3,27.6,61.8,1.2,66.9,15.1,3.8,4,2.8,3.7,2.9,school,058,0980,0580980,Southside
-8,Mecklenburg County,Park View High,667,2022,16.1,7.9,16.1,18.9,3.3,26.7,6.4,32.4,44.7,38.1,17.7,45.8,67.8,1.5,70.6,14.8,3.9,4.1,3,4.1,2.9,school,058,0990,0580990,Southside
 3,Middlesex County,Middlesex High,300,2022,18.3,6.6,12,20.7,6.3,36,5.7,31.3,46.3,35.7,16.3,42.9,55.1,1.2,73.3,19.3,4,4.3,2.4,3.2,3.4,school,059,0090,0590090,Northern Neck
 6,Montgomery County,Blacksburg High,929,2022,14.7,3,13.8,17.2,4.2,27.8,7,33.6,39.4,47.4,13,43,52.1,0.8,74,24.2,4.4,4.6,2.6,3.4,3.8,school,060,0760,0600760,Western Virginia
 6,Montgomery County,Christiansburg High,816,2022,16.1,3,17.8,23.7,5.6,32.8,7.2,40.7,47.8,44.9,18.9,42.2,62.3,1.2,75.6,24.4,4.2,4.5,3.1,3.7,3.3,school,060,0770,0600770,Western Virginia
 6,Montgomery County,Eastern Montgomery High,188,2022,20,5.5,17.6,22.3,5.3,34,3.2,29.8,43.1,48.4,8.5,43.8,37.5,0.8,83,25,4.3,4.7,2.6,3.3,3.7,school,060,0904,0600904,Western Virginia
 6,Montgomery County,Auburn High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,060,0650,0600650,Western Virginia
 5,Nelson County,Nelson County High,407,2022,13,5.3,12.1,11.5,2.2,19.4,5.7,20.9,29.5,43.5,7.4,60,56.7,1.4,77.4,13.3,4.2,4.5,2.8,3.4,3.6,school,062,0710,0620710,Valley
-NA,NA,New Horizons - Butler Farm Campus,546,2022,7.4,5.1,4.2,6.2,1.3,7.9,2.4,10.6,30.2,46.2,8.1,40.9,70.5,0.6,75.8,21.6,4.9,5.1,1.5,2,4.9,school,196,0007,1960007,NA
 1,New Kent County,New Kent High,816,2022,15.5,4.5,16.2,16.2,4,31.6,5.5,32.6,44.6,41.8,15.3,28,52,1.4,70.2,19.6,4.1,4.4,2.5,3.5,3.5,school,063,0020,0630020,Central Virginia
 2,Newport News City,Denbigh High,703,2022,14.4,6.3,10.3,9.5,3.7,16.9,5.5,23.9,44.1,37.3,14.8,25,57.7,1.3,71.1,13.1,3.8,4.6,2.8,3.3,3.7,school,117,0280,1170280,Tidewater
 2,Newport News City,Warwick High,896,2022,20.5,5.9,15.1,12.5,3.3,22.2,6.4,34.3,49.6,36.4,16.1,35.4,55.6,1,65.2,15.1,3.7,4.3,3.4,3.6,3.1,school,117,1070,1171070,Tidewater
@@ -511,10 +494,6 @@ NA,NA,New Horizons - Butler Farm Campus,546,2022,7.4,5.1,4.2,6.2,1.3,7.9,2.4,10.
 2,Norfolk City,Norview High,1626,2022,18.6,5.6,16.5,12.6,4.4,20.8,6.3,28.8,45,35.3,16.6,30,62.6,1.7,69.3,16.2,3.9,4.5,3,3.3,3.6,school,118,0580,1180580,Tidewater
 2,Norfolk City,Lake Taylor High,534,2022,16.4,9.1,9.8,11,3,19.1,6.4,20.6,40.1,26.4,12.7,27.9,64.7,1.5,62.9,15.5,3.6,4.3,2.9,3.4,3.3,school,118,0840,1180840,Tidewater
 2,Northampton County,Northampton High,220,2022,19.2,5.1,6.9,15,7.7,28.6,4.5,25.5,42.3,34.5,10.5,43.5,56.5,1.5,65.9,12.3,4.1,4.4,2.6,3.5,3.5,school,065,0350,0650350,Tidewater
-NA,NA,Northern Neck Technical Center,203,2022,3.8,1.3,2.5,4.9,3.4,6.9,1.5,9.4,27.6,46.3,4.9,50,40,0.8,85.2,22.7,4.9,5.3,1.5,1.9,4.8,school,198,0310,1980310,NA
-NA,NA,nan,203,2022,3.8,1.3,2.5,4.9,3.4,6.9,1.5,9.4,27.6,46.3,4.9,50,40,0.8,85.2,22.7,4.9,5.3,1.5,1.9,4.8,school,198,NA,198NA,NA
-NA,NA,nan,749,2022,6.4,3.8,3.8,5.9,1.9,7.6,2.1,10.3,29.5,46.2,7.2,42.6,64.8,0.6,78.4,21.9,4.9,5.1,1.5,2,4.9,school,NA,0NaN,NA0NaN,NA
-NA,NA,nan,219435,2022,15.6,5,12.7,12.3,3.7,21.9,5.6,27.1,39.9,43.6,12.8,39.1,56.3,1.1,75.1,22.9,4.2,4.5,2.5,3.2,3.8,school,NaN,0NaN,NaN0NaN,NA
 3,Northumberland County,Northumberland High,199,2022,19.1,3.1,16.1,14.6,5.5,28.6,4.5,27.1,39.7,45.7,12.6,32,64,1.2,72.4,15.1,4.1,4.6,2.5,3.4,3.9,school,066,0040,0660040,Northern Neck
 7,Norton City,J.I. Burton High,218,2022,14.3,1.6,11.5,14.7,1.4,28.4,2.3,27.5,40.4,50.9,16.5,52.8,66.7,1.4,78.9,15.1,4.8,5.1,1.9,2.8,4.6,school,119,0020,1190020,Southwest
 8,Nottoway County,Nottoway High,360,2022,19.8,4.1,15.4,16.7,4.2,23.1,10.6,30,48.9,40.8,20.8,45.3,52,1.4,76.1,20.3,4,4.4,2.7,3.5,3.5,school,067,0301,0670301,Southside
@@ -523,14 +502,13 @@ NA,NA,nan,219435,2022,15.6,5,12.7,12.3,3.7,21.9,5.6,27.1,39.9,43.6,12.8,39.1,56.
 4,Page County,Page County High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,069,0380,0690380,Northern Virginia
 6,Patrick County,Patrick County High,612,2022,16.9,4.8,12.7,20.6,6.9,33,6.5,29.6,43.1,38.7,14.2,35.6,64.4,1.2,74.2,14.7,4,4.4,2.6,3.4,3.5,school,070,0700,0700700,Western Virginia
 1,Petersburg City,Petersburg High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,120,0200,1200200,Central Virginia
-NA,NA,Piedmont Governor's School,144,2022,4.8,2.6,2.1,4.9,2.1,8.3,2.1,4.9,44.4,56.9,6.9,50,60,1.3,89.6,13.9,5.1,5.3,1.1,1.6,4.9,school,199,0015,1990015,NA
 6,Pittsylvania County,Dan River High,471,2022,18.3,5.3,13.6,18.7,6.6,33.3,6.6,37.4,50.3,39.9,19.7,43,55.9,1.1,68.4,17.8,4,4.4,3,3.8,3.3,school,071,1680,0711680,Western Virginia
 6,Pittsylvania County,Gretna High,477,2022,19.2,5.1,17.7,22.4,5.5,38.2,6.5,35,47.8,34,19.5,29,65.6,1.3,68.6,14.5,3.7,4,3.1,3.9,2.9,school,071,1700,0711700,Western Virginia
 6,Pittsylvania County,Chatham High,532,2022,17.2,4.9,20.5,20.3,11.3,34.6,8.5,35.7,43.6,39.5,19.4,22.3,73.8,1.6,72,15.6,4,4.3,2.7,3.7,3.4,school,071,1720,0711720,Western Virginia
 6,Pittsylvania County,Tunstall High,726,2022,19.3,2.5,17.7,21.8,9.1,32.5,9.2,32.9,45.5,42,17.8,43.4,55.8,1.4,72.9,18.3,4.1,4.4,2.7,3.9,3.5,school,071,1730,0711730,Western Virginia
 2,Poquoson City,Poquoson High,689,2022,16,4.1,12.5,14.7,4.8,24.8,4.6,31.3,42.2,45.7,13.2,39.6,54.9,0.9,79.4,15.7,4.2,4.5,2.2,3.4,3.7,school,142,0010,1420010,Tidewater
 2,Portsmouth City,I.C. Norcom High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,121,0240,1210240,Tidewater
-2,Portsmouth City,Monroe High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,121,1660,1211660,Tidewater
+2,Portsmouth City,Manor High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,121,1660,1211660,Tidewater
 2,Portsmouth City,Churchland High,944,2022,16,4.5,11.4,10.9,3.7,22,6.5,27.9,46.1,42.5,16,30.5,60.3,1.4,72.2,14.7,4,4.5,3,3.5,3.6,school,121,0500,1210500,Tidewater
 1,Powhatan County,Powhatan High,803,2022,14.3,4.3,16.6,17.4,4.5,30.6,6.7,34.9,36.2,45.7,12.8,44.7,57.3,0.8,82.7,28.6,4.3,4.5,2.6,3.5,3.7,school,072,0011,0720011,Central Virginia
 8,Prince Edward County,Prince Edward County High,294,2022,19.1,3.6,13.7,13.6,3.7,22.4,3.1,32.3,51.7,36.1,15.6,34.8,63,1.3,64.6,8.8,3.7,4.2,2.9,3.7,3,school,073,0400,0730400,Southside
@@ -555,14 +533,14 @@ NA,NA,Piedmont Governor's School,144,2022,4.8,2.6,2.1,4.9,2.1,8.3,2.1,4.9,44.4,5
 3,Richmond County,Rappahannock High,363,2022,14.2,4.8,5.2,10.5,4.1,22,3.3,23.4,33.9,48.5,8.8,46.9,53.1,1.1,83.7,25.6,4.5,4.8,2,2.9,4.2,school,079,0210,0790210,Northern Neck
 1,Richmond City,Thomas Jefferson High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,123,0020,1230020,Central Virginia
 1,Richmond City,John Marshall High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,123,0730,1230730,Central Virginia
-1,Richmond City,George Wythe High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,123,0741,1230741,Central Virginia
+1,Richmond City,Richmond High School for the Arts,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,123,0741,1230741,Central Virginia
 1,Richmond City,Armstrong High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,123,0850,1230850,Central Virginia
 1,Richmond City,Open High,142,2022,12.9,1.5,6.4,6.3,2.1,19.7,4.9,21.1,47.2,52.8,19.7,50,57.1,0.8,68.3,21.1,4.7,5.2,1.3,1.9,4.8,school,123,0090,1230090,Central Virginia
 1,Richmond City,Richmond Community High,176,2022,8.5,1.9,6.3,6.2,1.1,13.1,2.8,17,48.9,56.2,17.6,19.4,54.8,0.9,64.2,14.2,4.8,5,1.3,1.9,4.6,school,123,0452,1230452,Central Virginia
 1,Richmond City,Franklin Military Academy,127,2022,11,1.1,2.4,8.7,3.1,15.7,4.7,13.4,33.1,53.5,13.4,5.9,47.1,1.5,74,12.6,4.6,5.1,1.6,2.1,4.6,school,123,0621,1230621,Central Virginia
 1,Richmond City,Huguenot High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,123,1510,1231510,Central Virginia
-1,Richmond City,Richmond Alternative School,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,123,3110,1233110,Central Virginia
-1,Richmond City,Richmond Career Education and Employment (Charter School),25,2022,7.1,1,4.3,24,12,20,20,12,44,64,28,57.1,71.4,1.8,88,32,5.3,5.5,1.6,2.6,4.8,school,123,3200,1233200,Central Virginia
+1,Richmond City,Richmond Success Academy,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,123,3110,1233110,Central Virginia
+1,Richmond City,Richmond Career Education and Employment Charter School,25,2022,7.1,1,4.3,24,12,20,20,12,44,64,28,57.1,71.4,1.8,88,32,5.3,5.5,1.6,2.6,4.8,school,123,3200,1233200,Central Virginia
 6,Roanoke County,Cave Spring High,753,2022,17.7,3.5,16.2,13,4.1,27.4,6,29.3,44.5,42.5,14.7,41.4,59.5,1,76,23.9,4.3,4.6,2.4,3.3,3.8,school,080,0470,0800470,Western Virginia
 6,Roanoke County,Northside High,638,2022,18.8,4.8,13.1,17.7,4.5,27.7,7.4,30.4,41.4,44.2,11.9,36.8,65.8,1.2,75.5,29.2,4.1,4.5,2.5,3.5,3.6,school,080,0520,0800520,Western Virginia
 6,Roanoke County,Glenvar High,476,2022,16,3.9,15.8,17.2,5.3,29.6,6.9,31.3,43.1,45.6,14.1,50.7,59.7,1.2,80.7,34.9,4.3,4.7,2.1,3.2,4.1,school,080,0610,0800610,Western Virginia
@@ -583,15 +561,12 @@ NA,NA,Piedmont Governor's School,144,2022,4.8,2.6,2.1,4.9,2.1,8.3,2.1,4.9,44.4,5
 7,Scott County,Gate City High,491,2022,21.5,4.6,20.8,22,4.9,28.9,5.7,34.6,40.7,47.7,13.2,29.2,60,1.4,81.7,14.9,4.3,4.4,2.5,3.7,3.5,school,084,0770,0840770,Southwest
 7,Scott County,Twin Springs High,155,2022,10.8,1,8.4,20.6,6.5,31,1.9,21.9,34.8,60.6,13.5,38.1,47.6,1.3,86.5,12.3,4.9,5.2,2.1,2.5,4.7,school,084,0780,0840780,Southwest
 4,Shenandoah County,Strasburg High,393,2022,21.2,4.2,16.8,21.1,7.4,31.8,4.1,37.2,50.9,43,16,33.3,47.6,1.1,76.3,18.6,4,4.4,2.7,3.7,3.3,school,085,0770,0850770,Northern Virginia
-4,Shenandoah County,Mountain View High,290,2022,18.6,2.1,17.3,20.7,6.9,33.4,7.2,36.6,46.6,41,14.5,47.6,59.5,1.4,76.6,16.9,4,4.6,2.2,3.4,3.8,school,085,0790,0850790,Northern Virginia
+4,Shenandoah County,Stonewall Jackson High,290,2022,18.6,2.1,17.3,20.7,6.9,33.4,7.2,36.6,46.6,41,14.5,47.6,59.5,1.4,76.6,16.9,4,4.6,2.2,3.4,3.8,school,085,0790,0850790,Northern Virginia
 4,Shenandoah County,Central High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,085,0780,0850780,Northern Virginia
 7,Smyth County,Northwood High,162,2022,19.9,3.3,13.7,17.3,1.9,28.4,1.2,27.2,37.7,51.2,13.6,45.5,77.3,0.8,81.5,14.8,4.2,4.8,2.4,3.4,3.7,school,086,0250,0860250,Southwest
 7,Smyth County,Chilhowie High,324,2022,20.6,5.4,15.5,25.6,7.7,40.4,7.4,36.4,51.5,45.1,17.6,43.9,68.4,1.2,77.2,21.3,4.2,4.5,2.5,3.6,3.7,school,086,0460,0860460,Southwest
 7,Smyth County,Marion Senior High,NA,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,086,0700,0860700,Southwest
 2,Southampton County,Southampton High,502,2022,21.3,7.2,12,21.7,6.4,31.7,4.2,30.3,47.8,32.1,13.7,26.1,52.2,1.1,65.9,13.3,3.7,4.1,3.2,3.8,2.9,school,087,0690,0870690,Tidewater
-NA,NA,Imbedded SECEP Programs,186,2022,20.3,3.7,10,21,11.3,16.1,4.8,21,38.7,51.6,21,46.2,30.8,1.2,82.3,21,4.2,4.9,2.6,3.1,4.1,school,190,0000,1900000,NA
-NA,NA,Norfolk SECEP Center,54,2022,25,11.8,6.2,16.7,33.3,22.2,22.2,22.2,38.9,27.8,11.1,50,100,1.5,38.9,11.1,2.9,4.2,3,3.2,3,school,190,0003,1900003,NA
-NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6,23.8,40,80,2,66.7,19,2.5,4.4,3,3.3,2.5,school,190,3119,1903119,NA
 3,Spotsylvania County,Courtland High,1030,2022,17.8,5.7,17.3,16.3,4.8,26.2,5.9,36.4,47.1,42.4,16.7,37.8,52.9,1.1,71.7,25.9,4.1,4.5,2.9,3.4,3.7,school,088,0020,0880020,Northern Neck
 3,Spotsylvania County,Spotsylvania High,944,2022,18.1,4.9,24.1,19.1,5.3,29.6,6.9,36.3,43.9,37.9,15.6,32.7,60.5,1.3,70.9,18.2,4.1,4.5,2.6,3.5,3.5,school,088,0370,0880370,Northern Neck
 3,Spotsylvania County,Chancellor High,952,2022,18.4,6.8,18.5,12.4,4.1,23.1,6.6,35.5,46.8,37,14.1,28.4,45.5,1.1,76.3,17.5,3.9,4.4,3.2,3.4,3.2,school,088,0381,0880381,Northern Neck
@@ -630,14 +605,20 @@ NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6
 7,Washington County,Holston High,216,2022,16.2,2.6,12,23.1,4.6,33.8,3.7,31.5,46.8,58.3,11.6,36,52,1,79.2,25.5,4.5,4.9,2.2,3.1,4.2,school,094,1060,0941060,Southwest
 5,Waynesboro City,Waynesboro High,453,2022,15.1,6.1,24.2,18.3,6.2,28,9.5,34,45.9,42.2,20.1,33,68.1,1.2,63.6,16.1,4,4.4,2.8,3.4,3.4,school,130,0600,1300600,Valley
 3,West Point,West Point Middle/High,228,2022,14.2,1.8,12.3,14.9,3.1,29.8,4.8,28.9,39.5,46.9,13.2,33.3,73.3,1.1,79.8,14.9,4.4,4.6,2.3,3.3,3.8,school,207,0290,2070290,Northern Neck
-3,Westmoreland County,Washington & Lee High,353,2022,16.3,5.8,15.2,13,7.1,23.2,7.4,26.6,39.4,36.3,10.5,32.4,64.9,0.8,74.2,21.2,4,4.2,2.7,3.3,3.5,school,095,0120,0950120,Northern Neck
+3,Westmoreland County,Westmoreland High,353,2022,16.3,5.8,15.2,13,7.1,23.2,7.4,26.6,39.4,36.3,10.5,32.4,64.9,0.8,74.2,21.2,4,4.2,2.7,3.3,3.5,school,095,0120,0950120,Northern Neck
+2,James City County,Lafayette High,661,2022,13.9,4.4,10.7,10.3,3.2,23,4.5,31.3,49,41.8,14.7,41.2,41.2,0.9,74.1,21.6,4.3,4.5,2.6,3.2,3.9,school,131,0090,1310090,Tidewater
 2,James City County,Lafayette High,661,2022,13.9,4.4,10.7,10.3,3.2,23,4.5,31.3,49,41.8,14.7,41.2,41.2,0.9,74.1,21.6,4.3,4.5,2.6,3.2,3.9,school,131,0090,1310090,Tidewater
 2,Williamsburg-James City County,Lafayette High,661,2022,13.9,4.4,10.7,10.3,3.2,23,4.5,31.3,49,41.8,14.7,41.2,41.2,0.9,74.1,21.6,4.3,4.5,2.6,3.2,3.9,school,131,0090,1310090,Tidewater
+2,Williamsburg-James City County,Lafayette High,661,2022,13.9,4.4,10.7,10.3,3.2,23,4.5,31.3,49,41.8,14.7,41.2,41.2,0.9,74.1,21.6,4.3,4.5,2.6,3.2,3.9,school,131,0090,1310090,Tidewater
+2,James City County,Jamestown High,876,2022,17.2,3.8,13.6,12.3,3.3,24.2,6.1,32.5,44.4,40.3,13.8,38,62,1.1,72,22.1,4.3,4.5,2.5,3.2,3.9,school,131,0202,1310202,Tidewater
 2,James City County,Jamestown High,876,2022,17.2,3.8,13.6,12.3,3.3,24.2,6.1,32.5,44.4,40.3,13.8,38,62,1.1,72,22.1,4.3,4.5,2.5,3.2,3.9,school,131,0202,1310202,Tidewater
 2,Williamsburg-James City County,Jamestown High,876,2022,17.2,3.8,13.6,12.3,3.3,24.2,6.1,32.5,44.4,40.3,13.8,38,62,1.1,72,22.1,4.3,4.5,2.5,3.2,3.9,school,131,0202,1310202,Tidewater
+2,Williamsburg-James City County,Jamestown High,876,2022,17.2,3.8,13.6,12.3,3.3,24.2,6.1,32.5,44.4,40.3,13.8,38,62,1.1,72,22.1,4.3,4.5,2.5,3.2,3.9,school,131,0202,1310202,Tidewater
+2,James City County,Warhill High,951,2022,17.4,4.2,21.5,17.5,6.2,31.8,8.8,39.4,53.1,38.2,20.4,35.6,55.7,1.1,70.8,25.1,3.9,4.1,3.1,3.6,3.3,school,131,0204,1310204,Tidewater
 2,James City County,Warhill High,951,2022,17.4,4.2,21.5,17.5,6.2,31.8,8.8,39.4,53.1,38.2,20.4,35.6,55.7,1.1,70.8,25.1,3.9,4.1,3.1,3.6,3.3,school,131,0204,1310204,Tidewater
 2,Williamsburg-James City County,Warhill High,951,2022,17.4,4.2,21.5,17.5,6.2,31.8,8.8,39.4,53.1,38.2,20.4,35.6,55.7,1.1,70.8,25.1,3.9,4.1,3.1,3.6,3.3,school,131,0204,1310204,Tidewater
-4,Winchester City,John Handley High School,751,2022,16.8,6,14.8,13.4,4.7,24.6,9.3,34.1,45.4,35,15.6,41,59.8,1.1,67,16.9,4.1,4.4,2.7,3.3,3.7,school,132,0040,1320040,Northern Virginia
+2,Williamsburg-James City County,Warhill High,951,2022,17.4,4.2,21.5,17.5,6.2,31.8,8.8,39.4,53.1,38.2,20.4,35.6,55.7,1.1,70.8,25.1,3.9,4.1,3.1,3.6,3.3,school,131,0204,1310204,Tidewater
+4,Winchester City,John Handley High,751,2022,16.8,6,14.8,13.4,4.7,24.6,9.3,34.1,45.4,35,15.6,41,59.8,1.1,67,16.9,4.1,4.4,2.7,3.3,3.7,school,132,0040,1320040,Northern Virginia
 7,Wise County,Eastside High,282,2022,18.8,5.6,6.7,16.3,1.8,30.9,4.6,22.7,38.3,44.7,12.8,27.8,69.4,1.1,84.8,13.1,4.5,4.9,2,3,4.1,school,096,0652,0960652,Southwest
 7,Wise County,Central High,421,2022,17,3.8,11,18.8,1.9,26.8,4.8,27.8,41.6,49.6,13.5,29.8,63.2,1.2,77.9,16.2,4.4,4.7,2.3,3.4,4,school,096,1000,0961000,Southwest
 7,Wythe County,Rural Retreat High,248,2022,12.1,2.1,11.3,16.9,2.8,26.6,3.6,23.4,35.1,47.2,11.7,44.8,65.5,1.5,79.4,16.5,4.4,4.9,2.6,3,4.1,school,097,0202,0970202,Southwest
@@ -657,14 +638,14 @@ NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6
 5,Albemarle County,Jackson P. Burley Middle,414,2023,16.4,4.5,11.8,23.9,6.8,30.7,10.4,36.2,31.4,38.2,8.9,56.8,37.8,1.6,74.2,14,4.3,4.6,2.9,3.3,3.7,school,002,0069,0020069,Valley
 5,Albemarle County,Community Lab School,81,2023,8.4,1.4,1.2,8.6,0,8.6,2.5,23.5,19.8,49.4,7.4,33.3,16.7,1.5,81.5,14.8,5,5.2,1.6,1.6,5.2,school,002,0890,0020890,Valley
 5,Albemarle County,Joseph T. Henley Middle,624,2023,15.1,5,7.2,22,4.5,26.3,7.1,35.6,32.5,41.8,9,30.4,44.6,1.6,76.4,10.6,4.6,4.6,2.5,2.9,3.9,school,002,0942,0020942,Valley
-5,Albemarle County,Jack Jouett Middle,401,2023,22.7,6.5,11,23.7,6.7,28.2,8.5,31.2,33.7,33.9,12.5,44,60,2.4,71.6,11.7,4.1,4.5,2.8,3.4,3.5,school,002,0950,0020950,Valley
+5,Albemarle County,Journey Middle,401,2023,22.7,6.5,11,23.7,6.7,28.2,8.5,31.2,33.7,33.9,12.5,44,60,2.4,71.6,11.7,4.1,4.5,2.8,3.4,3.5,school,002,0950,0020950,Valley
 5,Albemarle County,Lakeside Middle,451,2023,14.6,4.4,4.7,18,2,21.7,4.2,25.7,24.4,44.3,6.7,46.7,43.3,1.9,78.3,9.8,4.6,4.8,2.2,2.7,4.1,school,002,1051,0021051,Valley
 4,Alexandria City,Patrick Henry K-8 School,184,2023,15.5,4.7,3.8,27.2,6.5,32.6,6.5,29.3,35.3,38.6,15.2,35.7,50,1.7,63,11.4,4.3,4.8,2.2,3,4,school,101,0050,1010050,Northern Virginia
 4,Alexandria City,Jefferson-Houston PK-8 School,73,2023,21.1,7.6,11,24.7,5.5,32.9,9.6,26,26,45.2,15.1,45.5,81.8,2.7,69.9,12.3,4.1,4.4,2.8,3.7,3.2,school,101,0090,1010090,Northern Virginia
 4,Alexandria City,George Washington Middle,814,2023,17.8,9.2,14.3,24.6,4.8,28.5,9.6,36.7,32.8,36.6,9.6,39.7,60.3,2.1,66.5,12.8,4.2,4.5,3.2,3.8,3.3,school,101,0130,1010130,Northern Virginia
 4,Alexandria City,Francis C. Hammond Middle,558,2023,17.7,8.1,17.2,26.9,9,27.6,11.8,35.3,38.2,33.7,13.4,40,58.7,2,69.4,13.3,4.1,4.5,3.1,3.7,3.5,school,101,0140,1010140,Northern Virginia
-6,Alleghany County,Jeter-Watson Intermediate,125,2023,24.3,4.2,4,42.4,10.4,47.2,8.8,33.6,40,43.2,13.6,35.3,41.2,1.9,84.8,16,4.1,4.6,2.8,3.6,3.7,school,003,0360,0030360,Western Virginia
-6,Alleghany County,Clifton Middle,316,2023,21.3,6,9.5,34.8,6.3,40.8,8.9,34.5,33.9,48.4,11.4,27.8,63.9,1.8,86.1,12.3,4.2,4.7,3.1,4,3.5,school,003,1040,0031040,Western Virginia
+6,Alleghany County,Jeter-Watson Elementary,125,2023,24.3,4.2,4,42.4,10.4,47.2,8.8,33.6,40,43.2,13.6,35.3,41.2,1.9,84.8,16,4.1,4.6,2.8,3.6,3.7,school,003,0360,0030360,Western Virginia
+6,Alleghany County,Covington Middle,316,2023,21.3,6,9.5,34.8,6.3,40.8,8.9,34.5,33.9,48.4,11.4,27.8,63.9,1.8,86.1,12.3,4.2,4.7,3.1,4,3.5,school,003,1040,0031040,Western Virginia
 8,Amelia County,Amelia County Middle,330,2023,28.3,6.4,13.9,41.2,10.6,37.6,11.5,40.9,42.7,36.7,12.7,40.5,52.4,2.7,72.7,13.6,3.9,4.2,3.1,3.8,3.2,school,004,0210,0040210,Southside
 5,Amherst County,Monelison Middle,316,2023,24.3,7.1,16.8,41.5,11.4,38.9,13.3,39.2,37.7,39.2,16.5,51.9,53.8,2.3,73.4,19.6,3.9,4.3,3,3.9,3.2,school,005,0020,0050020,Valley
 5,Amherst County,Amherst Middle,279,2023,16.7,4.2,2.9,21.5,2.9,31.5,7.5,26.2,33.7,42.7,8.6,29.2,79.2,2,76.7,12.5,4.6,4.9,2.3,3.2,4.2,school,005,0670,0050670,Valley
@@ -676,7 +657,6 @@ NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6
 4,Arlington County,Dorothy Hamm Middle,675,2023,11.5,5,4.1,13.8,2.4,21.9,7.7,24,21.6,42.4,8.7,25.4,47.5,1.7,77.8,16,4.7,4.8,2.3,2.8,4.1,school,007,0628,0070628,Northern Virginia
 5,Augusta County,Stuarts Draft Middle,309,2023,23.3,8.5,6.1,34.3,4.2,36.2,5.8,32.7,36.2,41.7,14.2,40.9,61.4,2.2,79.6,13.3,4.1,4.5,2.5,3.5,3.5,school,008,0060,0080060,Valley
 5,Augusta County,S. Gordon Stewart Middle,401,2023,16.6,6.8,8.7,41.1,8.7,38.4,7.7,38.4,36.2,39.7,10,32.5,45,1.6,80.5,8.7,4.2,4.5,2.7,3.7,3.4,school,008,0090,0080090,Valley
-5,Augusta County,Beverley Manor Middle,356,2023,17.5,9.8,8.7,29.8,7.6,29.2,6.2,31.5,37.6,38.5,9.3,45.5,54.5,1.8,75.3,14.3,4.1,4.3,2.5,3.7,3.4,school,008,0212,0080212,Valley
 5,Augusta County,Wilson Elementary,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,008,0640,0080640,Valley
 5,Augusta County,Wilson Middle,395,2023,21.1,5,9.6,41.3,6.3,42.3,9.4,36.5,39.5,43.3,12.4,34.7,57.1,2.2,80.5,9.6,4.3,4.7,2.6,3.7,3.8,school,008,0844,0080844,Valley
 5,Bath County,Millboro Elementary,36,2023,25,4.8,8.3,41.7,0,33.3,0,41.7,52.8,61.1,19.4,57.1,28.6,1.4,77.8,8.3,4.5,4.7,2,2.7,3.8,school,009,0120,0090120,Valley
@@ -710,7 +690,7 @@ NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6
 1,Charles City County,Charles City County Elementary,28,2023,29.4,3.4,17.9,60.7,35.7,57.1,14.3,57.1,53.6,42.9,10.7,100,66.7,2.3,75,14.3,3.9,4.5,3,4.2,3.2,school,019,0080,0190080,Central Virginia
 1,Charles City County,Charles City County High,53,2023,28.8,8.6,11.3,22.6,7.5,30.2,3.8,35.8,56.6,35.8,28.3,40,53.3,1.9,69.8,13.2,4.1,4.1,2.9,3.6,3.2,school,019,0100,0190100,Central Virginia
 8,Charlotte County,Central Middle,330,2023,18.9,9.8,10.3,27.9,5.2,29.7,6.1,31.2,34.5,36.4,11.5,39.5,60.5,2.3,79.4,15.2,4.2,4.5,2.3,3.4,3.7,school,020,0210,0200210,Southside
-5,Charlottesville City,Buford Middle,389,2023,20.4,6.8,12.6,28,8,36.2,13.1,36.5,37,45,14.9,44.8,55.2,1.8,66.6,15.7,4.1,4.4,3.1,3.8,3.3,school,104,0100,1040100,Valley
+5,Charlottesville City,Charlottesville Middle,389,2023,20.4,6.8,12.6,28,8,36.2,13.1,36.5,37,45,14.9,44.8,55.2,1.8,66.6,15.7,4.1,4.4,3.1,3.8,3.3,school,104,0100,1040100,Valley
 5,Charlottesville City,Walker Upper Elementary,238,2023,21.8,6.5,7.6,38.2,8.8,32.4,7.1,41.6,38.7,43.3,12.6,23.3,43.3,2.1,79.4,7.1,4.3,4.9,2.9,3.6,3.7,school,104,0110,1040110,Valley
 2,Chesapeake City,Oscar Smith Middle,552,2023,23.7,4.9,7.2,26.3,5.8,31.5,6.2,34.6,39.5,36.8,14.7,39.5,55.6,2,74.8,12.9,4,4.5,3.1,3.8,3.4,school,136,0010,1360010,Tidewater
 2,Chesapeake City,Chesapeake Center for Student Success,15,2023,18.8,4.1,13.3,20,13.3,40,6.7,20,60,53.3,20,33.3,100,3,80,33.3,3.5,4.4,2,2.3,3.9,school,136,0130,1360130,Tidewater
@@ -726,7 +706,7 @@ NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6
 2,Chesapeake City,Greenbrier Middle,696,2023,24,4.9,6.5,29.6,6.3,25.1,6.3,38.1,31.5,38.8,16.8,24.8,55.6,2,74.1,11.1,4.3,4.6,2.7,3.8,3.7,school,136,0972,1360972,Tidewater
 2,Chesapeake City,Jolliff Middle,419,2023,19.1,2.8,6,27.9,4.5,23.6,6,32.9,36.5,46.8,14.1,18.6,54.2,1.9,81.9,15.8,4.4,4.7,2.7,3.3,3.9,school,136,0973,1360973,Tidewater
 1,Chesterfield County,Midlothian Middle,1035,2023,18.4,5.1,7.6,23.9,2.7,28,7.6,32,26.3,44.9,6.8,44.3,52.9,2,79.1,21.6,4.5,4.5,2.8,3.5,3.6,school,021,0040,0210040,Central Virginia
-1,Chesterfield County,Chesterfield Virtual Academy,171,2023,17.9,9.5,2.9,11.1,1.8,9.9,3.5,10.5,35.7,43.9,12.3,42.9,66.7,2,88.3,13.5,4.4,5.1,1.8,2.4,4.7,school,021,0093,0210093,Central Virginia
+1,Chesterfield County,Chesterfield Virtual School,171,2023,17.9,9.5,2.9,11.1,1.8,9.9,3.5,10.5,35.7,43.9,12.3,42.9,66.7,2,88.3,13.5,4.4,5.1,1.8,2.4,4.7,school,021,0093,0210093,Central Virginia
 1,Chesterfield County,Matoaca Middle,480,2023,25.7,6.5,17.3,33.3,7.3,39.8,10.6,43.3,41.5,36,16.5,32.9,63.3,2.5,72.3,19.2,3.9,4.1,3.4,3.9,3,school,021,0110,0210110,Central Virginia
 1,Chesterfield County,Swift Creek Middle,653,2023,20.7,5.7,5.2,26.8,4.4,25.4,6.6,34,31.7,41.5,9.2,48.3,68.3,1.9,78.9,15.8,4.3,4.4,2.8,3.6,3.7,school,021,0270,0210270,Central Virginia
 1,Chesterfield County,Carver Middle,440,2023,23,7,10.5,31.1,5.2,31.6,9.3,40.2,41.8,33.2,14.1,45.2,64.5,2.1,72,20,3.6,4,3.6,4,2.8,school,021,0420,0210420,Central Virginia
@@ -894,10 +874,9 @@ NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6
 4,Fairfax County,Laurel Hill Elementary,79,2023,9.5,6.2,0,17.7,0,17.7,3.8,16.5,26.6,35.4,2.5,50,50,1,74.7,13.9,4.5,4.8,2.2,2.7,4.2,school,029,2348,0292348,Northern Virginia
 4,Fairfax County,South County Middle,727,2023,14.2,7.3,7,15.7,2.8,22,6.2,26.4,26.7,39.1,7.2,34.6,51.9,1.7,75.9,13.3,4.7,4.6,2.7,3.2,4,school,029,2420,0292420,Northern Virginia
 4,Fairfax County,Fort Belvoir Upper Elementary,97,2023,8.9,4.5,1,30.9,4.1,22.7,10.3,27.8,25.8,46.4,7.2,33.3,33.3,1.1,78.4,7.2,4.4,4.8,2.6,2.8,3.7,school,029,2458,0292458,Northern Virginia
-4,Falls Church City,Mary Ellen Henderson Middle,506,2023,13.7,4.6,1.6,11.7,1.4,19.8,4.2,23.5,23.1,40.5,5.7,37.9,37.9,1.3,81.4,11.1,4.7,4.8,2.1,2.7,4.3,school,109,0252,1090252,Northern Virginia
+4,Falls Church City,Mary Ellen Henderson Middle School,506,2023,13.7,4.6,1.6,11.7,1.4,19.8,4.2,23.5,23.1,40.5,5.7,37.9,37.9,1.3,81.4,11.1,4.7,4.8,2.1,2.7,4.3,school,109,0252,1090252,Northern Virginia
 4,Fauquier County,Marshall Middle,338,2023,16.9,5.5,8.9,27.5,5.3,27.8,6.2,29.9,32.2,34.9,10.4,40,65.7,1.6,74,12.7,4.4,4.7,2.2,3.1,3.9,school,030,0010,0300010,Northern Virginia
 4,Fauquier County,Cedar Lee Middle,494,2023,20.3,8.3,14,35.4,9.9,35.2,8.1,38.1,36.8,35.4,12.1,23.3,58.3,2.2,72.7,8.9,4.2,4.4,2.9,3.7,3.4,school,030,0520,0300520,Northern Virginia
-4,Fauquier County,Warrenton Middle,347,2023,16.7,2.8,7.2,29.1,7.2,32.6,7.8,35.4,29.1,43.5,7.5,50,57.7,1.8,82.4,11.2,4.5,4.6,2.5,3.3,4,school,030,0660,0300660,Northern Virginia
 4,Fauquier County,W.C. Taylor Middle,298,2023,22.5,7.4,8.1,36.9,7.7,35.6,9.4,38.9,34.2,42.3,12.1,50,58.3,1.6,73.8,9.7,4.3,4.5,2.7,3.5,3.4,school,030,0670,0300670,Northern Virginia
 4,Fauquier County,Auburn Middle,466,2023,18.5,5,4.3,30.3,4.7,27.3,6,34.8,31.1,44.6,9.4,43.2,52.3,1.6,78.8,7.1,4.5,4.8,2.3,3.1,4.3,school,030,0854,0300854,Northern Virginia
 6,Floyd County,Check Elementary,61,2023,27.7,3.2,4.9,45.9,13.1,41,6.6,32.8,39.3,41,4.9,0,66.7,2.7,80.3,13.1,4,4.7,2.6,3.3,3.7,school,031,0090,0310090,Western Virginia
@@ -909,7 +888,6 @@ NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6
 5,Fluvanna County,Fluvanna Middle,430,2023,23.6,7.5,4.4,30.5,5.6,32.6,6,31.2,34.9,46.3,9.5,51.2,39,1.7,82.8,15.1,4.3,4.7,2.6,3.4,3.8,school,032,0320,0320320,Valley
 6,Franklin County,Benjamin Franklin Middle,1102,2023,22.1,6.3,13.3,33.8,10.6,37.7,8.9,39.7,39,43.9,14,38.3,61.7,2.2,75.9,14.8,4.2,4.5,2.9,3.8,3.5,school,033,0031,0330031,Western Virginia
 2,Franklin City,Franklin High,53,2023,22,6.3,13.2,28.3,7.5,37.7,9.4,26.4,50.9,47.2,28.3,26.7,66.7,2.2,64.2,15.1,3.9,4.7,2.6,3.3,3.4,school,135,0020,1350020,Tidewater
-2,Franklin City,Joseph P. King Jr. Middle,119,2023,21.3,8.6,13.4,37.8,12.6,42,18.5,39.5,37.8,33.6,13.4,68.8,62.5,2.6,64.7,14.3,3.6,4.1,2.8,3.9,2.7,school,135,0561,1350561,Tidewater
 4,Frederick County,James Wood Middle,666,2023,22.5,7.4,9.2,28.4,7.1,31.8,8.1,34.4,37.5,38.1,11.6,26,58.4,2.1,74,10.1,4,4.5,3,3.8,3.3,school,034,0420,0340420,Northern Virginia
 4,Frederick County,Frederick County Middle,533,2023,25.4,5.9,12.9,40.7,10.9,39.4,13.1,44.5,38.6,44.3,12.2,24.6,52.3,2.2,73.9,11.3,4.2,4.5,2.7,3.8,3.6,school,034,0460,0340460,Northern Virginia
 4,Frederick County,Robert E. Aylor Middle,709,2023,19.9,6.2,9.9,29.3,5.5,33.6,5.6,34.4,33.1,42,10.9,37.7,54.5,2,74.3,13.8,4.3,4.7,2.7,3.5,3.7,school,034,0480,0340480,Northern Virginia
@@ -935,7 +913,7 @@ NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6
 2,Hampton City,Cesar Tarrant Middle,368,2023,24.4,7,12.5,30.7,8.4,37.8,13.9,38.9,39.7,30.7,17.1,33.3,49.2,2.5,69,16.3,3.7,4.3,3.4,3.8,3,school,112,0300,1120300,Tidewater
 2,Hampton City,Thomas Eaton Middle,486,2023,18.7,5.2,10.5,25.9,6,34.2,10.7,35.4,38.9,41.4,16.7,43.2,53.1,2,76.1,13.8,4.2,4.5,2.6,3.6,3.6,school,112,0380,1120380,Tidewater
 2,Hampton City,C. Alton Lindsay Middle,41,2023,21.3,12.8,9.8,39,9.8,29.3,4.9,51.2,41.5,34.1,17.1,28.6,42.9,1.6,70.7,12.2,3.7,4.3,3.8,4,2.6,school,112,0450,1120450,Tidewater
-2,Hampton City,Kilgore Gifted Center,456,2023,19.9,2.2,4.4,21.7,5.5,26.8,7.5,37.9,42.8,44.3,15.8,25,70.8,2,74.3,12.9,4.2,4.6,2.5,3.3,3.6,school,112,0624,1120624,Tidewater
+2,Hampton City,Ann H. Kilgore Gifted Center,456,2023,19.9,2.2,4.4,21.7,5.5,26.8,7.5,37.9,42.8,44.3,15.8,25,70.8,2,74.3,12.9,4.2,4.6,2.5,3.3,3.6,school,112,0624,1120624,Tidewater
 2,Hampton City,Hunter B. Andrews,80,2023,26.7,7,6.2,31.2,10,36.2,7.5,35,37.5,33.8,17.5,7.1,64.3,2.1,66.2,15,3.8,4.2,3,3.8,3,school,112,0640,1120640,Tidewater
 2,Hampton City,George P. Phenix Elementary,346,2023,23.4,4.5,4.3,21.1,3.8,22.8,8.7,29.8,39.3,41.6,12.7,38.6,70.5,1.8,75.7,12.4,4.1,4.6,2.7,3.5,3.6,school,112,0650,1120650,Tidewater
 1,Hanover County,Chickahominy Middle,120,2023,12.2,2.8,1.7,20.8,0,16.7,3.3,25,20.8,45,2.5,33.3,66.7,1.7,84.2,20,4.8,5.1,2,2.8,4.5,school,042,0061,0420061,Central Virginia
@@ -958,8 +936,7 @@ NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6
 1,Henrico County,Tuckahoe Middle,678,2023,15.2,6.9,4.4,20.4,2.8,27.9,6,26,24.5,35.8,6.9,42.6,55.3,1.6,81.9,18.4,4.6,4.7,3,3.4,3.8,school,043,0520,0430520,Central Virginia
 1,Henrico County,Maybeury Elementary,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,043,0540,0430540,Central Virginia
 1,Henrico County,Quioccasin Middle,539,2023,19.6,9.3,8.7,25.4,4.5,26.2,9.3,32.1,33.8,37.7,9.1,28.6,53.1,2,75.3,14.3,4,4.5,3,3.7,3.3,school,043,0690,0430690,Central Virginia
-1,Henrico County,Virginia Randolph Education Center & PACE,16,2023,23.5,9.1,12.5,12.5,18.8,12.5,12.5,25,25,62.5,0,0,0,NA,93.8,37.5,4.2,4.8,2.9,3.3,3.8,school,043,0810,0430810,Central Virginia
-1,Henrico County,An Achievable Dream Certified Academy Secondary at Oak Avenue,75,2023,30.3,7.5,32,48,29.3,44,29.3,48,38.7,45.3,17.3,76.9,30.8,2.9,74.7,24,3.6,4.5,2.7,3.9,3.1,school,043,0999,0430999,Central Virginia
+1,Henrico County,Virginia Randolph Education Center,16,2023,23.5,9.1,12.5,12.5,18.8,12.5,12.5,25,25,62.5,0,0,0,NA,93.8,37.5,4.2,4.8,2.9,3.3,3.8,school,043,0810,0430810,Central Virginia
 6,Henry County,Fieldale-Collinsville Middle,741,2023,27.4,8,8.9,33.9,7.7,33.3,7.8,34.4,40.9,37.9,16.2,42.5,53.3,2.1,74.8,12.7,4.2,4.7,2.8,3.7,3.6,school,044,0620,0440620,Western Virginia
 6,Henry County,Laurel Park Middle,316,2023,23.5,5.8,7.9,31,4.1,33.2,6.3,35.4,40.2,38.6,12.7,30,62.5,2,84.2,15.5,4.1,4.6,2.9,3.8,3.6,school,044,0670,0440670,Western Virginia
 5,Highland County,Highland High,41,2023,11.1,3.4,17.1,34.1,2.4,29.3,4.9,48.8,29.3,36.6,14.6,16.7,33.3,2.2,78,14.6,4.7,4.6,2,2.6,4.5,school,045,0220,0450220,Valley
@@ -975,7 +952,7 @@ NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6
 3,King George County,King George Elementary,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,048,0100,0480100,Northern Neck
 3,King William County,Hamilton Holmes Middle,303,2023,24.3,6.9,11.6,32.7,9.9,40.6,10.9,31,39.9,36.6,12.9,30.8,51.3,2.1,74.3,14.9,4.2,4.5,2.6,3.8,3.5,school,050,0160,0500160,Northern Neck
 3,Lancaster County,Lancaster High,46,2023,26.4,9,10.9,34.8,13,50,10.9,41.3,45.7,41.3,8.7,0,25,1.8,69.6,8.7,3.7,4.1,3.1,3.7,3,school,051,0010,0510010,Northern Neck
-3,Lancaster County,Lancaster Middle,73,2023,31.8,8.6,6.8,42.5,16.4,34.2,24.7,43.8,56.2,38.4,15.1,36.4,45.5,2,72.6,28.8,4,4.3,3.1,3.8,3.2,school,051,0110,0510110,Northern Neck
+3,Lancaster County,Lancaster Elementary,73,2023,31.8,8.6,6.8,42.5,16.4,34.2,24.7,43.8,56.2,38.4,15.1,36.4,45.5,2,72.6,28.8,4,4.3,3.1,3.8,3.2,school,051,0110,0510110,Northern Neck
 7,Lee County,Pennington Middle,153,2023,23.3,9.8,4.6,30.1,8.5,30.1,6.5,37.3,35.9,45.1,19,34.5,62.1,1.9,79.7,20.3,4.3,4.8,2.5,3.2,3.8,school,052,0290,0520290,Southwest
 7,Lee County,Lee High,111,2023,28.6,14.4,22.5,37.8,7.2,43.2,11.7,45.9,45,27,12.6,50,50,1.6,83.8,16.2,3.8,4.2,3,4.2,2.8,school,052,0300,0520300,Southwest
 7,Lee County,Jonesville Middle,134,2023,22.4,3.7,13.4,38.8,7.5,37.3,11.2,35.8,29.1,31.3,9,58.3,66.7,2,73.1,12.7,4.3,4.7,2.6,3.4,3.8,school,052,0470,0520470,Southwest
@@ -986,7 +963,7 @@ NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6
 4,Loudoun County,Seneca Ridge Middle,863,2023,13.4,3.8,6.4,14.6,4.2,23.4,7.3,24.3,28.6,41.4,7.4,28.1,53.1,1.8,76.7,13.3,4.6,4.9,2.3,2.9,4.3,school,053,0030,0530030,Northern Virginia
 4,Loudoun County,Smart's Mill Middle,537,2023,15.3,6.7,6.1,15.1,2.2,24.8,5.8,29.4,26.3,41.5,8.9,39.6,54.2,1.6,77.5,17.9,4.5,4.7,2.5,3,3.8,school,053,0090,0530090,Northern Virginia
 4,Loudoun County,Farmwell Station Middle,740,2023,12.5,6.9,4.7,14.6,2.6,20.8,4.6,23.9,23.4,44.7,6.9,29.4,45.1,1.6,82.8,15.1,4.6,4.8,2.4,2.9,4,school,053,0210,0530210,Northern Virginia
-4,Loudoun County,Mercer Middle,932,2023,10.7,5.9,2.4,12.9,1.9,16,6.5,19.8,24.5,47.2,5.2,33.3,60.4,1.8,85.8,15.2,4.7,5,2.3,2.8,4.3,school,053,0320,0530320,Northern Virginia
+4,Loudoun County,Gum Spring Middle,932,2023,10.7,5.9,2.4,12.9,1.9,16,6.5,19.8,24.5,47.2,5.2,33.3,60.4,1.8,85.8,15.2,4.7,5,2.3,2.8,4.3,school,053,0320,0530320,Northern Virginia
 4,Loudoun County,Willard Middle,1396,2023,11,3.9,1.8,13,0.9,16.3,4.4,20.1,20.6,49.9,4.3,40.3,62.9,2,87.3,17.8,4.8,5.1,2.3,2.8,4.3,school,053,0360,0530360,Northern Virginia
 4,Loudoun County,Harper Park Middle,660,2023,13,7.5,4.8,16.2,2.6,22.3,4.4,23.2,28.2,50.9,6.5,37.2,48.8,1.9,84.1,16.2,4.5,4.8,2.6,2.9,4.1,school,053,0520,0530520,Northern Virginia
 4,Loudoun County,Virtual Distance Learning,49,2023,20.4,2.9,2,4.1,0,2,0,6.1,14.3,59.2,6.1,33.3,0,2,95.9,16.3,4.9,5.5,1.7,1.7,5.2,school,053,0531,0530531,Northern Virginia
@@ -1031,11 +1008,11 @@ NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6
 2,Newport News City,Mary Passage Middle,193,2023,18.9,7.7,7.8,20.2,4.1,29.5,9.8,31.1,36.3,37.3,14.5,32.1,57.1,2.3,71.5,9.8,3.9,4.4,3.3,3.8,3.2,school,117,1400,1171400,Tidewater
 2,Newport News City,Achievable Dream Middle/High,200,2023,19.1,5.5,3.5,26.5,11,42.5,10,39.5,35,34.5,15.5,29,41.9,2.1,68.5,10,4.2,4.5,2.9,3.8,3.4,school,117,1405,1171405,Tidewater
 2,Norfolk City,Blair Middle,892,2023,24.3,7.3,11.7,28.3,7.5,29.9,10.9,39.3,36.5,33.6,14.9,41.4,63.9,2.2,71.4,15.9,3.9,4.3,3.1,3.9,3.2,school,118,0020,1180020,Tidewater
-2,Norfolk City,William H. Ruffner Middle,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,118,0030,1180030,Tidewater
+2,Norfolk City,Ruffner School,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,118,0030,1180030,Tidewater
 2,Norfolk City,Ghent K-8,128,2023,26.9,8.2,16.4,39.1,12.5,39.1,17.2,41.4,42.2,40.6,19.5,26.9,84.6,1.9,69.5,19.5,3.8,4.3,2.9,3.6,3.3,school,118,0090,1180090,Tidewater
 2,Norfolk City,Academy for Discovery at Lakewood,355,2023,23.6,4.2,4.5,31.3,3.9,30.7,7.3,41.1,35.8,39.4,13.8,30.6,51,1.5,75.2,9.3,4.5,4.7,2.5,3.1,3.9,school,118,0185,1180185,Tidewater
 2,Norfolk City,Northside Middle,598,2023,23.8,9.2,17.2,24.7,7.9,31.4,10.9,38.8,41.8,31.6,16.7,29,59,2.2,67.1,13.5,3.9,4.3,3.2,3.7,3.3,school,118,0490,1180490,Tidewater
-2,Norfolk City,Crossroads Elementary,157,2023,23.1,5.2,5.1,29.9,8.3,35,7.6,32.5,36.9,31.2,21,24.2,45.5,1.9,73.2,15.9,4.2,4.7,2.6,3.6,3.8,school,118,0560,1180560,Tidewater
+2,Norfolk City,Crossroads PreK-8 School,157,2023,23.1,5.2,5.1,29.9,8.3,35,7.6,32.5,36.9,31.2,21,24.2,45.5,1.9,73.2,15.9,4.2,4.7,2.6,3.6,3.8,school,118,0560,1180560,Tidewater
 2,Norfolk City,Norview Middle,755,2023,26.7,6.2,13.9,31.8,10.5,37.9,12.7,41.1,43.2,38.8,18.4,33.8,66.9,2.5,65.3,15.5,3.8,4.3,3.3,3.9,3.1,school,118,0570,1180570,Tidewater
 2,Norfolk City,Azalea Gardens Middle,556,2023,25.5,7.5,13.1,31.8,9,34.2,13.8,40.8,43.9,34,15.5,39.5,64,2.3,66,12.1,3.8,4.2,3.4,4,2.9,school,118,0760,1180760,Tidewater
 2,Norfolk City,Southside STEM Academy at Campostella,173,2023,20.7,9.1,10.4,22.5,12.1,34.7,13.9,37,35.3,35.3,14.5,44,44,2.2,64.7,17.9,3.8,3.9,3.2,3.9,2.5,school,118,0770,1180770,Tidewater
@@ -1052,8 +1029,6 @@ NA,NA,Chesapeake SECEP Center,63,2022,18.2,0,23.8,19,9.5,57.1,4.8,28.6,33.3,28.6
 8,Nottoway County,Nottoway Middle,160,2023,27.6,6.1,8.8,27.5,4.4,32.5,8.8,31.2,41.2,48.8,12.5,45,75,1.9,76.9,10,4.1,4.6,3,3.6,3.4,school,067,0302,0670302,Southside
 4,Orange County,Prospect Heights Middle,383,2023,21.4,4.9,7,33.9,8.6,38.6,7,31.3,36.6,44.4,11.7,48.9,46.7,2.3,74.9,11.2,4.1,4.6,2.7,3.7,3.5,school,068,0340,0680340,Northern Virginia
 4,Orange County,Locust Grove Middle,539,2023,23.6,10.8,8.2,32.1,4.5,33.4,7.2,33.6,37.7,34.7,9.5,35.3,64.7,1.9,78.3,9.8,4.1,4.6,2.8,3.8,3.5,school,068,0471,0680471,Northern Virginia
-NA,NA,Other,1872,2023,20.9,8.1,14.9,29.3,9.5,37.4,13.6,33.7,37.4,36.5,12.1,46.9,58,2.4,69.8,17.2,4,4.3,2.8,3.6,3.4,school,999,0999,9990999,NA
-NA,NA,nan,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,NaN,0NaN,NaN0NaN,NA
 4,Page County,Page County Middle,238,2023,21.8,4.6,5.5,38.7,8.4,42.4,7.1,31.9,39.9,47.9,9.2,22.7,54.5,1.8,84.5,8.4,4.3,4.8,2.8,3.9,3.6,school,069,0390,0690390,Northern Virginia
 4,Page County,Luray Middle,243,2023,20.2,5.6,11.1,35.8,6.6,36.6,8.6,37.9,35.8,38.3,14.8,38.9,66.7,2.1,81.9,19.3,4.4,4.6,2.5,3.5,3.9,school,069,0400,0690400,Northern Virginia
 6,Patrick County,Woolwine Elementary,38,2023,12.5,1.3,0,31.6,7.9,34.2,2.6,31.6,28.9,55.3,10.5,25,25,1.5,92.1,15.8,5,5.4,2.1,2.6,4.3,school,070,0080,0700080,Western Virginia
@@ -1120,15 +1095,15 @@ NA,NA,nan,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
 3,Richmond County,Richmond County Elementary,171,2023,14.7,5.5,3.5,31,5.3,42.7,9.4,30.4,33.3,38,7.6,30.8,69.2,2.2,81.3,11.1,4.4,4.8,2.7,3.6,3.8,school,079,0020,0790020,Northern Neck
 3,Richmond County,Rappahannock High,83,2023,17.8,4.6,4.8,26.5,8.4,30.1,3.6,26.5,26.5,34.9,1.2,0,100,1,80.7,8.4,4.4,4.6,2.6,3.5,3.8,school,079,0210,0790210,Northern Neck
 1,Richmond City,Albert Hill Middle,190,2023,18.5,6.3,5.8,31.6,5.3,21.1,5.8,32.1,33.2,32.1,10.5,35,45,1.8,74.7,10.5,4.1,4.7,3.2,3.6,3.5,school,123,0030,1230030,Central Virginia
-1,Richmond City,Binford Middle,397,2023,21.8,3.5,9.6,33.2,6,29.7,8.8,41.6,36.3,43.1,14.9,33.9,54.2,1.8,71.5,11.8,4.2,4.6,3.2,3.6,3.5,school,123,0050,1230050,Central Virginia
+1,Richmond City,Dogwood Middle,397,2023,21.8,3.5,9.6,33.2,6,29.7,8.8,41.6,36.3,43.1,14.9,33.9,54.2,1.8,71.5,11.8,4.2,4.6,3.2,3.6,3.5,school,123,0050,1230050,Central Virginia
 1,Richmond City,Richmond K12 Virginia Virtual Academy,53,2023,17.2,5.7,1.9,0,1.9,3.8,0,7.5,28.3,45.3,9.4,40,80,1.8,84.9,17,4.7,5.4,2.5,1.9,4.8,school,123,0411,1230411,Central Virginia
-1,Richmond City,Henderson Middle,186,2023,21.7,8.9,8.6,24.2,8.1,28.5,10.8,33.9,34.4,24.7,11.3,9.5,66.7,2.2,68.3,8.6,3.7,4.3,3,3.8,3.2,school,123,0470,1230470,Central Virginia
+1,Richmond City,Thomas H. Henderson Middle,186,2023,21.7,8.9,8.6,24.2,8.1,28.5,10.8,33.9,34.4,24.7,11.3,9.5,66.7,2.2,68.3,8.6,3.7,4.3,3,3.8,3.2,school,123,0470,1230470,Central Virginia
 1,Richmond City,Thomas C. Boushall Middle,404,2023,23.3,8.3,16.1,19.3,10.9,32.9,11.6,29.7,36.6,39.9,11.6,53.2,51.1,2.4,70.3,23,4.2,4.7,2.7,3.7,3.6,school,123,0480,1230480,Central Virginia
 1,Richmond City,Franklin Military Academy,119,2023,13.6,2,4.2,9.2,0.8,14.3,1.7,16,22.7,52.9,7.6,22.2,55.6,3,83.2,2.5,4.8,5.2,1.7,2.2,4.6,school,123,0621,1230621,Central Virginia
 1,Richmond City,Martin Luther King Jr. Middle,181,2023,15.9,4.6,5,18.8,8.3,32,11,32,31.5,48.1,8.3,26.7,60,2.5,71.8,12.7,3.7,4.5,3.1,3.8,3.3,school,123,0770,1230770,Central Virginia
 1,Richmond City,River City Middle,562,2023,27.6,11.5,15.7,31.3,7.7,40,11.6,38.3,44,32.7,16.7,44.2,53.7,2.4,66.4,14.1,3.8,4.3,3.1,4,3.3,school,123,1631,1231631,Central Virginia
 1,Richmond City,Lucille M. Brown Middle,421,2023,18.8,8.8,13.5,23.8,10.2,39.7,12.6,36.1,43.5,33,16.6,51.4,52.9,2.2,66,14.3,3.6,4.3,3,3.7,3.2,school,123,3105,1233105,Central Virginia
-1,Richmond City,Richmond Alternative,43,2023,22,5.3,18.6,23.3,20.9,51.2,23.3,34.9,34.9,41.9,25.6,45.5,36.4,2.9,67.4,37.2,2.9,4.2,3.1,3.2,2.7,school,123,3110,1233110,Central Virginia
+1,Richmond City,Richmond Success Academy,43,2023,22,5.3,18.6,23.3,20.9,51.2,23.3,34.9,34.9,41.9,25.6,45.5,36.4,2.9,67.4,37.2,2.9,4.2,3.1,3.2,2.7,school,123,3110,1233110,Central Virginia
 6,Roanoke County,Hidden Valley Middle,488,2023,19.3,4.2,14.1,32.4,6.6,35,9.4,40.8,35.9,50.2,13.3,36.9,52.3,2,76.8,25,4.5,4.7,2.6,3.4,3.8,school,080,0010,0800010,Western Virginia
 6,Roanoke County,William Byrd Middle,572,2023,17.6,6.8,15.7,30.1,6.6,34.3,8.9,34.8,35.7,46.3,13.5,36.4,62.3,1.9,76,22,4.3,4.6,2.8,3.8,3.4,school,080,0232,0800232,Western Virginia
 6,Roanoke County,Cave Spring Middle,610,2023,19.2,3.9,9.2,32.8,5.4,35.1,4.6,39.5,30.2,42.6,8.5,32.7,59.6,2,79.5,22.6,4.4,4.7,2.7,3.4,3.8,school,080,0620,0800620,Western Virginia
@@ -1146,14 +1121,13 @@ NA,NA,nan,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
 5,Rockingham County,J. Frank Hillyard Middle,564,2023,19.1,8.4,10.1,29.6,7.1,33.5,10.5,31.9,34.9,37.6,10.6,45,65,2.1,72.5,13.5,4.3,4.5,2.5,3.4,3.8,school,082,0960,0820960,Valley
 7,Russell County,Lebanon High,99,2023,32.4,4.8,12.1,25.3,3,28.3,3,29.3,30.3,43.4,10.1,40,80,1.8,81.8,16.2,4.2,4.6,2.5,3.5,3.9,school,083,0140,0830140,Southwest
 7,Russell County,Honaker High,85,2023,22.7,7.8,5.9,21.2,1.2,23.5,2.4,21.2,25.9,48.2,9.4,25,37.5,2,83.5,12.9,4.5,4.9,2.3,3,4.2,school,083,0540,0830540,Southwest
-7,Russell County,Swords Creek Elementary,21,2023,9.5,1.5,0,23.8,0,33.3,0,19,38.1,47.6,4.8,0,100,2,95.2,14.3,4.8,5.1,2.3,2.3,4.8,school,083,0710,0830710,Southwest
 7,Russell County,Castlewood High,55,2023,25.9,7.6,14.5,29.1,5.5,29.1,5.5,27.3,40,49.1,14.5,25,37.5,1.9,78.2,12.7,4.2,4.9,2.9,3.5,3.6,school,083,0791,0830791,Southwest
 7,Russell County,Castlewood Elementary,34,2023,24.3,5.3,11.8,50,11.8,32.4,17.6,35.3,41.2,58.8,20.6,57.1,42.9,2.7,82.4,26.5,4.4,5,2.7,3.6,4.1,school,083,0792,0830792,Southwest
 7,Russell County,Honaker Elementary,116,2023,19.2,3.3,7.8,22.4,10.3,31.9,8.6,25.9,35.3,39.7,12.1,28.6,78.6,2.5,80.2,12.1,4.7,5,2.5,3,4.2,school,083,0890,0830890,Southwest
 7,Russell County,Lebanon Middle,170,2023,19.4,8.7,10,34.1,8.8,29.4,9.4,35.3,35.3,43.5,15.3,34.6,65.4,1.8,80,11.8,4.2,4.7,2.8,3.5,3.5,school,083,0902,0830902,Southwest
 6,Salem City,Andrew Lewis Middle,721,2023,20.9,3.7,8,27,5.3,34.8,6.4,37.3,35.5,48.5,12.1,41.4,60.9,1.9,83.4,18.6,4.5,4.9,2.8,3.4,4,school,139,0100,1390100,Western Virginia
 7,Scott County,Rye Cove Intermediate,17,2023,11.1,3.6,0,35.3,0,0,5.9,5.9,29.4,70.6,17.6,0,0,1,58.8,5.9,4.5,5.2,2,2.6,4.6,school,084,0020,0840020,Southwest
-7,Scott County,Dungannon Intermediate,20,2023,30,1.7,5,40,15,25,0,20,30,45,0,0,0,NA,75,5,4.5,5.3,2.2,2.8,4,school,084,0042,0840042,Southwest
+7,Scott County,Dungannon Elementary,20,2023,30,1.7,5,40,15,25,0,20,30,45,0,0,0,NA,75,5,4.5,5.3,2.2,2.8,4,school,084,0042,0840042,Southwest
 7,Scott County,Nickelsville Elementary,23,2023,30.8,3.2,13,56.5,8.7,34.8,0,47.8,43.5,60.9,17.4,25,100,3.2,78.3,21.7,4.4,4.8,2.3,3.1,4.1,school,084,0220,0840220,Southwest
 7,Scott County,Rye Cove High,73,2023,20.8,6,11,28.8,2.7,32.9,5.5,23.3,32.9,39.7,15.1,36.4,90.9,2.7,79.5,16.4,4.5,4.8,2.6,3.2,4,school,084,0260,0840260,Southwest
 7,Scott County,Shoemaker Elementary,30,2023,20.6,8.8,0,33.3,10,26.7,3.3,33.3,40,46.7,10,0,33.3,1,83.3,0,4.6,4.8,2.3,3,4.2,school,084,0641,0840641,Southwest
@@ -1166,17 +1140,11 @@ NA,NA,nan,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
 4,Shenandoah County,Peter Muhlenberg Middle,300,2023,25,7.3,8,36,6.7,43.7,7,36.7,40,39.3,18.7,37.5,62.5,2.1,75.3,16.3,4.1,4.5,2.8,3.6,3.5,school,085,0030,0850030,Northern Virginia
 4,Shenandoah County,North Fork Middle,165,2023,25.9,6.7,6.1,30.3,5.5,28.5,7.9,32.1,40,47.9,12.7,42.9,61.9,2.3,73.9,11.5,4.3,4.6,2.2,3.3,4,school,085,0040,0850040,Northern Virginia
 4,Shenandoah County,Signal Knob Middle,288,2023,19.9,7.3,5.6,31.6,6.2,31.9,8.7,37.2,43.1,43.4,14.2,24.4,56.1,2.2,77.8,14.9,4.1,4.5,2.6,3.6,3.4,school,085,0050,0850050,Northern Virginia
-4,Shenandoah County,Mountain View High,61,2023,28.4,5.3,21.3,42.6,6.6,41,9.8,37.7,50.8,42.6,21.3,61.5,61.5,1.8,60.7,34.4,3.8,4.3,2.9,3.8,3.4,school,085,0790,0850790,Northern Virginia
+4,Shenandoah County,Stonewall Jackson High,61,2023,28.4,5.3,21.3,42.6,6.6,41,9.8,37.7,50.8,42.6,21.3,61.5,61.5,1.8,60.7,34.4,3.8,4.3,2.9,3.8,3.4,school,085,0790,0850790,Northern Virginia
 7,Smyth County,Northwood Middle,118,2023,16.1,4.8,5.9,39,6.8,37.3,5.1,26.3,34.7,36.4,11.9,21.4,64.3,2.4,83.1,11.9,4.5,5.1,2.2,3,4,school,086,0120,0860120,Southwest
 7,Smyth County,Marion Middle,298,2023,23.5,6.5,16.1,42.3,12.8,38.3,8.4,48.3,50.3,46,21.8,38.5,58.5,2,76.5,20.1,4,4.6,2.8,3.8,3.3,school,086,0680,0860680,Southwest
 7,Smyth County,Chilhowie Middle,274,2023,22.6,7.5,4.4,36.1,6.6,28.5,5.1,38.3,36.9,43.4,11.7,25,53.1,1.8,79.6,11.3,4.4,4.8,2.6,3.2,4,school,086,0851,0860851,Southwest
 2,Southampton County,Southampton Middle,58,2023,26.2,4.9,12.1,39.7,5.2,20.7,6.9,43.1,32.8,48.3,8.6,40,80,1.8,81,10.3,4,4.4,3.7,4.2,2.9,school,087,0700,0870700,Tidewater
-NA,NA,Imbedded Program VB,16,2023,23.5,3,18.8,43.8,25,25,18.8,43.8,31.2,43.8,25,100,75,2.5,81.2,37.5,4.2,4.6,2.1,3,4.4,school,190,0000,1900000,NA
-NA,NA,Imbedded Program Other,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,190,0001,1900001,NA
-NA,NA,Norfolk Center,10,2023,10,13,40,20,40,20,0,40,20,20,20,50,50,1.5,70,20,3,4.3,2.2,3.8,4,school,190,0003,1900003,NA
-NA,NA,Suffolk Center,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,190,0004,1900004,NA
-NA,NA,Renaissance Academy,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,190,0005,1900005,NA
-NA,NA,Chesapeake center,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,190,3119,1903119,NA
 3,Spotsylvania County,Battlefield Middle,565,2023,27.6,6.5,9.4,36.5,9.7,37.5,10.3,45.1,44.1,37.3,13.8,46.2,55.1,2,71,13.6,3.9,4.3,3,3.8,3.2,school,088,0050,0880050,Northern Neck
 3,Spotsylvania County,Post Oak Middle,551,2023,19.4,7.8,16.3,29,7.8,34.3,10.7,35.8,39.9,37.2,12.5,40.6,49.3,2,74.6,11.4,4.2,4.3,2.7,3.4,3.5,school,088,0220,0880220,Northern Neck
 3,Spotsylvania County,Spotsylvania Middle,807,2023,24.2,6.7,11.3,35.9,7.7,34.9,10.3,44.9,44.9,35.6,15.6,28.3,63,2,74.7,12.9,4.1,4.4,2.9,3.9,3.3,school,088,0330,0880330,Northern Neck
@@ -1207,7 +1175,6 @@ NA,NA,Chesapeake center,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,
 7,Tazewell County,Richlands Middle,349,2023,18.6,5,10.6,28.9,4.6,29.2,6,41.5,32.7,49.6,10.9,44.7,68.4,1.9,81.1,12.9,4.3,4.8,3.1,3.7,3.8,school,092,0823,0920823,Southwest
 2,Virginia Beach City,Salem Middle,79,2023,18.1,1.7,8.9,24.1,0,31.6,12.7,35.4,27.8,51.9,8.9,28.6,42.9,1.6,84.8,25.3,4.4,4.8,2.8,3.2,4.1,school,128,0050,1280050,Tidewater
 2,Virginia Beach City,Old Donation School,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,128,0080,1280080,Tidewater
-2,Virginia Beach City,Bayside 6th Grade Campus,14,2023,13.3,0,7.1,14.3,14.3,21.4,0,35.7,42.9,50,21.4,66.7,66.7,2.7,92.9,21.4,4.8,5.4,2.8,3.2,4.1,school,128,0115,1280115,Tidewater
 2,Virginia Beach City,Virginia Beach Middle,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,school,128,0140,1280140,Tidewater
 2,Virginia Beach City,Great Neck Middle,110,2023,22.8,2.4,4.5,20.9,0.9,21.8,3.6,24.5,29.1,56.4,11.8,30.8,38.5,1.8,82.7,30.9,4.7,4.9,1.8,2.7,4.6,school,128,0430,1280430,Tidewater
 2,Virginia Beach City,Plaza Middle,91,2023,16.3,1.8,8.8,26.4,0,23.1,5.5,36.3,35.2,51.6,5.5,60,40,1.8,82.4,47.3,4.6,4.8,2.7,3.2,4.1,school,128,0640,1280640,Tidewater
@@ -1230,12 +1197,20 @@ NA,NA,Chesapeake center,NA,2023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,
 3,West Point,West Point Middle/High,140,2023,18.6,3.6,4.3,37.1,10.7,30,3.6,50.7,43.6,45,12.1,52.9,52.9,1.6,73.6,12.9,4.2,4.7,2.6,3.3,3.8,school,207,0290,2070290,Northern Neck
 3,Westmoreland County,Montross Middle,206,2023,20,6.9,6.3,26.7,6.3,35.9,12.6,26.7,33,35.9,11.7,33.3,87.5,2.4,72.8,11.2,4.1,4.5,2.6,3.5,3.5,school,095,0300,0950300,Northern Neck
 2,James City County,James Blair Middle,445,2023,16.8,5.4,6.1,24.3,6.3,30.1,9,32.1,31,40.9,13.3,28.8,55.9,1.9,69.4,7.6,4.3,4.5,2.7,3.3,3.8,school,131,0025,1310025,Tidewater
+2,James City County,James Blair Middle,445,2023,16.8,5.4,6.1,24.3,6.3,30.1,9,32.1,31,40.9,13.3,28.8,55.9,1.9,69.4,7.6,4.3,4.5,2.7,3.3,3.8,school,131,0025,1310025,Tidewater
+2,Williamsburg-James City County,James Blair Middle,445,2023,16.8,5.4,6.1,24.3,6.3,30.1,9,32.1,31,40.9,13.3,28.8,55.9,1.9,69.4,7.6,4.3,4.5,2.7,3.3,3.8,school,131,0025,1310025,Tidewater
 2,Williamsburg-James City County,James Blair Middle,445,2023,16.8,5.4,6.1,24.3,6.3,30.1,9,32.1,31,40.9,13.3,28.8,55.9,1.9,69.4,7.6,4.3,4.5,2.7,3.3,3.8,school,131,0025,1310025,Tidewater
 2,James City County,Berkeley Middle,580,2023,20.7,4.7,7.2,22.2,6.2,33.6,7.9,40.7,36,42.8,13.1,34.2,60.5,2,71.4,9.1,4.3,4.6,3.1,3.4,3.6,school,131,0060,1310060,Tidewater
+2,James City County,Berkeley Middle,580,2023,20.7,4.7,7.2,22.2,6.2,33.6,7.9,40.7,36,42.8,13.1,34.2,60.5,2,71.4,9.1,4.3,4.6,3.1,3.4,3.6,school,131,0060,1310060,Tidewater
+2,Williamsburg-James City County,Berkeley Middle,580,2023,20.7,4.7,7.2,22.2,6.2,33.6,7.9,40.7,36,42.8,13.1,34.2,60.5,2,71.4,9.1,4.3,4.6,3.1,3.4,3.6,school,131,0060,1310060,Tidewater
 2,Williamsburg-James City County,Berkeley Middle,580,2023,20.7,4.7,7.2,22.2,6.2,33.6,7.9,40.7,36,42.8,13.1,34.2,60.5,2,71.4,9.1,4.3,4.6,3.1,3.4,3.6,school,131,0060,1310060,Tidewater
 2,James City County,Toano Middle,568,2023,22.6,4.9,14.1,31.3,5.5,30.8,7.4,40.5,36.8,38.9,14.3,29.6,66.7,1.9,73.4,13.4,4.2,4.5,3.2,3.7,3.3,school,131,0100,1310100,Tidewater
+2,James City County,Toano Middle,568,2023,22.6,4.9,14.1,31.3,5.5,30.8,7.4,40.5,36.8,38.9,14.3,29.6,66.7,1.9,73.4,13.4,4.2,4.5,3.2,3.7,3.3,school,131,0100,1310100,Tidewater
+2,Williamsburg-James City County,Toano Middle,568,2023,22.6,4.9,14.1,31.3,5.5,30.8,7.4,40.5,36.8,38.9,14.3,29.6,66.7,1.9,73.4,13.4,4.2,4.5,3.2,3.7,3.3,school,131,0100,1310100,Tidewater
 2,Williamsburg-James City County,Toano Middle,568,2023,22.6,4.9,14.1,31.3,5.5,30.8,7.4,40.5,36.8,38.9,14.3,29.6,66.7,1.9,73.4,13.4,4.2,4.5,3.2,3.7,3.3,school,131,0100,1310100,Tidewater
 2,James City County,Lois Hornsby Middle,684,2023,20,5.3,5.4,24.1,5.7,32.2,8.3,35.5,31.3,41.2,12.6,37.2,62.8,2,76.2,13.3,4.4,4.6,2.8,3.4,3.7,school,131,0191,1310191,Tidewater
+2,James City County,Lois Hornsby Middle,684,2023,20,5.3,5.4,24.1,5.7,32.2,8.3,35.5,31.3,41.2,12.6,37.2,62.8,2,76.2,13.3,4.4,4.6,2.8,3.4,3.7,school,131,0191,1310191,Tidewater
+2,Williamsburg-James City County,Lois Hornsby Middle,684,2023,20,5.3,5.4,24.1,5.7,32.2,8.3,35.5,31.3,41.2,12.6,37.2,62.8,2,76.2,13.3,4.4,4.6,2.8,3.4,3.7,school,131,0191,1310191,Tidewater
 2,Williamsburg-James City County,Lois Hornsby Middle,684,2023,20,5.3,5.4,24.1,5.7,32.2,8.3,35.5,31.3,41.2,12.6,37.2,62.8,2,76.2,13.3,4.4,4.6,2.8,3.4,3.7,school,131,0191,1310191,Tidewater
 4,Winchester City,Daniel Morgan Middle,530,2023,23.3,6.9,11.3,29.2,10.6,38.1,11.3,39.1,36,37.4,13.4,32.4,56.3,2.1,70.4,13.8,4.1,4.6,2.9,3.6,3.7,school,132,0070,1320070,Northern Virginia
 4,Winchester City,Daniel Morgan Intermediate,222,2023,32.4,9.3,16.7,41,9.5,36.9,10.8,43.7,50,39.6,23,35.3,56.9,2.1,64,16.2,3.8,4.3,3,3.9,3.3,school,132,0075,1320075,Northern Virginia
