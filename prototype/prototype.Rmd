@@ -10,10 +10,12 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(rlang)
-#library(tidycensus)
 library(tidyverse)
+
+regions <- read_csv("../data/vdoe_regions_divisions.csv")
+
 ```
 
 Script to isolate measures of interest and develop initial visualizations.
@@ -56,7 +58,7 @@ Enrollment counts include both full and part-time students.
 
 Rates are calculated as number of incidents per 1000 students in a particular geographic grouping. In the case of schools, where there may be significantly than 1000 students enrolled, we may need to rethink rate calculation or provide important context about how to interpret the rates.
 
-```{r bullying, message=FALSE}
+```{r bullying, warning=FALSE}
 
 # Read:
 bullying_codes <- c("RB1", "RB2", "BSC6", "BSC7")
@@ -64,10 +66,9 @@ bullying_codes <- c("RB1", "RB2", "BSC6", "BSC7")
 sbar <- read_csv("../data/sbar_behavior.csv") %>%
   filter(behavior_code %in% bullying_codes)
 
-enroll <- read_csv("../data/fall_membership.csv") %>%
-  rename(total_enrolled = total_count)
+enroll <- read_csv("../data/fall_membership.csv") 
 
-# Function to get bullying rates for different geo groupings (division, region, and school):
+# Function to get bullying rates for division and region:
 calc_bully_rate <- function(sbar, enroll, grouping_value, grouping_var) {
   
   grouping_var <- enquo(grouping_var)
@@ -80,7 +81,7 @@ calc_bully_rate <- function(sbar, enroll, grouping_value, grouping_var) {
   
   enroll_sum <- enroll %>%
     filter(locality_grouping == grouping_value) %>%
-    select(school_year, total_enrolled, !!grouping_var)
+    select(school_year, total_enrolled, sch_id, division_number, region_number, !!grouping_var)
   
   rates <- left_join(sbar_sum,enroll_sum, by = c("school_year", grouping_name)) %>%
     mutate(
@@ -91,13 +92,12 @@ calc_bully_rate <- function(sbar, enroll, grouping_value, grouping_var) {
 }
 
 # Region:
-bully_reg <- calc_bully_rate(sbar, enroll, "region", region_name)
+bully_reg <- calc_bully_rate(sbar, enroll, "region", region_name) %>%
+  filter(!is.na(total_enrolled)) # Drop non-membership values (ie. no enrollment counts)
 
 # Division:
-bully_div <- calc_bully_rate(sbar, enroll, "division", division_name)
-
-# School:
-bully_sch <- calc_bully_rate(sbar, enroll, "school", school_name)
+bully_div <- calc_bully_rate(sbar, enroll, "division", division_name) %>%
+  filter(!is.na(total_enrolled)) # Drop Fort Hill Community School and Petersburg Regional Alternative (no enrollment counts)
 
 # State (no grouping, so calculated separately):
 sbar_state <- sbar %>%
@@ -113,10 +113,30 @@ bully_state <- left_join(sbar_state, enroll_state) %>%
   mutate(bully_rate_per_1k = (n_bullying_incidents / total_enrolled) * 1000,
          locality_grouping = "state")
 
+# School (more inconsistencies, so calculated separately):
+sbar_sch <- sbar %>%
+  filter(locality_grouping == "school") %>%
+  group_by(school_year, sch_id) %>%
+  summarise(n_bullying_incidents = sum(n_events, na.rm = T))
+
+enroll_sch <- enroll %>%
+  filter(locality_grouping == "school")%>%
+  select(school_year, division_number, sch_id, school_name, total_enrolled)
+
+bully_sch <- left_join(enroll_sch, sbar_sch, by = c("school_year", "sch_id"))
+
+# Add region information
+bully_sch <- bully_sch %>%
+  left_join(regions, by = "division_number")
+
+# Calculate rates:
+bully_sch <- bully_sch %>%
+    mutate(bully_rate_per_1k = (n_bullying_incidents / total_enrolled) * 1000,
+         locality_grouping = "school")
+
 # Combine & save:
-# bullying <- bind_rows(bully_state, bully_reg, bully_div, bully_sch) 
-# 
-# write_csv(bullying, "../prototype/bullying.csv")
+#bullying <- bind_rows(bully_state, bully_reg, bully_div, bully_sch) 
+#write_csv(bullying, "../prototype/bullying.csv")
 
 ```
 
@@ -190,8 +210,7 @@ Where Yes = 1 and No = 0. The measure is the percentage of students that selecte
 
 # Read and select variables of interest:
 climate <- read_csv("../data/climate.csv") %>%
-  select(yr, locality_grouping, region_name, division_name, school_name,
-         n_students_surveyed = s_num, avg_bully_prob, avg_adult_relationships = avg_adult_rel,
+  select(-school_number, n_students_surveyed = s_num, avg_adult_relationships = avg_adult_rel,
          avg_peer_relationships = avg_peer_rel, pct_mental_health_training = pct_sui_training) %>%
   mutate(
     school_year = recode(yr,
@@ -203,15 +222,16 @@ climate_state <- climate %>%
   filter(locality_grouping == "state")
 
 climate_reg <- climate %>%
-  filter(locality_grouping == "region")
+  filter(locality_grouping == "region",
+         !is.na(region_name)) # Drop alternative, homeschools, etc. 
 
 climate_div <- climate %>%
-  filter(locality_grouping == "division") %>%
-  mutate(division_name = str_remove(division_name, " Public Schools"))
+  filter(locality_grouping == "division",
+         !is.na(division_name)) # Drop adult education, etc. 
 
 climate_sch <- climate %>%
-  filter(locality_grouping == "school") %>%
-  mutate(division_name = str_remove(division_name, " Public Schools"))
+  filter(locality_grouping == "school",
+         !is.na(division_name)) # Drop governor's schools, etc. 
 
 #write_csv(climate, "../prototype/climate.csv")
 
@@ -240,7 +260,7 @@ The following position titles are considered to be related to student mental hea
 # Read:
 staffing <- read_csv("../data/staffing.csv")
 
-# Function to get mental health staffing rates for different geo groupings (division, region, and school):
+# Function to get mental health staffing rates for division and region:
 calc_staff_rate <- function(staffing, enroll, grouping_value, grouping_var) {
   
   grouping_var <- enquo(grouping_var)
@@ -254,16 +274,17 @@ calc_staff_rate <- function(staffing, enroll, grouping_value, grouping_var) {
   
   enroll_sum <- enroll %>%
     filter(locality_grouping == grouping_value) %>%
-    select(school_year, total_enrolled, !!grouping_var)
+    select(school_year, total_enrolled, region_number, region_name, division_number, 
+           division_name, school_name, sch_id, !!grouping_var)
   
-  staff_reg_rates <- left_join(staff_sum,enroll_sum, by = c("school_year", grouping_name)) %>%
+  staff_rates <- left_join(staff_sum, enroll_sum, by = c("school_year", grouping_name)) %>%
     mutate(
       pct_vacant = (vacancies / total_positions) * 100,
       filled_positions = total_positions - vacancies,
       staff_per_1k_students = (filled_positions / total_enrolled) * 1000,
       locality_grouping = grouping_value)
 
-return(staff_reg_rates)
+return(staff_rates)
 }
 
 # Region:
@@ -271,9 +292,6 @@ staff_rates_reg <- calc_staff_rate(staffing, enroll, "region", region_name)
 
 # Division:
 staff_rates_div <- calc_staff_rate(staffing, enroll, "division", division_name)
-
-# School:
-staff_rates_sch <- calc_staff_rate(staffing, enroll, "school", school_name)
 
 # State (no grouping, so calculated separately):
 staff_state <- staffing %>%
@@ -291,13 +309,30 @@ staff_rates_state <- left_join(staff_state, enroll_state) %>%
          filled_positions = total_positions - vacancies,
          staff_per_1k_students = (filled_positions / total_enrolled) * 1000)
 
+# School (more inconsistencies, so calculated separately): 
+staff_sch <- staffing %>%
+  filter(locality_grouping == "school") %>%
+  group_by(school_year, sch_id) %>%
+  summarise(total_positions = sum(number_of_positions_by_fte, na.rm = T),
+            vacancies = sum(number_of_unfilled_positions_by_fte, na.rm = T))
+
+enroll_sch <- enroll %>%
+  filter(locality_grouping == "school")%>%
+  select(school_year, division_number, sch_id, school_name, total_enrolled)
+
+staff_sch <- left_join(staff_sch, enroll_sch, by = c("school_year", "sch_id"))
+
+# Calculate rates:
+staff_rates_sch <- staff_sch %>%
+  mutate(pct_vacant = (vacancies / total_positions) * 100,
+         filled_positions = total_positions - vacancies,
+         staff_per_1k_students = (filled_positions / total_enrolled) * 1000,
+         locality_grouping = "school") %>%
+  left_join(regions, by = "division_number")
+
 # Combine & Save:
-# mental_health_staff <- bind_rows(staff_rates_state,
-#                                  staff_rates_reg, 
-#                                  staff_rates_div,
-#                                  staff_rates_sch) %>%
+# mental_health_staff <- bind_rows(staff_rates_state,staff_rates_reg, staff_rates_div, staff_rates_sch) %>%
 #   select(-total_positions, -vacancies, -pct_vacant)
-# 
 #   
 # write_csv(mental_health_staff, "../prototype/mental_health_staff.csv")
 
@@ -334,11 +369,10 @@ disadv_div <- enroll %>%
 
 disadv_sch <- enroll %>%
   filter(locality_grouping == "school") %>%
-  group_by(school_name, school_year) %>%
+  group_by(sch_id, school_year) %>%
   mutate(pct_disadv = (n_disadv_students / total_enrolled) * 100)
 
 # disadv <- bind_rows(disadv_state, disadv_reg, disadv_div, disadv_sch)
-# 
 # write_csv(disadv, "../prototype/disadv.csv")
   
 ```
@@ -362,13 +396,13 @@ reg <- climate_reg %>%
   filter(!is.na(region_name)) %>%
   full_join(bully_reg) %>%
   full_join(staff_rates_reg) %>%
-  full_join(disadv_reg)
+  full_join(disadv_reg) 
 
 # Division
 div <- climate_div %>%
   full_join(bully_div) %>%
   full_join(disadv_div) %>%
-  full_join(staff_rates_div)
+  full_join(staff_rates_div) 
 
 # School 
 sch <- climate_sch %>%
@@ -376,9 +410,7 @@ sch <- climate_sch %>%
   full_join(disadv_sch) %>%
   full_join(staff_rates_sch)
 
-
-prototype_data <- bind_rows(state, reg, div, sch) %>%
-  select(-ft_count, -pt_count, -region_number, -division_number)
+prototype_data <- bind_rows(state, reg, div, sch) 
 
 write_csv(prototype_data, "../prototype/prototype_data.csv")
 
