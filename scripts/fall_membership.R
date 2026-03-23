@@ -201,6 +201,7 @@ disadv_state <- read_csv("data/raw/disadv_state_raw.csv") %>%
 enroll_state <- left_join(enroll_state, disadv_state)
 
 # Combine & Save ----
-fall_membership <- bind_rows(enroll_div, enroll_reg, enroll_sch, enroll_state)
+fall_membership <- bind_rows(enroll_div, enroll_reg, enroll_sch, enroll_state) %>%
+  rename(total_enrolled = total_count)
 
 write_csv(fall_membership, "data/fall_membership.csv")

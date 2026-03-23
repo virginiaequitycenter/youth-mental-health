@@ -1,4 +1,4 @@
-school_year,division_number,ft_count,pt_count,total_count,locality_grouping,region_name,region_number,division_name,n_disadv_students,school_number,sch_id,school_name
+school_year,division_number,ft_count,pt_count,total_enrolled,locality_grouping,region_name,region_number,division_name,n_disadv_students,school_number,sch_id,school_name
 2021-2022,001,4751,1,4752,division,Tidewater,2,Accomack County,2033,NA,NA,NA
 2021-2022,002,13721,28,13749,division,Valley,5,Albemarle County,3783,NA,NA,NA
 2021-2022,101,15676,36,15712,division,Northern Virginia,4,Alexandria City,9185,NA,NA,NA
