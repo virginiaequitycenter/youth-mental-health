@@ -12,6 +12,9 @@ regions <- read_csv("data/vdoe_regions_divisions.csv")
 # And for consistency across school names we're using the school key from fall_membership.R:
 school_key <- read_csv("data/school_key.csv")
 
+new_school_names <- school_key %>%
+  select(school_name, sch_id)
+
 # This data is available to download using the VDOE Build-a-Table functionality: 
 # https://p1pe.doe.virginia.gov/apex_captcha/home.do?apexTypeId=320 
 
@@ -42,7 +45,7 @@ school_key <- read_csv("data/school_key.csv")
 # - Special Education: All
 
 ## Tidy ----
-# State, division, and school levels 
+# State, division, and school:
 admin <- read_csv("data/raw/staffing_admin.csv") %>%
   clean_names() %>%
   mutate(
@@ -61,11 +64,8 @@ admin <- read_csv("data/raw/staffing_admin.csv") %>%
       locality_grouping == "school" ~paste0(division_number, school_number),
       TRUE ~ NA)
   ) %>%
-  select(-level, -adult_ed)
-
-# Join with school key 
-admin <- admin %>%
-  left_join(school_key)
+  select(-level, -adult_ed, -position_type, -school_name) %>%
+  left_join(new_school_names)
 
 # Region levels
 admin_reg <- read_csv("data/raw/staffing_admin_region.csv") %>%
@@ -75,7 +75,7 @@ admin_reg <- read_csv("data/raw/staffing_admin_region.csv") %>%
     percent_unfilled = as.numeric(gsub("%", "", percent_unfilled)),
     region_number = as.numeric(str_extract(region_number, "\\d+"))) %>%
   left_join(regions %>% select(-division_name) %>% distinct()) %>%
-  select(-adult_ed)
+  select(-adult_ed, -position_type)
 
 # Non-Instructional Positions ----
 ## Download ----
@@ -119,11 +119,8 @@ noninstr <- read_csv("data/raw/staffing_noninstr.csv") %>%
       locality_grouping == "school" ~paste0(division_number, school_number),
       TRUE ~ NA)
   ) %>%
-  select(-level, -adult_ed)
-
-# Join with school key
-noninstr <- noninstr %>%
-  left_join(school_key)
+  select(-level, -adult_ed, -school_name) %>%
+  left_join(new_school_names)
 
 # Region levels
 noninstr_reg <- read_csv("data/raw/staffing_noninstr_region.csv") %>%
@@ -133,8 +130,7 @@ noninstr_reg <- read_csv("data/raw/staffing_noninstr_region.csv") %>%
     percent_unfilled = as.numeric(gsub("%", "", percent_unfilled)),
     region_number = as.numeric(str_extract(region_number, "\\d+"))) %>%
   left_join(regions %>% select(-division_name) %>% distinct()) %>%
-  select(-adult_ed)
-
+  select(-adult_ed, -position_type)
 
 # Combine and Save ----  
 
