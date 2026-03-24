@@ -210,8 +210,8 @@ Where Yes = 1 and No = 0. The measure is the percentage of students that selecte
 
 # Read and select variables of interest:
 climate <- read_csv("../data/climate.csv") %>%
-  select(-school_number, n_students_surveyed = s_num, avg_adult_relationships = avg_adult_rel,
-         avg_peer_relationships = avg_peer_rel, pct_mental_health_training = pct_sui_training) %>%
+  select(-(pct_no_particpate:pct_tell_adult), -avg_worry_violence, -avg_envi, -school_number) %>%
+  rename(n_students_surveyed = s_num, pct_mental_health_training = pct_sui_training) %>%
   mutate(
     school_year = recode(yr,
                          `2022` = "2021-2022",
@@ -410,7 +410,8 @@ sch <- climate_sch %>%
   full_join(disadv_sch) %>%
   full_join(staff_rates_sch)
 
-prototype_data <- bind_rows(state, reg, div, sch) 
+prototype_data <- bind_rows(state, reg, div, sch) %>%
+  select(-school_number)
 
 write_csv(prototype_data, "../prototype/prototype_data.csv")
 
