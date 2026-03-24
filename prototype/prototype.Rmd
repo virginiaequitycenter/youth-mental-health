@@ -411,7 +411,7 @@ sch <- climate_sch %>%
   full_join(staff_rates_sch)
 
 prototype_data <- bind_rows(state, reg, div, sch) %>%
-  select(-school_number)
+  select(-school_number, -ft_count, -pt_count, -vacancies, -filled_positions)
 
 write_csv(prototype_data, "../prototype/prototype_data.csv")
 
