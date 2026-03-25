@@ -2882,51 +2882,28 @@ division_number,nces_school_num,school_num,school_name,low_grades,high_grades,sc
 095,NA,9992,Suspension Services,NA,NA,Public center - Alternative,NA,NA,NA,Non-Membership,0959992,Northern Neck,3,Westmoreland County
 095,510398001769,0310,Washington District Elementary,PK,05,Public school - Regular,Elementary,Colonial Beach,22443,Membership,0950310,Northern Neck,3,Westmoreland County
 095,510398001768,0120,Westmoreland High,09,12,Public school - Regular,High,Montross,22520,Membership,0950120,Northern Neck,3,Westmoreland County
-131,510402001770,0060,Berkeley Middle,06,08,Public school - Regular,Middle,Williamsburg,23185,Membership,1310060,Tidewater,2,James City County
 131,510402001770,0060,Berkeley Middle,06,08,Public school - Regular,Middle,Williamsburg,23185,Membership,1310060,Tidewater,2,Williamsburg-James City County
-131,510402002170,0040,Clara Byrd Baker Elementary,PK,05,Public school - Regular,Elementary,Williamsburg,23185,Membership,1310040,Tidewater,2,James City County
 131,510402002170,0040,Clara Byrd Baker Elementary,PK,05,Public school - Regular,Elementary,Williamsburg,23185,Membership,1310040,Tidewater,2,Williamsburg-James City County
-131,NA,9990,Community PK School,NA,NA,Public center - Alternative,NA,NA,NA,Non-Membership,1319990,Tidewater,2,James City County
 131,NA,9990,Community PK School,NA,NA,Public center - Alternative,NA,NA,NA,Non-Membership,1319990,Tidewater,2,Williamsburg-James City County
-131,510402002171,0080,D.J. Montague Elementary,PK,05,Public school - Regular,Elementary,Williamsburg,23188,Membership,1310080,Tidewater,2,James City County
 131,510402002171,0080,D.J. Montague Elementary,PK,05,Public school - Regular,Elementary,Williamsburg,23188,Membership,1310080,Tidewater,2,Williamsburg-James City County
-131,NA,9991,Home Educational Services,NA,NA,Public center - Alternative,NA,NA,NA,Non-Membership,1319991,Tidewater,2,James City County
 131,NA,9991,Home Educational Services,NA,NA,Public center - Alternative,NA,NA,NA,Non-Membership,1319991,Tidewater,2,Williamsburg-James City County
-131,NA,9999,Homebased,NA,NA,Public center - Alternative,NA,NA,NA,Non-Membership,1319999,Tidewater,2,James City County
 131,NA,9999,Homebased,NA,NA,Public center - Alternative,NA,NA,NA,Non-Membership,1319999,Tidewater,2,Williamsburg-James City County
-131,NA,9998,Homebound,NA,NA,Public center - Alternative,NA,NA,NA,Non-Membership,1319998,Tidewater,2,James City County
 131,NA,9998,Homebound,NA,NA,Public center - Alternative,NA,NA,NA,Non-Membership,1319998,Tidewater,2,Williamsburg-James City County
-131,510402002815,0190,J. Blaine Blayton Elementary,PK,05,Public school - Regular,Elementary,Williamsburg,23188,Membership,1310190,Tidewater,2,James City County
 131,510402002815,0190,J. Blaine Blayton Elementary,PK,05,Public school - Regular,Elementary,Williamsburg,23188,Membership,1310190,Tidewater,2,Williamsburg-James City County
-131,510402003054,0025,James Blair Middle,06,08,Public school - Regular,Middle,Williamsburg,23185,Membership,1310025,Tidewater,2,James City County
 131,510402003054,0025,James Blair Middle,06,08,Public school - Regular,Middle,Williamsburg,23185,Membership,1310025,Tidewater,2,Williamsburg-James City County
-131,510402000705,0201,James River Elementary,KG,05,Public school - Regular,Elementary,Williamsburg,23185,Membership,1310201,Tidewater,2,James City County
 131,510402000705,0201,James River Elementary,KG,05,Public school - Regular,Elementary,Williamsburg,23185,Membership,1310201,Tidewater,2,Williamsburg-James City County
-131,510402001665,0202,Jamestown High,09,12,Public school - Regular,High,Williamsburg,23135,Membership,1310202,Tidewater,2,James City County
 131,510402001665,0202,Jamestown High,09,12,Public school - Regular,High,Williamsburg,23135,Membership,1310202,Tidewater,2,Williamsburg-James City County
-131,510402001773,0090,Lafayette High,09,12,Public school - Regular,High,Williamsburg,23188,Membership,1310090,Tidewater,2,James City County
 131,510402001773,0090,Lafayette High,09,12,Public school - Regular,High,Williamsburg,23188,Membership,1310090,Tidewater,2,Williamsburg-James City County
-131,510402001776,0050,Laurel Lane Elementary,PK,05,Public school - Regular,Elementary,Williamsburg,23188,Membership,1310050,Tidewater,2,James City County
 131,510402001776,0050,Laurel Lane Elementary,PK,05,Public school - Regular,Elementary,Williamsburg,23188,Membership,1310050,Tidewater,2,Williamsburg-James City County
-131,NA,9997,Local or Regional Jail,KG,12,Local or Regional Jail,Other,Williamsburg,23188,Membership,1319997,Tidewater,2,James City County
 131,NA,9997,Local or Regional Jail,KG,12,Local or Regional Jail,Other,Williamsburg,23188,Membership,1319997,Tidewater,2,Williamsburg-James City County
-131,510402002830,0191,Lois Hornsby Middle,06,08,Public school - Regular,Middle,Williamsburg,23188,Membership,1310191,Tidewater,2,James City County
 131,510402002830,0191,Lois Hornsby Middle,06,08,Public school - Regular,Middle,Williamsburg,23188,Membership,1310191,Tidewater,2,Williamsburg-James City County
-131,510402002656,0205,Matoaka Elementary,KG,05,Public school - Regular,Elementary,Williamsburg,23188,Membership,1310205,Tidewater,2,James City County
 131,510402002656,0205,Matoaka Elementary,KG,05,Public school - Regular,Elementary,Williamsburg,23188,Membership,1310205,Tidewater,2,Williamsburg-James City County
-131,510402001774,0010,Matthew Whaley Elementary,KG,05,Public school - Regular,Elementary,Williamsburg,23185,Membership,1310010,Tidewater,2,James City County
 131,510402001774,0010,Matthew Whaley Elementary,KG,05,Public school - Regular,Elementary,Williamsburg,23185,Membership,1310010,Tidewater,2,Williamsburg-James City County
-131,510402001775,0070,Norge Elementary,PK,05,Public school - Regular,Elementary,Williamsburg,23188,Membership,1310070,Tidewater,2,James City County
 131,510402001775,0070,Norge Elementary,PK,05,Public school - Regular,Elementary,Williamsburg,23188,Membership,1310070,Tidewater,2,Williamsburg-James City County
-131,NA,8888,Special Situation Schools,NA,NA,Unknown,NA,NA,NA,Non-Membership,1318888,Tidewater,2,James City County
 131,NA,8888,Special Situation Schools,NA,NA,Unknown,NA,NA,NA,Non-Membership,1318888,Tidewater,2,Williamsburg-James City County
-131,510402002556,0203,Stonehouse Elementary,KG,05,Public school - Regular,Elementary,Williamsburg,23188,Membership,1310203,Tidewater,2,James City County
 131,510402002556,0203,Stonehouse Elementary,KG,05,Public school - Regular,Elementary,Williamsburg,23188,Membership,1310203,Tidewater,2,Williamsburg-James City County
-131,NA,9992,Suspension Services,NA,NA,Public center - Alternative,NA,NA,NA,Non-Membership,1319992,Tidewater,2,James City County
 131,NA,9992,Suspension Services,NA,NA,Public center - Alternative,NA,NA,NA,Non-Membership,1319992,Tidewater,2,Williamsburg-James City County
-131,510402000446,0100,Toano Middle,06,08,Public school - Regular,Middle,Toano,23168,Membership,1310100,Tidewater,2,James City County
 131,510402000446,0100,Toano Middle,06,08,Public school - Regular,Middle,Toano,23168,Membership,1310100,Tidewater,2,Williamsburg-James City County
-131,510402002658,0204,Warhill High,09,12,Public school - Regular,High,Williamsburg,23188,Membership,1310204,Tidewater,2,James City County
 131,510402002658,0204,Warhill High,09,12,Public school - Regular,High,Williamsburg,23188,Membership,1310204,Tidewater,2,Williamsburg-James City County
 132,NA,9990,Community PK School,NA,NA,Public center - Alternative,NA,NA,NA,Non-Membership,1329990,Northern Virginia,4,Winchester City
 132,510405003042,0075,Daniel Morgan Intermediate,05,06,Public school - Regular,Middle,Winchester,22601,Membership,1320075,Northern Virginia,4,Winchester City
