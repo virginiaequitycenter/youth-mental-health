@@ -14,11 +14,11 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(rlang)
 library(tidyverse)
 
-regions <- read_csv("../data/vdoe_regions_divisions.csv")
+regions <- read_csv("../data/regions.csv")
 
 ```
 
-Script to isolate measures of interest and develop initial visualizations.
+Script to isolate measures of interest to develop initial visualizations.
 
 # Prototype Variables
 
@@ -142,7 +142,7 @@ bully_sch <- bully_sch %>%
 
 ### Bullying Perception
 
-This data comes from the School Climate Survey. It is important to note that the School Climate Survey is not administered to all students at all schools, so it is not representative of the full Virginia youth population. The School Climate Survey isis administered to middle schools in odd years and high schools in even years, so the 2023 data represents middle school student responses and the 2022 data represents high school student responses.
+This data comes from the School Climate Survey. It is important to note that the School Climate Survey is not administered to all students at all schools, so it is not representative of the full Virginia youth population. The School Climate Survey is administered to **middle schools in odd years** and **high schools in even years**, so the 2023 data represents middle school student responses and the 2022 data represents high school student responses.
 
 The perception of bullying is measured as the average level of students indicating that bulling is a problem at their school, and what they observe other being bullied about, with 1 indicating that there is no problem and 6 indicating that students strongly perceive that there is a problem.
 
@@ -210,28 +210,13 @@ Where Yes = 1 and No = 0. The measure is the percentage of students that selecte
 
 # Read and select variables of interest:
 climate <- read_csv("../data/climate.csv") %>%
-  select(-(pct_no_particpate:pct_tell_adult), -avg_worry_violence, -avg_envi, -school_number) %>%
+  select(-(pct_no_particpate:pct_tell_adult), -avg_worry_violence, -avg_envi) %>%
   rename(n_students_surveyed = s_num, pct_mental_health_training = pct_sui_training) %>%
   mutate(
     school_year = recode(yr,
                          `2022` = "2021-2022",
                          `2023` = "2022-2023")) %>%
   select(-yr)
-
-climate_state <- climate %>%
-  filter(locality_grouping == "state")
-
-climate_reg <- climate %>%
-  filter(locality_grouping == "region",
-         !is.na(region_name)) # Drop alternative, homeschools, etc. 
-
-climate_div <- climate %>%
-  filter(locality_grouping == "division",
-         !is.na(division_name)) # Drop adult education, etc. 
-
-climate_sch <- climate %>%
-  filter(locality_grouping == "school",
-         !is.na(division_name)) # Drop governor's schools, etc. 
 
 #write_csv(climate, "../prototype/climate.csv")
 
@@ -330,6 +315,7 @@ staff_rates_sch <- staff_sch %>%
          locality_grouping = "school") %>%
   left_join(regions, by = "division_number")
 
+
 # Combine & Save:
 # mental_health_staff <- bind_rows(staff_rates_state,staff_rates_reg, staff_rates_div, staff_rates_sch) %>%
 #   select(-total_positions, -vacancies, -pct_vacant)
@@ -377,8 +363,6 @@ disadv_sch <- enroll %>%
   
 ```
 
-### *To do: ACS % below poverty threshold*
-
 # Variable List
 
 All data is grouped by a particular locality_grouping (state, region, division, or school) for a particular school year.
@@ -387,31 +371,31 @@ All data is grouped by a particular locality_grouping (state, region, division, 
 
 # State
 state <- bully_state %>%
-  left_join(climate_state) %>%
+  left_join(climate %>% filter(locality_grouping == "state")) %>%
   left_join(staff_rates_state) %>%
   left_join(disadv_state)
   
 # Region
-reg <- climate_reg %>%
-  filter(!is.na(region_name)) %>%
-  full_join(bully_reg) %>%
+reg <- bully_reg %>%
+  full_join(climate %>% filter(locality_grouping == "region")) %>%
   full_join(staff_rates_reg) %>%
   full_join(disadv_reg) 
 
 # Division
-div <- climate_div %>%
-  full_join(bully_div) %>%
+div <- bully_div %>%
+  full_join(climate %>% filter(locality_grouping == "division")) %>%
   full_join(disadv_div) %>%
   full_join(staff_rates_div) 
 
 # School 
-sch <- climate_sch %>%
-  full_join(bully_sch) %>%
+sch <- bully_sch %>%
+  full_join(climate %>% filter(locality_grouping == "school")) %>%
   full_join(disadv_sch) %>%
-  full_join(staff_rates_sch)
+  full_join(staff_rates_sch) %>%
+  filter(!is.na(school_name)) # to check later? 
 
 prototype_data <- bind_rows(state, reg, div, sch) %>%
-  select(-school_number, -ft_count, -pt_count, -vacancies, -filled_positions)
+  select(-ft_count, -pt_count, -vacancies, -filled_positions)
 
 write_csv(prototype_data, "../prototype/prototype_data.csv")
 
