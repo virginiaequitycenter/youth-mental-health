@@ -370,27 +370,27 @@ All data is grouped by a particular locality_grouping (state, region, division, 
 ```{r, combine, message=FALSE}
 
 # State
-state <- bully_state %>%
+state <- disadv_state %>%
   left_join(climate %>% filter(locality_grouping == "state")) %>%
   left_join(staff_rates_state) %>%
-  left_join(disadv_state)
+  left_join(bully_state)
   
 # Region
-reg <- bully_reg %>%
+reg <- disadv_reg %>%
   full_join(climate %>% filter(locality_grouping == "region")) %>%
   full_join(staff_rates_reg) %>%
-  full_join(disadv_reg) 
+  full_join(bully_reg) 
 
 # Division
-div <- bully_div %>%
+div <- disadv_div %>%
   full_join(climate %>% filter(locality_grouping == "division")) %>%
-  full_join(disadv_div) %>%
+  full_join(bully_div) %>%
   full_join(staff_rates_div) 
 
 # School 
-sch <- bully_sch %>%
+sch <- disadv_sch %>%
   full_join(climate %>% filter(locality_grouping == "school")) %>%
-  full_join(disadv_sch) %>%
+  full_join(bully_sch) %>%
   full_join(staff_rates_sch) %>%
   filter(!is.na(school_name)) # to check later? 
 
