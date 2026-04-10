@@ -4,27 +4,45 @@
 library(shiny)
 library(bslib)
 library(ggbeeswarm)
+library(plotly)
 library(tidyverse)
 
-prototype_data <- readr::read_csv("prototype_data.csv")
+# For school levels
+school_levels <- read_csv("../data/school_key.csv") %>%
+  select(grade_standard, sch_id)
+
+prototype_data <- readr::read_csv("prototype_data.csv") %>%
+  left_join(school_levels, by = "sch_id") %>%
+  filter(
+    locality_grouping != "school" |
+    grade_standard %in% c("High", "Middle"))
 
 # Dataprep ----
-## Reduce to most recent values 
+## Reduce to most recent values ----
 # Bully information as of 23/24:
 bully_recent <- prototype_data %>%
   filter(school_year == "2023-2024") %>%
   select(school_year:division_name, sch_id:school_name, n_bullying_incidents:bully_rate_per_1k) %>%
-  mutate(label = case_when(
-    locality_grouping == "state" ~ "State Average",
-    locality_grouping == "region" ~ region_name, 
-    locality_grouping == "division" ~ division_name,
-    TRUE ~ school_name))
+  mutate(
+    label = case_when(
+      locality_grouping == "state" ~ "State Average",
+      locality_grouping == "region" ~ region_name, 
+      locality_grouping == "division" ~ division_name,
+      TRUE ~ school_name),
+    # If bully rate is NA make 0 
+    bully_rate_per_1k = case_when(
+      is.na(bully_rate_per_1k) ~ 0,
+      TRUE ~ bully_rate_per_1k))
 
-# Climate data is more complicated: 21/22 AND 22/23
+# Climate data is more complicated: 
+# - years are 21/22 AND 22/23
+# - different state averages calculated (middle school, high school, combined)
 climate <- prototype_data %>%
   filter(str_detect(school_year, "2022")) %>%
-  select(school_year:division_name, sch_id:school_name, n_students_surveyed:avg_bully_prob)
+  select(school_year:division_name, sch_id:school_name, n_students_surveyed:avg_bully_prob, grade_standard)
 
+# School:
+# we only care about school type here 
 climate_recent_sch <- climate %>% 
   filter(locality_grouping == "school",
          !is.na(n_students_surveyed)) %>%
@@ -32,31 +50,74 @@ climate_recent_sch <- climate %>%
   filter(n() == 1 | school_year == "2022-2023") %>%
   ungroup()
 
+# Division:
 # High schools in 21-22 and middle schools in 22-23
-climate_recent_div <- climate %>%
+
+# climate_recent_div <- climate %>%
+#   filter(locality_grouping == "division") %>%
+#   mutate(division_name_ext = case_when(
+#     school_year == "2022-2023" ~ paste0(division_name, " Middle Schools"),
+#     TRUE ~ paste0(division_name, " High Schools")))
+
+# Calculate division averages across years
+climate_div_avg <- climate %>%
   filter(locality_grouping == "division") %>%
-  mutate(division_name_ext = case_when(
-    school_year == "2022-2023" ~ paste0(division_name, " Middle Schools"),
-    TRUE ~ paste0(division_name, " High Schools")))
+  group_by(division_number, division_name) %>%
+  summarise(
+    across(where(is.numeric), mean, na.rm = TRUE),
+    school_year = "2021-2023",
+    locality_grouping = "division")
 
-climate_recent_reg <- climate %>%
+# Combine
+#climate_recent_div <- bind_rows(climate_recent_div, div_avg)
+
+# Region:
+# climate_recent_reg <- climate %>%
+#   filter(locality_grouping == "region") %>%
+#   mutate(region_name_ext = case_when(
+#     school_year == "2022-2023" ~ paste0(region_name, " Middle Schools"),
+#     TRUE ~ paste0(region_name, " High Schools")))
+
+# Calculate region averages across years 
+reg_avg <- climate %>%
   filter(locality_grouping == "region") %>%
-  mutate(region_name_ext = case_when(
-    school_year == "2022-2023" ~ paste0(region_name, " Middle Schools"),
-    TRUE ~ paste0(region_name, " High Schools")))
+  group_by(region_number, region_name) %>%
+  summarise(
+    across(where(is.numeric), mean, na.rm = TRUE),
+    school_year = "2021-2023",
+    locality_grouping = "region")
 
-climate_recent_state <- climate %>%
+# Combine
+#climate_recent_reg <- bind_rows(climate_recent_reg, reg_avg)
+
+# State:
+# climate_recent_state <- climate %>%
+#   filter(locality_grouping == "state") %>%
+#   mutate(state_name_ext = case_when(
+#     school_year == "2022-2023" ~ "State Average - Middle Schools",
+#     TRUE ~ "State Average - High Schools"))
+
+# Calculate state average across years
+state_avg <- climate %>%
   filter(locality_grouping == "state") %>%
-  mutate(state_name_ext = case_when(
-    school_year == "2022-2023" ~ "State Average - Middle Schools",
-    TRUE ~ "State Average - High Schools"))
+  summarise(
+    across(where(is.numeric), mean, na.rm = TRUE),
+    school_year = "2021-2023",
+    locality_grouping = "state",
+    region_number = NA_real_)
 
-climate_recent <- bind_rows(climate_recent_state, climate_recent_reg, climate_recent_div, climate_recent_sch) %>%
+# Combine climate state 
+# climate_recent_state <-bind_rows(climate_recent_state, state_avg_row)
+
+# Combine all climate data 
+
+climate_recent <- bind_rows(state_avg, reg_avg, div_avg, climate_recent_sch) %>%
   mutate(label = case_when(
-    !is.na(state_name_ext) ~ state_name_ext,
-    !is.na(region_name_ext) ~ region_name_ext, 
-    !is.na(division_name_ext) ~ division_name_ext,
-    TRUE ~ school_name))
+    locality_grouping == "school" ~ school_name,
+    locality_grouping == "division" ~ division_name,
+    locality_grouping == "region" ~ region_name,
+    TRUE ~ "State Average"
+  ))
 
 # Staffing and disadvantage 24/25
 staff_disadv_recent <- prototype_data %>%
@@ -68,7 +129,8 @@ staff_disadv_recent <- prototype_data %>%
     locality_grouping == "division" ~ division_name,
     TRUE ~ school_name))
 
-## Pivot longer & combine 
+
+## Pivot longer & then combine 
 staff_disad_long <- staff_disadv_recent %>%
   select(label, locality_grouping, pct_disadv, staff_per_1k_students) %>%
   pivot_longer(cols = c(pct_disadv, staff_per_1k_students))
@@ -82,7 +144,7 @@ bully_long <- bully_recent %>%
   pivot_longer(cols = bully_rate_per_1k)
 
 # Combine:
-plt_dat <- rbind(staff_disad_long, climate_long, bully_long)
+plt_dat <- rbind(staff_disad_long, climate_long, bully_long) 
 
 
 
@@ -90,7 +152,7 @@ plt_dat <- rbind(staff_disad_long, climate_long, bully_long)
 ui <- 
   page_sidebar(
     theme = bs_theme(version = 5),
-    title = "Prototype v2: Exploring Youth Mental Health in Virginia",
+    title = "Prototype: Exploring Youth Mental Health in Virginia",
     sidebar = sidebar(
       title = "Select Measures",
       
@@ -114,11 +176,27 @@ ui <-
     navset_card_tab(
       nav_panel(title = "At a Glance", 
                 textOutput("all_values_header"),
-                plotOutput("all_values_plt")),
-      nav_panel(title = "Explore"),
+                plotlyOutput("all_values_plt")),
+      nav_panel(title = "Explore",
+                selectInput("measure", "Select measure to explore:", choices = c(
+                  "Bullying Rate",
+                  "Avg. Bullying Problem",
+                  "Relationships with Peers",
+                  "Relationships with Adults",
+                  "Mental Health Training (%)",
+                  "EconomicallyDisadv. (%)",
+                  "Mental Health Staff Rate"
+                )),
+                layout_columns(
+                  col_widths = c(6, 6),
+                  row_heights = c(2, 2),
+                  card(card_header("Rank"), "Lollipop plot"),
+                  card(card_header("Severity"), "Quintiles plot"),
+                  card(card_header("Change"), "Line plot"),
+                  card(card_header("Locality"), "Map")
+                )),
       nav_panel(title = "Compare")
     )
-    
   )
 
 # Server ----
@@ -173,36 +251,54 @@ server <- function(input, output, session) {
   })
   
   # Render the plot:
-  output$all_values_plt <- renderPlot({
-    ggplot(plot_data(), aes(x = value, y = name)) +
-      geom_beeswarm(alpha = 0.1, color = "black", show.legend = FALSE) +
+  output$all_values_plt <- renderPlotly({
+    
+    req(input$highlight)
+    highlight_label <- as.character(input$highlight)
+    
+   
+    highlight_df <- dplyr::bind_rows(
+      dplyr::mutate(state_data(), type = "State average"),
+      dplyr::mutate(highlight_data(), type = highlight_label))
+    
+    color_vals <- c("State average" = "#D95F02FF")
+    color_vals[highlight_label] = "#1B9E77FF"
+    
+    shape_vals <- c("State average" = 17)
+    shape_vals[highlight_label] = 15
+    
+    p <- ggplot(plot_data(), aes(x = value, y = name)) +
+      geom_beeswarm(alpha = 0.10, color = "black", show.legend = FALSE, size = 1,
+                    aes(text = paste0(label,": ", round(value)))) +
       geom_point(
-        data = dplyr::bind_rows(
-          dplyr::mutate(state_data(), type = "State"),
-          dplyr::mutate(highlight_data(), type = "Highlighted")),
-        aes(color = type, shape = type), size = 4) +
-      theme_bw() +
+        data = highlight_df, 
+        aes(color = type, shape = type, 
+            text = paste0(label,": ", round(value))), 
+        size = 3) +
+      #theme_minimal() +
+      theme_bw(base_size = 12) +
       facet_wrap(~ name, ncol = 1, scales = "free") +
       theme(
         strip.text.x = element_blank(),
         legend.position = "top",
         legend.text = element_text(size = 12),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 11)) +
+        axis.text.y = element_text(size = 11),
+        axis.text.x = element_text(size = 10)) +
       labs(x = NULL, y = NULL, color = NULL, shape = NULL) +
-      scale_color_manual(
-        values = c("State" = "blue", "Highlighted" = "red"),
-        labels = c("State" = "State Average", "Highlighted" = "Selected Area")) +
-      scale_shape_manual(
-        values = c("State" = 17, "Highlighted" = 15),
-        labels = c("State" = "State Average", "Highlighted" = "Selected Area")) +
-      scale_y_discrete(labels = c("bully_rate_per_1k" = "Bullying Rate",
-                                  "avg_bully_prob" = "Average\nBullying Problem",
-                                  "avg_peer_rel" = "Average Relationship\nwith Peers",
-                                  "avg_adult_rel" = "Average Relationship\nwith Adults",
-                                  "pct_mental_health_training" = "Percent that Received\nMental Health Training",
-                                  "pct_disadv" = "Percent\nEconomically\nDisadvantaged",
-                                  "staff_per_1k_students" = "Rate of Mental\nHealth Staff"))
+      scale_color_manual(values = color_vals ) +
+      scale_shape_manual(values = shape_vals) +
+      scale_y_discrete(labels = c(
+        bully_rate_per_1k = "Bullying Rate",
+        avg_bully_prob = "Avg. Bullying\nProblem",
+        avg_peer_rel = "Relationships\nwith Peers",
+        avg_adult_rel = "Relationships\nwith Adults",
+        pct_mental_health_training = "Mental Health\nTraining (%)",
+        pct_disadv = "Economically\nDisadv. (%)",
+        staff_per_1k_students = "Mental Health\nStaff Rate"
+      ))
+    
+    ggplotly(p, tooltip = "text") %>%
+      config(displayModeBar = FALSE, displaylogo = FALSE)
   })
   
   
@@ -217,7 +313,7 @@ server <- function(input, output, session) {
       grouping <- "other group"
     }
 
-    paste0("Compare ", highlight, " to all ", grouping, "s")
+    paste0("See ", highlight, " across all indicators")
   })
 
   # Show selected values
