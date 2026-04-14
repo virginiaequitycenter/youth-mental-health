@@ -111,7 +111,7 @@ state_avg <- climate %>%
 
 # Combine all climate data 
 
-climate_recent <- bind_rows(state_avg, reg_avg, div_avg, climate_recent_sch) %>%
+climate_recent <- bind_rows(state_avg, reg_avg, climate_div_avg, climate_recent_sch) %>%
   mutate(label = case_when(
     locality_grouping == "school" ~ school_name,
     locality_grouping == "division" ~ division_name,
@@ -185,8 +185,7 @@ ui <-
                   "Relationships with Adults",
                   "Mental Health Training (%)",
                   "EconomicallyDisadv. (%)",
-                  "Mental Health Staff Rate"
-                )),
+                  "Mental Health Staff Rate")),
                 layout_columns(
                   col_widths = c(6, 6),
                   row_heights = c(2, 2),
@@ -195,7 +194,29 @@ ui <-
                   card(card_header("Change"), "Line plot"),
                   card(card_header("Locality"), "Map")
                 )),
-      nav_panel(title = "Compare")
+      nav_panel(
+        title = "Compare",
+        layout_columns(
+          col_widths = 12,
+          card(
+            card_header("Compare how two indicators intersect in your area"),
+            "Scatter plot"
+          )
+        ),
+        layout_columns(
+          col_widths = c(6, 6),
+          row_heights = 1,
+          selectInput("x", "Select value for x-axis", choices = c("Bullying Rates", "Staffing")),
+          selectInput("y", "Select value for y-axis", choices = c("Bullying Rates", "Staffing"))
+        )
+
+      ),
+      nav_panel(title = "Measures", "More information about each indicator, including how it's measured, where it's from, and why it's important.",
+                HTML('
+      <p><b>Bullying Rate</b> - the rate of reported incidents of bullying per 1000 students enrolled...</p> 
+      <p><b>Staffing Rate</b> - the rate of mental health staff per 1000 student enrolled...
+  ')
+                )
     )
   )
 
