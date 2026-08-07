@@ -1,4 +1,5 @@
-# Explore student mental health across different datasets 
+# Create standalone app to show all youth mental health variables at a glance with a particular region highlighted 
+# This is equivalent to just the At-A-Glance tab on app1_all.R 
 
 # Setup ----
 library(shiny)
@@ -8,14 +9,14 @@ library(plotly)
 library(tidyverse)
 
 # For school levels
-school_levels <- read_csv("../data/school_key.csv") %>%
+school_levels <- read_csv("../school_key.csv") %>%
   select(grade_standard, sch_id)
 
-prototype_data <- readr::read_csv("prototype_data.csv") %>%
+prototype_data <- read_csv("../prototype_data.csv") %>%
   left_join(school_levels, by = "sch_id") %>%
   filter(
     locality_grouping != "school" |
-    grade_standard %in% c("High", "Middle"))
+      grade_standard %in% c("High", "Middle"))
 
 # Dataprep ----
 ## Reduce to most recent values ----
@@ -152,7 +153,7 @@ plt_dat <- rbind(staff_disad_long, climate_long, bully_long)
 ui <- 
   page_sidebar(
     theme = bs_theme(version = 5),
-    title = "Prototype: Exploring Youth Mental Health in Virginia",
+    title = "At a Glance - Youth Mental Health",
     sidebar = sidebar(
       title = "Select Measures",
       
@@ -173,50 +174,9 @@ ui <-
         options = list(placeholder = "Start typing")
       ),
     ),
-    navset_card_tab(
-      nav_panel(title = "At a Glance", 
-                textOutput("all_values_header"),
-                plotlyOutput("all_values_plt")),
-      nav_panel(title = "Explore",
-                selectInput("measure", "Select measure to explore:", choices = c(
-                  "Bullying Rate",
-                  "Avg. Bullying Problem",
-                  "Relationships with Peers",
-                  "Relationships with Adults",
-                  "Mental Health Training (%)",
-                  "EconomicallyDisadv. (%)",
-                  "Mental Health Staff Rate")),
-                layout_columns(
-                  col_widths = c(6, 6),
-                  row_heights = c(2, 2),
-                  card(card_header("Rank"), "Lollipop plot"),
-                  card(card_header("Severity"), "Quintiles plot"),
-                  card(card_header("Change"), "Line plot"),
-                  card(card_header("Locality"), "Map")
-                )),
-      nav_panel(
-        title = "Compare",
-        layout_columns(
-          col_widths = 12,
-          card(
-            card_header("Compare how two indicators intersect in your area"),
-            "Scatter plot"
-          )
-        ),
-        layout_columns(
-          col_widths = c(6, 6),
-          row_heights = 1,
-          selectInput("x", "Select value for x-axis", choices = c("Bullying Rates", "Staffing")),
-          selectInput("y", "Select value for y-axis", choices = c("Bullying Rates", "Staffing"))
-        )
-
-      ),
-      nav_panel(title = "Measures", "More information about each indicator, including how it's measured, where it's from, and why it's important.",
-                HTML('
-      <p><b>Bullying Rate</b> - the rate of reported incidents of bullying per 1000 students enrolled...</p> 
-      <p><b>Staffing Rate</b> - the rate of mental health staff per 1000 student enrolled...
-  ')
-                )
+    card(
+      textOutput("all_values_header"),
+      plotlyOutput("all_values_plt")
     )
   )
 
@@ -277,7 +237,7 @@ server <- function(input, output, session) {
     req(input$highlight)
     highlight_label <- as.character(input$highlight)
     
-   
+    
     highlight_df <- dplyr::bind_rows(
       dplyr::mutate(state_data(), type = "State average"),
       dplyr::mutate(highlight_data(), type = highlight_label))
@@ -327,24 +287,16 @@ server <- function(input, output, session) {
   output$all_values_header <- renderText({
     highlight <- input$highlight
     grouping <- input$locality
-
+    
     # Handle NULL / empty cases safely
     if (is.null(highlight) || highlight == "") {
       highlight <- "your value"
       grouping <- "other group"
     }
-
+    
     paste0("See ", highlight, " across all indicators")
   })
-
-  # Show selected values
-  # output$selected <- renderPrint({
-  #   list(
-  #     locality = input$locality,
-  #     highlight = input$highlight
-  #   )
-  # })
+  
 }
 
 shinyApp(ui, server)
-

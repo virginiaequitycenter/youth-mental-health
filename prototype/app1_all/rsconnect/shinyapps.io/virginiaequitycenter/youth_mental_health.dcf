@@ -1,0 +1,12 @@
+name: youth_mental_health
+title: youth_mental_health
+username: virginiaequitycenter
+account: virginiaequitycenter
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 17153352
+bundleId: 11861282
+url: https://virginiaequitycenter.shinyapps.io/youth_mental_health/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

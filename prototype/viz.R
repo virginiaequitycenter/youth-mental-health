@@ -198,7 +198,7 @@ quintile_summary <- bully_quintiles %>%
   summarise(
     mean_rate = mean(bully_rate_per_1k, na.rm = TRUE),
     n = n()) %>%
-  mutate(highlight = quintile == ah_quintile)
+  mutate(highlight = quintile)
 
 ggplot(quintile_summary, aes(x = factor(quintile), y = mean_rate, fill = highlight)) +
   geom_hline(data = state_highlight,

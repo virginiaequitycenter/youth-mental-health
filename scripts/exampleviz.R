@@ -1,4 +1,4 @@
-# Explore possible data visualistions
+# Explore possible data visualizations of SBAR data 
 
 library(GGally)
 library(ggrepel)
@@ -7,6 +7,8 @@ library(tidyverse)
 library(scales)
 
 load("data/sbar_levels.Rdata")
+
+
 
 # 1. example of all divisions on one variable
 # with albemarle highlighted
