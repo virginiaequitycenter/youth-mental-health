@@ -5,25 +5,28 @@
 # Setup ----
 library(shiny)
 library(bslib)
-library(ggbeeswarm)
 library(plotly)
+library(leaflet)
+library(sf)
 library(tidyverse)
 
 # Read ----
 # For school levels
-school_key <- read_csv("../school_key.csv")
+school_key <- read_csv("school_key.csv")
 
 school_levels <-  school_key %>%
   select(grade_standard, sch_id)
 
-prototype_data <- readr::read_csv("../prototype_data.csv") %>%
+prototype_data <- read_csv("prototype_data.csv") %>%
   left_join(school_levels, by = "sch_id") %>%
-  filter(
-    locality_grouping != "school" |
-      grade_standard %in% c("High", "Middle"))
+  filter(locality_grouping != "school" | grade_standard %in% c("High", "Middle"))
+
+acs <- readRDS("acs.RDS")
 
 # Dataprep ----
 ## Reduce to most recent values ----
+# TODO: eventually move to dataprep script
+
 # Bully information as of 23/24:
 bully_recent <- prototype_data %>%
   filter(school_year == "2023-2024") %>%
@@ -57,13 +60,6 @@ climate_recent_sch <- climate %>%
 
 # Division:
 # High schools in 21-22 and middle schools in 22-23
-
-# climate_recent_div <- climate %>%
-#   filter(locality_grouping == "division") %>%
-#   mutate(division_name_ext = case_when(
-#     school_year == "2022-2023" ~ paste0(division_name, " Middle Schools"),
-#     TRUE ~ paste0(division_name, " High Schools")))
-
 # Calculate division averages across years
 climate_div_avg <- climate %>%
   filter(locality_grouping == "division") %>%
@@ -72,16 +68,6 @@ climate_div_avg <- climate %>%
     across(where(is.numeric), mean, na.rm = TRUE),
     school_year = "2021-2023",
     locality_grouping = "division")
-
-# Combine
-#climate_recent_div <- bind_rows(climate_recent_div, div_avg)
-
-# Region:
-# climate_recent_reg <- climate %>%
-#   filter(locality_grouping == "region") %>%
-#   mutate(region_name_ext = case_when(
-#     school_year == "2022-2023" ~ paste0(region_name, " Middle Schools"),
-#     TRUE ~ paste0(region_name, " High Schools")))
 
 # Calculate region averages across years 
 reg_avg <- climate %>%
@@ -92,16 +78,7 @@ reg_avg <- climate %>%
     school_year = "2021-2023",
     locality_grouping = "region")
 
-# Combine
-#climate_recent_reg <- bind_rows(climate_recent_reg, reg_avg)
-
 # State:
-# climate_recent_state <- climate %>%
-#   filter(locality_grouping == "state") %>%
-#   mutate(state_name_ext = case_when(
-#     school_year == "2022-2023" ~ "State Average - Middle Schools",
-#     TRUE ~ "State Average - High Schools"))
-
 # Calculate state average across years
 state_avg <- climate %>%
   filter(locality_grouping == "state") %>%
@@ -111,18 +88,13 @@ state_avg <- climate %>%
     locality_grouping = "state",
     region_number = NA_real_)
 
-# Combine climate state 
-# climate_recent_state <-bind_rows(climate_recent_state, state_avg_row)
-
 # Combine all climate data 
-
 climate_recent <- bind_rows(state_avg, reg_avg, climate_div_avg, climate_recent_sch) %>%
   mutate(label = case_when(
     locality_grouping == "school" ~ school_name,
     locality_grouping == "division" ~ division_name,
     locality_grouping == "region" ~ region_name,
-    TRUE ~ "State Average"
-  ))
+    TRUE ~ "State Average"))
 
 # Staffing and disadvantage 24/25
 staff_disadv_recent <- prototype_data %>%
@@ -134,8 +106,7 @@ staff_disadv_recent <- prototype_data %>%
     locality_grouping == "division" ~ division_name,
     TRUE ~ school_name))
 
-
-## Pivot longer & then combine 
+# Pivot everything longer  
 staff_disad_long <- staff_disadv_recent %>%
   select(label, locality_grouping, pct_disadv, staff_per_1k_students) %>%
   pivot_longer(cols = c(pct_disadv, staff_per_1k_students))
@@ -148,20 +119,47 @@ bully_long <- bully_recent %>%
   select(label, locality_grouping, bully_rate_per_1k) %>%
   pivot_longer(cols = bully_rate_per_1k)
 
-# Combine:
+# And combine:
 plt_dat <- rbind(staff_disad_long, climate_long, bully_long) 
+
+## Get change data ----
+# # Measures that have multiple years: bully_rate_per_1k, pct_disadv, staff_per_1k_students
+change_raw <- prototype_data %>%
+  select(school_year, locality_grouping, region_name, division_name, school_name, pct_disadv, bully_rate_per_1k, staff_per_1k_students) %>%
+  mutate(
+    school_year = as.numeric(str_sub(school_year, 6, 9)),
+    label = case_when(
+      locality_grouping == "state" ~ "State Average",
+      locality_grouping == "region" ~ region_name,
+      locality_grouping == "division" ~ division_name,
+      TRUE ~ school_name),
+    # If bullying incidents are not available, we assume there were no reports made
+    # (this is different from staffing and disadv)
+    bully_rate_per_1k = case_when(
+      is.na(bully_rate_per_1k) ~ 0,
+      TRUE ~ bully_rate_per_1k))
+
+change_dat <- change_raw %>%
+  select(label, locality_grouping, pct_disadv:staff_per_1k_students, school_year) %>%
+  pivot_longer(cols = c(pct_disadv:staff_per_1k_students))
 
 ## Standardize on measure names ----
 measure_key <- tibble::tribble(
   ~label,                         ~name,                     ~units,
   "Bullying Rate",                "bully_rate_per_1k",        "Incidents per 1,000 Students",
-  "Avg. Bullying Problem",        "avg_bully_prob",        "Average Rating",
+  "Avg. Bullying Problem",        "avg_bully_prob",           "Average Rating",
   "Relationships with Peers",     "avg_peer_rel",             "Average Rating",
   "Relationships with Adults",    "avg_adult_rel",            "Average Rating",
-  "Mental Health Training (%)",   "pct_mental_health_training",          "Percent",
-  "Economically Disadv. (%)",     "pct_disadv",               "Percent",
-  "Mental Health Staff Rate",     "staff_per_1k_students",    "Staff per 1,000 Students"
-)
+  "Mental Health Training (%)",   "pct_mental_health_training",          "Percent of Students",
+  "Economically Disadv. (%)",     "pct_disadv",               "Percent of Students",
+  "Mental Health Staff Rate",     "staff_per_1k_students",    "Staff per 1,000 Students")
+
+# Measures where higher values are better:
+good_measures <- c(
+  "avg_peer_rel",
+  "avg_adult_rel",
+  "pct_mental_health_training",
+  "staff_per_1k_students")
 
 # UI ----
 ui <- 
@@ -189,7 +187,7 @@ ui <-
       ),
     ),
     
-    # Main body (variable to explore): 
+    # Main body: 
     selectInput(
       "measure", 
       "Select measure to explore:", 
@@ -207,24 +205,29 @@ ui <-
         card_header(uiOutput("severity_title")), 
         plotlyOutput("severity")),
       card(
-        card_header("Change"), 
+        full_screen = TRUE,
+        card_header(uiOutput("change_title")), 
         plotlyOutput("line")),
       card(
-        card_header("Locality"), 
-        plotlyOutput("map"))
+        full_screen = TRUE,
+        card_header(uiOutput("map_title")), 
+        leafletOutput("map"))
     )
   )
 
 # Server ----
 server <- function(input, output, session) {
   
+  # Data logic ----
+  
+  # Get measure of interest:
   selected_measure <- reactive({
     req(input$measure)
     measure_key %>%
       filter(label == input$measure)
   })
   
-  # Update highlight choices based on selected locality ----
+  # Update highlight choices based on selected locality: 
   observeEvent(input$locality, {
     
     choices <- plt_dat %>%
@@ -242,38 +245,26 @@ server <- function(input, output, session) {
     )
   })
   
-  # Identify the selected area's hierarchy ----
+  # Identify the selected area's hierarchy: 
   selected_area <- reactive({
     
     req(input$highlight)
     
     if (input$locality == "school") {
-      
       school_key %>%
         filter(school_name == input$highlight) %>%
-        select(
-          school_name,
-          division_name,
-          region_name
-        ) %>%
+        select(school_name, division_name, region_name) %>%
         slice(1)
       
     } else if (input$locality == "division") {
-      
       school_key %>%
         filter(division_name == input$highlight) %>%
-        select(
-          division_name,
-          region_name
-        ) %>%
+        select(division_name, region_name) %>%
         distinct() %>%
         slice(1)
       
     } else if (input$locality == "region") {
-      
-      tibble(
-        region_name = input$highlight
-      )
+      tibble(region_name = input$highlight)
     }
   })
   
@@ -281,86 +272,54 @@ server <- function(input, output, session) {
   ## Get plot data based on selection logic ---- 
   plot_data <- reactive({
     
-    req(
-      input$locality,
-      input$measure,
-      input$highlight
-    )
-    
+    req(input$locality, input$measure,input$highlight)
     selected <- selected_area()
     
     # Start with selected measure and geography level
     dat <- plt_dat %>%
       filter(
         locality_grouping == input$locality,
-        name == selected_measure()$name
-      )
+        name == selected_measure()$name)
     
     # Region: all regions
     if (input$locality == "region") {
-      
       dat
       
       # Division: only divisions in selected region
     } else if (input$locality == "division") {
-      
       division_region <- school_key %>%
-        select(
-          division_name,
-          region_name
-        ) %>%
+        select(division_name, region_name) %>%
         distinct()
       
       dat %>%
-        left_join(
-          division_region,
-          by = c("label" = "division_name")
-        ) %>%
-        filter(
-          region_name == selected$region_name
-        ) %>%
-        select(
-          -region_name
-        )
+        left_join(division_region, by = c("label" = "division_name")) %>%
+        filter(region_name == selected$region_name) %>%
+        select(-region_name)
       
       # School: only schools in selected division
     } else if (input$locality == "school") {
-      
       school_division <- school_key %>%
-        select(
-          school_name,
-          division_name
-        ) %>%
+        select(school_name, division_name) %>%
         distinct()
       
       dat %>%
-        left_join(
-          school_division,
-          by = c("label" = "school_name")
-        ) %>%
-        filter(
-          division_name == selected$division_name
-        ) %>%
-        select(
-          -division_name
-        )
+        left_join(school_division, by = c("label" = "school_name")) %>%
+        filter(division_name == selected$division_name) %>%
+        select(-division_name)
     }
   })
   
   ## Get highlighted data based on logic ----
-  
   highlight_data <- reactive({
     
     plt_dat %>%
       filter(
         locality_grouping == input$locality,
         name == selected_measure()$name,
-        label == input$highlight
-      )
+        label == input$highlight)
   })
   
   ## Get state average based on logic ----
-  
   state_data <- reactive({
     
     plt_dat %>%
@@ -372,18 +331,13 @@ server <- function(input, output, session) {
   })
   
   ## Generate plot ----
-  
   # Plot title:
   plot_title <- reactive({
     
-    req(
-      input$measure,
-      input$highlight,
-      input$locality)
-    
+    req(input$measure, input$highlight, input$locality)
     selected <- selected_area()
     
-    # Get internal measure name and display label
+    # Get internal measure name and display label:
     measure_info <- measure_key %>%
       filter(label == input$measure)
     
@@ -395,18 +349,9 @@ server <- function(input, output, session) {
     # Determine year based on internal measure name
     year <- case_when(
       measure_name == "bully_rate_per_1k" ~ "2023-2024",
-      measure_name %in% c(
-        "avg_bully_prob",
-        "avg_peer_rel",
-        "avg_adult_rel",
-        "pct_mental_health_training"
-      ) ~ "2021-2023",
-      measure_name %in% c(
-        "pct_disadv",
-        "staff_per_1k_students"
-      ) ~ "2024-2025",
-      TRUE ~ "Unknown year"
-    )
+      measure_name %in% c("avg_bully_prob", "avg_peer_rel", "avg_adult_rel", "pct_mental_health_training") ~ "2021-2023",
+      measure_name %in% c("pct_disadv", "staff_per_1k_students") ~ "2024-2025",
+      TRUE ~ "Unknown year")
     
     # Determine geography wording
     location <- case_when(
@@ -416,10 +361,7 @@ server <- function(input, output, session) {
         selected$region_name, " region"),
       input$locality == "region" ~ "state by region")
     
-    paste0(
-      measure_label,
-      " in the ", location, ", ", year)
-    
+    paste0(measure_label, " in the ", location, ", ", year)
   })
   
   ### Plot output:
@@ -433,9 +375,7 @@ server <- function(input, output, session) {
     
     p <- ggplot(
       plot_dat,
-      aes(
-        x = value,
-        y = label,
+      aes(x = value, y = label,
         text = paste0("<b>", label, "</b><br>", input$measure, ": ", round(value, 2)))) +
       geom_segment(
         aes(x = 0, xend = value, yend = label), color = "grey75") +
@@ -448,15 +388,14 @@ server <- function(input, output, session) {
       geom_point(data = state_data(), color = "#D95F02FF", size = 2) +
       labs(
         title = plot_title(),
-        x = input$measure,
+        x = selected_measure()$units,
         y = NULL) +
       theme_minimal() +
       theme(
         axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 10),
         axis.title.x = element_text(size = 10),
-        plot.title = element_text(size = 11, hjust = -.9)
-      )
+        plot.title = element_text(size = 11, hjust = -.9))
     
     ggplotly(
       p,
@@ -488,19 +427,17 @@ server <- function(input, output, session) {
   }) 
   
   # Percentile ----
-  
   ## Get data ----
   severity_data <- reactive({
     
     req(input$highlight)
     
-    # All statewide data for this measure and locality type
+    # All statewide data for this measure and locality type:
     dat <- plt_dat %>%
       filter(
         locality_grouping == input$locality,
-        name == selected_measure()$name
-      ) %>%
-      filter(!is.na(value)) %>%
+        name == selected_measure()$name,
+        !is.na(value)) %>%
       mutate(value = as.numeric(value))
     
     # Highlighted area's value
@@ -510,26 +447,15 @@ server <- function(input, output, session) {
     
     req(length(highlight_value) == 1)
     
-    # Calculate statewide percentile
+    # Calculate statewide percentile:
     percentile <- mean(dat$value <= as.numeric(highlight_value)) * 100
     
-    # Measures where higher values are better
-    good_measures <- c(
-      "avg_peer_rel",
-      "avg_adult_rel",
-      "pct_mental_health_training",
-      "staff_per_1k_students"
-    )
-    
-    # Reverse so higher always means more severe
+    # Reverse so higher always means more severe:
     if (selected_measure()$name %in% good_measures) {
       percentile <- 100 - percentile
     }
     
-    tibble(
-      value = highlight_value,
-      percentile = percentile
-    )
+    tibble(value = highlight_value,percentile = percentile)
     
   })
   
@@ -553,8 +479,7 @@ server <- function(input, output, session) {
       ifelse(
         x %% 100 %in% c(11, 12, 13),
         paste0(x, "th"),
-        paste0(x, c("th","st","nd","rd","th","th","th","th","th","th")[x %% 10 + 1])
-      )
+        paste0(x, c("th","st","nd","rd","th","th","th","th","th","th")[x %% 10 + 1]))
     }
     
     p <- ggplot(
@@ -566,53 +491,26 @@ server <- function(input, output, session) {
         data = tibble(x = seq(0, 100, 20)),
         aes(x = x, xend = x, y = .9, yend = 1.1), linewidth = .8, color = "grey40") +
       geom_point(
-        aes(
-          x = percentile,
-          y = 1,
-          text = paste0(
-            "<b>", input$highlight, "</b>",
-            "<br>",
-            input$measure,
-            ": ",
-            round(highlight_data()$value, 2)
-          )
-        ),
-        shape = 17,
-        size = 5,
-        color = "#1B9E77"
-      ) +
-      annotate(
-        "text",
-        x = percentile,
-        y = 1.25,
+        aes(x = percentile, y = 1,
+            text = paste0("<b>", input$highlight, "</b>","<br>", input$measure,": ", round(highlight_data()$value, 2))),
+        shape = 17, size = 5,color = "#1B9E77") +
+      annotate("text", x = percentile, y = 1.25,
         label = paste0(
-          input$highlight,
-          "<br>",
-          input$measure, ": ", round(highlight_data()$value, 2), 
-          "<br>",
-          ordinal(round(percentile)),
-          " percentile statewide"
-        ),
-        size = 4
-      ) +
-      annotate("text", x = 0, y = .65, label = "Very Low", hjust = 0, size = 4) +
-      annotate("text", x = 100, y = .65, label = "Very High", hjust = 1,size = 4) +
+          input$highlight, "<br>", input$measure, ": ", round(highlight_data()$value, 2), 
+          "<br>", ordinal(round(percentile)), " percentile statewide"),size = 4) +
+      annotate("text", x = 0, y = .65, label = "Low", hjust = 0, size = 4) +
+      annotate("text", x = 100, y = .65, label = "High", hjust = 1,size = 4) +
       scale_x_continuous(limits = c(-5, 105), breaks = seq(0, 100, 20)) +
       scale_y_continuous(limits = c(.5, 1.5)) +
-      labs(
-        x = NULL,
-        y = NULL
-      ) +
+      labs(x = NULL, y = NULL) +
       theme_void()
     
     ggplotly(
       p,
-      tooltip = "text"
-    ) %>%
+      tooltip = "text") %>%
       config(
         displayModeBar = FALSE,
-        displaylogo = FALSE
-      )
+        displaylogo = FALSE)
     
   })
   
@@ -620,20 +518,257 @@ server <- function(input, output, session) {
   output$severity_title <- renderUI({
     
     req(input$highlight)
-    
     sev <- severity_data()
     
     paste0(
-      "Severity: ",
-      round(sev$percentile),
-      "% of statewide ",
-      input$locality,
-      "s scored less than or equal to ",
-      input$highlight
+      "Severity: ", round(sev$percentile), "% of statewide ", input$locality,
+      "s scored less than or equal to ", input$highlight)
+  })
+  
+  # Change ----
+  ## Get data ----
+  state_change <- reactive({
+    change_dat %>%
+      filter(
+        locality_grouping == "state",
+        label == "State Average",
+        name == selected_measure()$name,
+        !(name == "bully_rate_per_1k" & school_year == 2025))
+  })
+  
+  has_trend_data <- reactive({
+    selected_measure()$name %in% c("pct_disadv", "bully_rate_per_1k", "staff_per_1k_students")
+  })
+  
+  change_plot_data <- reactive({
+    
+    req(input$highlight)
+    selected <- selected_area()
+    
+    dat <- change_dat %>%
+      filter(
+        locality_grouping == input$locality,
+        name == selected_measure()$name,
+        !(name == "bully_rate_per_1k" & school_year == 2025))
+    
+    if (input$locality == "region") {
+      dat
+      
+    } else if (input$locality == "division") {
+      division_region <- school_key %>%
+        select(division_name, region_name) %>%
+        distinct()
+      
+      dat %>%
+        left_join(division_region,by = c("label" = "division_name")) %>%
+        filter(region_name == selected$region_name) %>%
+        select(-region_name)
+      
+    } else {
+      school_division <- school_key %>%
+        select(school_name, division_name) %>%
+        distinct()
+      
+      dat %>%
+        left_join(school_division,by = c("label" = "school_name")) %>%
+        filter(division_name == selected$division_name) %>%
+        select(-division_name)
+    }
+  })
+  
+  ## Generate plot ----
+  # Reactive title:
+  change_title <- reactive({
+    
+    req(input$measure, input$highlight, input$locality)
+    selected <- selected_area()
+    
+    # Get internal measure name and display label:
+    measure_info <- measure_key %>%
+      filter(label == input$measure)
+    
+    req(nrow(measure_info) == 1)
+    measure_name <- measure_info$name
+    measure_label <- measure_info$label
+    
+    # Determine geography wording
+    location <- case_when(
+      input$locality == "school" ~ paste0(
+        selected$division_name, " division"),
+      input$locality == "division" ~ paste0(
+        selected$region_name, " region"),
+      input$locality == "region" ~ "state by region")
+    
+    paste0(measure_label, " in the ", location)
+  })
+  
+  output$line <- renderPlotly({
+    
+    validate(
+      need(
+        has_trend_data(),
+        paste(
+          "Change data is not available for this measure. Change data is available for Bullying Rates, Mental Health Staff Rates, and Economically Disadvantaged (%)."
+        )
+      )
     )
+    
+    highlight_line <- change_plot_data() %>%
+      filter(label == input$highlight)
+    
+    p <- ggplot() +
+      geom_line(data = change_plot_data(),
+        aes(x = school_year, y = value, group = label), color = "grey80", linewidth = 0.5) +
+      geom_point(data = change_plot_data(),
+        aes(x = school_year, y = value,
+            text = paste0("<b>", label, "</b><br>",school_year, "<br>",
+                          input$measure, ": ", round(value, 2))), color = "grey80", size = 1) +
+      geom_line(data = state_change(),
+        aes(x = school_year,y = value), color = "#D95F02", linewidth = 1) +
+      geom_point(data = state_change(),
+        aes(x = school_year, y = value,
+            text = paste0("<b>State Average</b><br>", school_year, "<br>",
+                          input$measure, ": ", round(value, 2))), color = "#D95F02", size = 2) +
+      geom_line(data = highlight_line,
+        aes(x = school_year,y = value), color = "#1B9E77", linewidth = 1) +
+      geom_point(data = highlight_line,
+        aes(x = school_year, y = value,
+            text = paste0("<b>", label, "</b><br>", school_year, "<br>",
+                          input$measure, ": ", round(value, 2))), color = "#1B9E77", size = 2) +
+      scale_x_continuous(breaks = sort(unique(change_plot_data()$school_year))) +
+      labs(
+        title = change_title(),
+        x = "School Year",
+        y = selected_measure()$units) +
+      theme_minimal() +
+      theme(
+        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 10),
+        axis.title.x = element_text(size = 10),
+        plot.title = element_text(size = 11, hjust = -.9))
+    
+    ggplotly(
+      p,
+      tooltip = "text") %>%
+      config(
+        displayModeBar = FALSE,
+        displaylogo = FALSE)
     
   })
   
+  ## Card title ----
+  output$change_title <- renderUI({
+    
+    req(input$highlight, input$measure)
+    paste0("Change in ", input$measure, " for ", input$highlight)
+    
+  })
+
+  # Map ----
+  ## Prepare geography data ----
+  acs_map <- acs %>% 
+    mutate(label = case_when(
+      locality_grouping == "division" ~ division_name, 
+      locality_grouping == "region" ~ region_name,
+      locality_grouping == "state" ~ "State Average")) %>% 
+    filter(!is.na(label)) %>%
+    select(locality_grouping, label, geometry)
+  
+  # Get geography grouping logic: 
+  map_locality <- reactive({ 
+    
+    if (input$locality == "region") { 
+      "region" 
+    } else { 
+      "division" 
+      } 
+    })
+  
+  # Get highlight logic:
+  map_highlight <- reactive({ 
+    
+    req(input$highlight) 
+    selected <- selected_area() 
+    
+    if (input$locality == "school") { 
+      selected$division_name 
+      
+    } else if (input$locality == "division") { 
+      input$highlight 
+    
+    } else { 
+      input$highlight 
+      } 
+    })
+  
+  # Get map data:
+  map_data <- reactive({ 
+    
+    req(input$measure) 
+    map_level <- map_locality() 
+    
+    values <- plt_dat %>% 
+      filter(locality_grouping == map_level, 
+             name == selected_measure()$name) %>% 
+      select(locality_grouping, label, value) 
+
+    acs_map %>% 
+      filter(locality_grouping == map_level) %>% 
+      left_join(values, by = c("locality_grouping", "label")) 
+    })
+  
+  # Get map title:
+  output$map_title <- renderUI({ 
+    
+    req(input$measure, input$locality) 
+    
+    if (input$locality == "school") { 
+      paste0(input$measure, " by school division" ) 
+    
+    } else if (input$locality == "division") { 
+      paste0(input$measure, " by school division" ) 
+      
+    } else { paste0(input$measure, " by region" ) 
+      
+    } 
+    })
+  
+  ## Generate map ----
+
+  output$map <- renderLeaflet({ 
+    
+    req(input$measure, input$highlight) 
+    dat <- map_data() 
+    req(nrow(dat) > 0) 
+    selected_name <- map_highlight() 
+    
+    # Reverse palette for measures where higher is better 
+    palette_colors <- if (
+      selected_measure()$name %in% good_measures 
+      ) { 
+        rev(RColorBrewer::brewer.pal(9, "YlOrRd")) 
+      } else { 
+        RColorBrewer::brewer.pal(9, "YlOrRd") } 
+    
+    pal <- colorNumeric( palette = palette_colors, domain = dat$value, na.color = "#E5E5E5" )
+    
+    dat <- dat %>% 
+      mutate(selected = label == selected_name, 
+             tooltip = paste0("<b>", label, "</b><br>", input$measure, ": ", 
+                              ifelse( is.na(value), "Data not available", round(value, 2)), selected_measure()$units)) 
+    
+    leaflet(dat) %>% 
+      addProviderTiles(providers$CartoDB.Positron) %>% 
+      addPolygons(fillColor = ~pal(value), fillOpacity = 0.75, 
+                  color = ~ifelse(selected, "#1B9E77", "white"), 
+                  weight = ~ifelse(selected, 3, 1), 
+                  opacity = 1, 
+                  label = ~lapply(tooltip, htmltools::HTML), 
+                  highlightOptions = highlightOptions(weight = 2, color = "#333333", 
+                                                      fillOpacity = 0.85, bringToFront = TRUE )) %>% 
+      addLegend(position = "bottomright", pal = pal, values = ~value, 
+                title = selected_measure()$label, opacity = 0.8 ) 
+    })
 }
 
 shinyApp(ui, server)
