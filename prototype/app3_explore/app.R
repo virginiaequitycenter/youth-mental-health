@@ -211,7 +211,11 @@ ui <-
       card(
         full_screen = TRUE,
         card_header(uiOutput("map_title")), 
-        leafletOutput("map"))
+        leafletOutput("map"),
+        div(
+          style = "font-size: 0.75rem; font-style: italic; color: #666;",
+          "School-level geography is not available."
+        ))
     )
   )
 
