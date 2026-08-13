@@ -227,6 +227,17 @@ server <- function(input, output, session) {
       filter(label == input$measure)
   })
   
+  # Display year for measure of interest:
+  measure_year <- reactive({
+    req(selected_measure())
+    case_when(
+      selected_measure()$name == "bully_rate_per_1k" ~ "2024",
+      selected_measure()$name %in% c("avg_bully_prob", "avg_peer_rel", "avg_adult_rel", 
+                                     "pct_mental_health_training") ~ "2022/2023",
+      selected_measure()$name %in% c("pct_disadv", "staff_per_1k_students") ~ "2025",
+      TRUE ~ "Unknown year")
+  })
+  
   # Update highlight choices based on selected locality: 
   observeEvent(input$locality, {
     
@@ -330,10 +341,9 @@ server <- function(input, output, session) {
       )
   })
   
-  ## Generate plot ----
+  ## Line plot ----
   # Plot title:
-  plot_title <- reactive({
-    
+  line_title <- reactive({
     req(input$measure, input$highlight, input$locality)
     selected <- selected_area()
     
@@ -341,19 +351,13 @@ server <- function(input, output, session) {
     measure_info <- measure_key %>%
       filter(label == input$measure)
     
+    # Determine measure name, label, and year:
     req(nrow(measure_info) == 1)
-    
     measure_name <- measure_info$name
     measure_label <- measure_info$label
+    year <- measure_year()
     
-    # Determine year based on internal measure name
-    year <- case_when(
-      measure_name == "bully_rate_per_1k" ~ "2023-2024",
-      measure_name %in% c("avg_bully_prob", "avg_peer_rel", "avg_adult_rel", "pct_mental_health_training") ~ "2021-2023",
-      measure_name %in% c("pct_disadv", "staff_per_1k_students") ~ "2024-2025",
-      TRUE ~ "Unknown year")
-    
-    # Determine geography wording
+    # Determine geography wording:
     location <- case_when(
       input$locality == "school" ~ paste0(
         selected$division_name, " division"),
@@ -366,17 +370,17 @@ server <- function(input, output, session) {
   
   ### Plot output:
   output$lollipop <- renderPlotly({
-    
     req(input$highlight)
     
     plot_dat <- plot_data() %>%
       filter(!is.na(value)) %>%
       mutate(label = forcats::fct_reorder(label, value))
     
-    p <- ggplot(
-      plot_dat,
+    p <- ggplot(plot_dat,
       aes(x = value, y = label,
-        text = paste0("<b>", label, "</b><br>", input$measure, ": ", round(value, 2)))) +
+        text = paste0("<b>", label, "</b>", 
+                      "<br>", measure_year(),
+                      "<br>", input$measure, ": ", round(value, 2), " ", selected_measure()$units))) +
       geom_segment(
         aes(x = 0, xend = value, yend = label), color = "grey75") +
       geom_segment(data = highlight_data(),
@@ -387,7 +391,7 @@ server <- function(input, output, session) {
       geom_point(data = highlight_data(), color = "#1B9E77FF", size = 2) +
       geom_point(data = state_data(), color = "#D95F02FF", size = 2) +
       labs(
-        title = plot_title(),
+        title = line_title(),
         x = selected_measure()$units,
         y = NULL) +
       theme_minimal() +
@@ -429,7 +433,6 @@ server <- function(input, output, session) {
   # Percentile ----
   ## Get data ----
   severity_data <- reactive({
-    
     req(input$highlight)
     
     # All statewide data for this measure and locality type:
@@ -440,14 +443,13 @@ server <- function(input, output, session) {
         !is.na(value)) %>%
       mutate(value = as.numeric(value))
     
-    # Highlighted area's value
+    # Highlighted area's value:
     highlight_value <- dat %>%
       filter(label == input$highlight) %>%
       pull(value)
     
-    req(length(highlight_value) == 1)
-    
     # Calculate statewide percentile:
+    req(length(highlight_value) == 1)
     percentile <- mean(dat$value <= as.numeric(highlight_value)) * 100
     
     # Reverse so higher always means more severe:
@@ -459,7 +461,7 @@ server <- function(input, output, session) {
     
   })
   
-  ## Generate plot ----
+  ## Scale plot ----
   output$severity <- renderPlotly({
   
     sev <- severity_data()
@@ -471,8 +473,7 @@ server <- function(input, output, session) {
     #   percentile < 40 ~ "Low Severity",
     #   percentile < 60 ~ "Moderate Severity",
     #   percentile < 80 ~ "High Severity",
-    #   TRUE ~ "Very High Severity"
-    # )
+    #   TRUE ~ "Very High Severity")
     
     # Helper function for dealing with ordinals in text (1st, 4th, etc.):
     ordinal <- function(x) {
@@ -482,8 +483,7 @@ server <- function(input, output, session) {
         paste0(x, c("th","st","nd","rd","th","th","th","th","th","th")[x %% 10 + 1]))
     }
     
-    p <- ggplot(
-      tibble(x = c(0, 100), y = 1),
+    p <- ggplot(tibble(x = c(0, 100), y = 1),
       aes(x = x, y = y)) +
       geom_segment(
         aes(x = 0, xend = 100, y = 1, yend = 1), linewidth = 1, color = "grey40") +
@@ -492,12 +492,18 @@ server <- function(input, output, session) {
         aes(x = x, xend = x, y = .9, yend = 1.1), linewidth = .8, color = "grey40") +
       geom_point(
         aes(x = percentile, y = 1,
-            text = paste0("<b>", input$highlight, "</b>","<br>", input$measure,": ", round(highlight_data()$value, 2))),
+            text = paste0("<b>", input$highlight, "</b>", 
+                          "<br>", measure_year(), 
+                          "<br>", input$measure,": ", round(highlight_data()$value, 2), " ", selected_measure()$units,
+                          "<br>", "State Average: ", round(state_data()$value, 2), " ", selected_measure()$units, 
+                          "<br>", ordinal(round(percentile)), " percentile statewide")), 
         shape = 17, size = 5,color = "#1B9E77") +
-      annotate("text", x = percentile, y = 1.25,
-        label = paste0(
-          input$highlight, "<br>", input$measure, ": ", round(highlight_data()$value, 2), 
-          "<br>", ordinal(round(percentile)), " percentile statewide"),size = 4) +
+      annotate("text", x = percentile, y = 1.3,
+        label = paste0(input$highlight, 
+                       "<br>", measure_year(),
+                       "<br>", input$measure, ": ", round(highlight_data()$value, 2), " ", selected_measure()$units,
+                       "<br>", ordinal(round(percentile)), " percentile statewide"),
+        size = 3.5) +
       annotate("text", x = 0, y = .65, label = "Low", hjust = 0, size = 4) +
       annotate("text", x = 100, y = .65, label = "High", hjust = 1,size = 4) +
       scale_x_continuous(limits = c(-5, 105), breaks = seq(0, 100, 20)) +
@@ -576,7 +582,7 @@ server <- function(input, output, session) {
     }
   })
   
-  ## Generate plot ----
+  ## Line plot ----
   # Reactive title:
   change_title <- reactive({
     
@@ -622,19 +628,22 @@ server <- function(input, output, session) {
       geom_point(data = change_plot_data(),
         aes(x = school_year, y = value,
             text = paste0("<b>", label, "</b><br>",school_year, "<br>",
-                          input$measure, ": ", round(value, 2))), color = "grey80", size = 1) +
+                          input$measure, ": ", round(value, 2), " ", selected_measure()$units)), 
+        color = "grey80", size = 1) +
       geom_line(data = state_change(),
         aes(x = school_year,y = value), color = "#D95F02", linewidth = 1) +
       geom_point(data = state_change(),
         aes(x = school_year, y = value,
             text = paste0("<b>State Average</b><br>", school_year, "<br>",
-                          input$measure, ": ", round(value, 2))), color = "#D95F02", size = 2) +
+                          input$measure, ": ", round(value, 2), " ", selected_measure()$units)), 
+        color = "#D95F02", size = 2) +
       geom_line(data = highlight_line,
         aes(x = school_year,y = value), color = "#1B9E77", linewidth = 1) +
       geom_point(data = highlight_line,
         aes(x = school_year, y = value,
             text = paste0("<b>", label, "</b><br>", school_year, "<br>",
-                          input$measure, ": ", round(value, 2))), color = "#1B9E77", size = 2) +
+                          input$measure, ": ", round(value, 2), " ", selected_measure()$units)), 
+        color = "#1B9E77", size = 2) +
       scale_x_continuous(breaks = sort(unique(change_plot_data()$school_year))) +
       labs(
         title = change_title(),
@@ -736,7 +745,6 @@ server <- function(input, output, session) {
   ## Generate map ----
 
   output$map <- renderLeaflet({ 
-    
     req(input$measure, input$highlight) 
     dat <- map_data() 
     req(nrow(dat) > 0) 
@@ -750,12 +758,14 @@ server <- function(input, output, session) {
       } else { 
         RColorBrewer::brewer.pal(9, "YlOrRd") } 
     
-    pal <- colorNumeric( palette = palette_colors, domain = dat$value, na.color = "#E5E5E5" )
+    pal <- colorNumeric(palette = palette_colors, domain = dat$value, na.color = "#E5E5E5")
     
     dat <- dat %>% 
       mutate(selected = label == selected_name, 
-             tooltip = paste0("<b>", label, "</b><br>", input$measure, ": ", 
-                              ifelse( is.na(value), "Data not available", round(value, 2)), selected_measure()$units)) 
+             tooltip = paste0("<b>", label, "</b>",
+                              "<br>", measure_year(),
+                              "<br>", input$measure, ": ", ifelse(is.na(value), "Data not available", round(value, 2)), " ", selected_measure()$units, 
+                              "<br>", "State Average: ", round(state_data()$value, 2), " ", selected_measure()$units)) 
     
     leaflet(dat) %>% 
       addProviderTiles(providers$CartoDB.Positron) %>% 
@@ -769,6 +779,8 @@ server <- function(input, output, session) {
       addLegend(position = "bottomright", pal = pal, values = ~value, 
                 title = selected_measure()$label, opacity = 0.8 ) 
     })
+  
+  
 }
 
 shinyApp(ui, server)
