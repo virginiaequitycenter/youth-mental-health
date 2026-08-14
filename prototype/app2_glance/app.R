@@ -9,10 +9,10 @@ library(plotly)
 library(tidyverse)
 
 # For school levels
-school_levels <- read_csv("../school_key.csv") %>%
+school_levels <- read_csv("school_key.csv") %>%
   select(grade_standard, sch_id)
 
-prototype_data <- read_csv("../prototype_data.csv") %>%
+prototype_data <- read_csv("prototype_data.csv") %>%
   left_join(school_levels, by = "sch_id") %>%
   filter(
     locality_grouping != "school" |
@@ -54,12 +54,6 @@ climate_recent_sch <- climate %>%
 # Division:
 # High schools in 21-22 and middle schools in 22-23
 
-# climate_recent_div <- climate %>%
-#   filter(locality_grouping == "division") %>%
-#   mutate(division_name_ext = case_when(
-#     school_year == "2022-2023" ~ paste0(division_name, " Middle Schools"),
-#     TRUE ~ paste0(division_name, " High Schools")))
-
 # Calculate division averages across years
 climate_div_avg <- climate %>%
   filter(locality_grouping == "division") %>%
@@ -69,16 +63,7 @@ climate_div_avg <- climate %>%
     school_year = "2021-2023",
     locality_grouping = "division")
 
-# Combine
-#climate_recent_div <- bind_rows(climate_recent_div, div_avg)
-
 # Region:
-# climate_recent_reg <- climate %>%
-#   filter(locality_grouping == "region") %>%
-#   mutate(region_name_ext = case_when(
-#     school_year == "2022-2023" ~ paste0(region_name, " Middle Schools"),
-#     TRUE ~ paste0(region_name, " High Schools")))
-
 # Calculate region averages across years 
 reg_avg <- climate %>%
   filter(locality_grouping == "region") %>%
@@ -88,16 +73,7 @@ reg_avg <- climate %>%
     school_year = "2021-2023",
     locality_grouping = "region")
 
-# Combine
-#climate_recent_reg <- bind_rows(climate_recent_reg, reg_avg)
-
 # State:
-# climate_recent_state <- climate %>%
-#   filter(locality_grouping == "state") %>%
-#   mutate(state_name_ext = case_when(
-#     school_year == "2022-2023" ~ "State Average - Middle Schools",
-#     TRUE ~ "State Average - High Schools"))
-
 # Calculate state average across years
 state_avg <- climate %>%
   filter(locality_grouping == "state") %>%
@@ -107,11 +83,7 @@ state_avg <- climate %>%
     locality_grouping = "state",
     region_number = NA_real_)
 
-# Combine climate state 
-# climate_recent_state <-bind_rows(climate_recent_state, state_avg_row)
-
-# Combine all climate data 
-
+# Combine all climate data: 
 climate_recent <- bind_rows(state_avg, reg_avg, climate_div_avg, climate_recent_sch) %>%
   mutate(label = case_when(
     locality_grouping == "school" ~ school_name,
@@ -130,6 +102,18 @@ staff_disadv_recent <- prototype_data %>%
     locality_grouping == "division" ~ division_name,
     TRUE ~ school_name))
 
+## Standardize on measure names ----
+measure_key <- tibble::tribble(
+  ~label,                         ~name,                         ~year,          ~units,
+  "Bullying Rate",                "bully_rate_per_1k",           "2024",         "Incidents per 1,000 Students",
+  "Avg. Bullying Problem",        "avg_bully_prob",              "2022/2023",    "Average Rating",
+  "Relationships with Peers",     "avg_peer_rel",                "2022/2023",    "Average Rating",
+  "Relationships with Adults",    "avg_adult_rel",               "2022/2023",    "Average Rating",
+  "Mental Health Training (%)",   "pct_mental_health_training",  "2022/2023",    "Percent of Students",
+  "Economically Disadv. (%)",     "pct_disadv",                  "2025",         "Percent of Students",
+  "Mental Health Staff Rate",     "staff_per_1k_students",       "2025",         "Staff per 1,000 Students"
+)
+
 
 ## Pivot longer & then combine 
 staff_disad_long <- staff_disadv_recent %>%
@@ -145,8 +129,8 @@ bully_long <- bully_recent %>%
   pivot_longer(cols = bully_rate_per_1k)
 
 # Combine:
-plt_dat <- rbind(staff_disad_long, climate_long, bully_long) 
-
+plt_dat <- rbind(staff_disad_long, climate_long, bully_long) %>%
+  left_join(measure_key %>% select(name, year, units), by = "name")
 
 
 # UI ----
@@ -185,13 +169,15 @@ server <- function(input, output, session) {
   
   # Dynamically update highlight options based on locality:
   observeEvent(input$locality, {
+    
     # Filter plt_dat based on selected locality
     choices <- plt_dat %>%
       filter(locality_grouping == input$locality) %>%
       pull(label) %>%
       unique() %>%
       sort()
-    # Update the selectizeInput choices
+    
+    # Update the selectizeInput choices:
     updateSelectizeInput(
       session,
       "highlight",
@@ -200,47 +186,56 @@ server <- function(input, output, session) {
     )
   })
   
-  # Compare all values plot ----
-  # Reactive data for plotting main data
+  # Compare All ----
+  # Reactive data for plotting main data:
   plot_data <- reactive({
     req(input$locality)  
     
-    # Filter the main dataset based on locality
+    # Filter the main dataset based on locality:
     main_dat <- plt_dat %>%
       filter(locality_grouping == input$locality)
     
-    # Drop outlier
+    # Drop outliers:
     if (input$locality == "school") {
       main_dat <- main_dat %>%
-        filter(!label %in% c("Amelia Street Special Education"))
+        filter(!label %in% c("Amelia Street Special Education", 
+                             "Richmond Career Education and Employment Charter School"))
     }
     
-    main_dat
+    main_dat %>%
+      mutate(tooltip = paste0(label,
+                              "<br>", round(value, 2), " ", units,
+                              "<br>", year))
   })
   
-  # Reactive data for the selected highlighted point
+  # Reactive data for the selected highlighted point:
   highlight_data <- reactive({
     req(input$highlight)  
     plt_dat %>%
-      filter(label == input$highlight)
+      filter(label == input$highlight) %>%
+      mutate(tooltip = paste0(label,
+                              "<br>", round(value, 2), " ", units,
+                              "<br>", year))
   })
   
-  # Reactive data for state-level points
+  # Reactive data for state-level points:
   state_data <- reactive({
     plt_dat %>%
-      filter(locality_grouping == "state")
+      filter(locality_grouping == "state") %>%
+      mutate(tooltip = paste0(label,
+                              "<br>", round(value, 2), " ", units,
+                              "<br>", year))
   })
   
-  # Render the plot:
+  # Beeswarm ----
   output$all_values_plt <- renderPlotly({
     
     req(input$highlight)
     highlight_label <- as.character(input$highlight)
     
-    
-    highlight_df <- dplyr::bind_rows(
-      dplyr::mutate(state_data(), type = "State average"),
-      dplyr::mutate(highlight_data(), type = highlight_label))
+    highlight_df <- bind_rows(
+      mutate(state_data(), type = "State average"),
+      mutate(highlight_data(), type = highlight_label))
     
     color_vals <- c("State average" = "#D95F02FF")
     color_vals[highlight_label] = "#1B9E77FF"
@@ -249,14 +244,8 @@ server <- function(input, output, session) {
     shape_vals[highlight_label] = 15
     
     p <- ggplot(plot_data(), aes(x = value, y = name)) +
-      geom_beeswarm(alpha = 0.10, color = "black", show.legend = FALSE, size = 1,
-                    aes(text = paste0(label,": ", round(value)))) +
-      geom_point(
-        data = highlight_df, 
-        aes(color = type, shape = type, 
-            text = paste0(label,": ", round(value))), 
-        size = 3) +
-      #theme_minimal() +
+      geom_beeswarm(alpha = 0.10, color = "black", show.legend = FALSE, size = 1, aes(text = tooltip)) +
+      geom_point(data = highlight_df, aes(color = type, shape = type, text = tooltip), size = 3) +
       theme_bw(base_size = 12) +
       facet_wrap(~ name, ncol = 1, scales = "free") +
       theme(
@@ -278,17 +267,17 @@ server <- function(input, output, session) {
         staff_per_1k_students = "Mental Health\nStaff Rate"
       ))
     
-    ggplotly(p, tooltip = "text") %>%
+    ggplotly(p, 
+             tooltip = "text") %>%
       config(displayModeBar = FALSE, displaylogo = FALSE)
   })
   
-  
-  # Header for plot:
+  # Header for plot ----
   output$all_values_header <- renderText({
     highlight <- input$highlight
     grouping <- input$locality
     
-    # Handle NULL / empty cases safely
+    # Handle NULL / empty cases safely:
     if (is.null(highlight) || highlight == "") {
       highlight <- "your value"
       grouping <- "other group"
