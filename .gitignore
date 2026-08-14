@@ -13,3 +13,8 @@
 /scripts/explore*
 explore_sbar*
 *.html
+
+# Ignore binary package installs and deployment files
+rsconnect/
+terra_1.8-93.tgz
+*.dcf

@@ -8,7 +8,12 @@ library(bslib)
 library(plotly)
 library(leaflet)
 library(sf)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(stringr)
+library(forcats)
+library(ggplot2)
 
 # Read ----
 # For school levels
@@ -784,9 +789,18 @@ server <- function(input, output, session) {
                 title = selected_measure()$label, opacity = 0.8 ) 
     })
   
-  
 }
 
 shinyApp(ui, server)
 
-
+# Deployment note: 
+# The leaflet package depends on the raster and terra package, and the most recent versions
+# of these packages (as of 8/14/26) are not comparable with the shinyapps.io GDAL. A workaround
+# per https://forum.posit.co/t/deployment-fails-on-shinyapps-io-because-of-terra/214331/19 is to
+# force an older version of the terra package, using:
+# 
+# download.file(
+#   "https://packagemanager.posit.co/cran/2026-01-15/bin/macosx/big-sur-arm64/contrib/4.3/terra_1.8-93.tgz",
+#   destfile = "terra_1.8-93.tgz"
+# )
+# install.packages("terra_1.8-93.tgz", repos = NULL, type = "binary")
