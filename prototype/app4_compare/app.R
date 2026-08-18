@@ -345,31 +345,38 @@ server <- function(input, output, session) {
     other <- d %>% filter(point_type == "Other")
     selected <- d %>% filter(point_type == "Selected")
     state <- d %>% filter(point_type == "State Average")
+    selected_label <- as.character(selected$label[[1]])
     
     p <- ggplot() +
       geom_point(data = other, aes(x, y, text = tooltip), 
-                 color = "black", size = 3, alpha = 0.2) +
-      geom_point(data = selected, aes(x, y, text = tooltip),
-                 color = "#1B9E77FF", size = 4, shape = 15) +
-      geom_point(data = state, aes(x, y, text = tooltip),
-                 color = "#D95F02FF", size = 4, shape = 17) +
-      geom_text(data = selected, aes(x, y, label = paste0("<b>", selected$label, "</b>")),
-        color = "#1B9E77FF") +
-      geom_text(data = state, aes(x, y, label = paste0("<b>State Average</b>")),
-        color = "#D55E00") +
+                 color = "black", alpha = 0.2) +
+      geom_point(data = selected, aes(x, y, text = tooltip, color = "Selected"),
+                 size = 4, shape = 15) +
+      geom_point(data = state, aes(x, y, text = tooltip, color = "State Average"),
+                 size = 4, shape = 17) +
+      # geom_text_repel(data = selected, aes(x, y, label = paste0("<b>", selected$label, "</b>")),
+      #   color = "#1B9E77FF") +
+      # geom_text_repel(data = state, aes(x, y, label = paste0("<b>State Average</b>")),
+      #   color = "#D55E00") +
+      scale_color_manual(name = NULL, 
+                         values = c("Selected" = "#1B9E77FF", "State Average" = "#D95F02FF")) +
       labs(
         title = plot_title(),
         x = paste0(input$measure1, " (", x_measure()$units, ")"),
         y = paste0(input$measure2, " (", y_measure()$units, ")")) +
-      theme_minimal(base_size = 12)
+      theme_minimal(base_size = 12) 
     
-    ggplotly(
-      p,
-      tooltip = "text") %>%
-      config(displayModeBar = FALSE, displaylogo = FALSE)
+    # Convert to Plotly and deal with legend:
+    plt <- ggplotly(p, tooltip = "text")
+    plt$x$data[[2]]$name <- selected_label
+    plt$x$data[[3]]$name <- "State Average"
+    
+    plt %>%
+      config(
+        displayModeBar = FALSE,
+        displaylogo = FALSE
+      )
   })
-  
-  
 }
 
 shinyApp(ui, server)
