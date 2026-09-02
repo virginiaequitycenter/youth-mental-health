@@ -1,0 +1,8 @@
+label,name,units,year,higher_better
+Bullying Rate,bully_rate_per_1k,"Incidents per 1,000 Students",2024,FALSE
+Avg. Bullying Problem,avg_bully_prob,Average Rating,2022/2023,FALSE
+Relationships with Peers,avg_peer_rel,Average Rating,2022/2023,TRUE
+Relationships with Adults,avg_adult_rel,Average Rating,2022/2023,TRUE
+Mental Health Training (%),pct_mental_health_training,Percent of Students,2022/2023,TRUE
+Economically Disadv. (%),pct_disadv,Percent of Students,2025,FALSE
+Mental Health Staff Rate,staff_per_1k_students,"Staff per 1,000 Students",2025,TRUE

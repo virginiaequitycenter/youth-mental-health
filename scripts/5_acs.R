@@ -1,4 +1,4 @@
-# Script to pull and prep American Community Survey population data across different 
+# Script to pull and prep American Community Survey geometry data across different 
 # geographical groupings in Virginia. 
 # Explorer: https://data.census.gov/table/ACSDT1Y2023.C14002?q=Type+of+School&t=Age+and+Sex:Populations+and+People&g=040XX00US51
 

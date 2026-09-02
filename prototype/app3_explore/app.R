@@ -1,6 +1,4 @@
-# Create standalone app to dive deeper into specific variables for a particular region, division, or school
-
-# This is equivalent to just the Explore tab on app1_all.R 
+# Create standalone app to explore specific variables for a particular region, division, or school
 
 # Setup ----
 library(shiny)
@@ -16,148 +14,11 @@ library(forcats)
 library(ggplot2)
 
 # Read ----
-# For school levels
-school_key <- read_csv("school_key.csv")
-
-school_levels <-  school_key %>%
-  select(grade_standard, sch_id)
-
-prototype_data <- read_csv("prototype_data.csv") %>%
-  left_join(school_levels, by = "sch_id") %>%
-  filter(locality_grouping != "school" | grade_standard %in% c("High", "Middle"))
-
+plt_dat <- readr::read_csv("plt_dat.csv")
+school_key <- readr::read_csv("school_key_deduped.csv")
+measure_key <- readr::read_csv("measure_key.csv")
+change_dat <- readr::read_csv("change_dat.csv")
 acs <- readRDS("acs.RDS")
-
-# Dataprep ----
-## Reduce to most recent values ----
-# TODO: eventually move to dataprep script
-
-# Bully information as of 23/24:
-bully_recent <- prototype_data %>%
-  filter(school_year == "2023-2024") %>%
-  select(school_year:division_name, sch_id:school_name, n_bullying_incidents:bully_rate_per_1k) %>%
-  mutate(
-    label = case_when(
-      locality_grouping == "state" ~ "State Average",
-      locality_grouping == "region" ~ region_name, 
-      locality_grouping == "division" ~ division_name,
-      TRUE ~ school_name),
-    # If bully rate is NA make 0 
-    bully_rate_per_1k = case_when(
-      is.na(bully_rate_per_1k) ~ 0,
-      TRUE ~ bully_rate_per_1k))
-
-# Climate data is more complicated: 
-# - years are 21/22 AND 22/23
-# - different state averages calculated (middle school, high school, combined)
-climate <- prototype_data %>%
-  filter(str_detect(school_year, "2022")) %>%
-  select(school_year:division_name, sch_id:school_name, n_students_surveyed:avg_bully_prob, grade_standard)
-
-# School:
-# we only care about school type here 
-climate_recent_sch <- climate %>% 
-  filter(locality_grouping == "school",
-         !is.na(n_students_surveyed)) %>%
-  group_by(school_name) %>%
-  filter(n() == 1 | school_year == "2022-2023") %>%
-  ungroup()
-
-# Division:
-# High schools in 21-22 and middle schools in 22-23
-# Calculate division averages across years
-climate_div_avg <- climate %>%
-  filter(locality_grouping == "division") %>%
-  group_by(division_number, division_name) %>%
-  summarise(
-    across(where(is.numeric), mean, na.rm = TRUE),
-    school_year = "2021-2023",
-    locality_grouping = "division")
-
-# Calculate region averages across years 
-reg_avg <- climate %>%
-  filter(locality_grouping == "region") %>%
-  group_by(region_number, region_name) %>%
-  summarise(
-    across(where(is.numeric), mean, na.rm = TRUE),
-    school_year = "2021-2023",
-    locality_grouping = "region")
-
-# State:
-# Calculate state average across years
-state_avg <- climate %>%
-  filter(locality_grouping == "state") %>%
-  summarise(
-    across(where(is.numeric), mean, na.rm = TRUE),
-    school_year = "2021-2023",
-    locality_grouping = "state",
-    region_number = NA_real_)
-
-# Combine all climate data 
-climate_recent <- bind_rows(state_avg, reg_avg, climate_div_avg, climate_recent_sch) %>%
-  mutate(label = case_when(
-    locality_grouping == "school" ~ school_name,
-    locality_grouping == "division" ~ division_name,
-    locality_grouping == "region" ~ region_name,
-    TRUE ~ "State Average"))
-
-# Staffing and disadvantage 24/25
-staff_disadv_recent <- prototype_data %>%
-  filter(school_year == "2024-2025") %>%
-  select(school_year:pct_disadv, total_positions:staff_per_1k_students) %>%
-  mutate(label = case_when(
-    locality_grouping == "state" ~ "State Average",
-    locality_grouping == "region" ~ region_name, 
-    locality_grouping == "division" ~ division_name,
-    TRUE ~ school_name))
-
-# Pivot everything longer  
-staff_disad_long <- staff_disadv_recent %>%
-  select(label, locality_grouping, pct_disadv, staff_per_1k_students) %>%
-  pivot_longer(cols = c(pct_disadv, staff_per_1k_students))
-
-climate_long <- climate_recent %>%
-  select(label, locality_grouping, pct_mental_health_training:avg_bully_prob) %>%
-  pivot_longer(cols = c(pct_mental_health_training:avg_bully_prob))
-
-bully_long <- bully_recent %>%
-  select(label, locality_grouping, bully_rate_per_1k) %>%
-  pivot_longer(cols = bully_rate_per_1k)
-
-# And combine:
-plt_dat <- rbind(staff_disad_long, climate_long, bully_long) 
-
-## Get change data ----
-# # Measures that have multiple years: bully_rate_per_1k, pct_disadv, staff_per_1k_students
-change_raw <- prototype_data %>%
-  select(school_year, locality_grouping, region_name, division_name, school_name, pct_disadv, bully_rate_per_1k, staff_per_1k_students) %>%
-  mutate(
-    school_year = as.numeric(str_sub(school_year, 6, 9)),
-    label = case_when(
-      locality_grouping == "state" ~ "State Average",
-      locality_grouping == "region" ~ region_name,
-      locality_grouping == "division" ~ division_name,
-      TRUE ~ school_name),
-    # If bullying incidents are not available, we assume there were no reports made
-    # (this is different from staffing and disadv)
-    bully_rate_per_1k = case_when(
-      is.na(bully_rate_per_1k) ~ 0,
-      TRUE ~ bully_rate_per_1k))
-
-change_dat <- change_raw %>%
-  select(label, locality_grouping, pct_disadv:staff_per_1k_students, school_year) %>%
-  pivot_longer(cols = c(pct_disadv:staff_per_1k_students))
-
-## Standardize on measure names ----
-measure_key <- tibble::tribble(
-  ~label,                         ~name,                     ~units,
-  "Bullying Rate",                "bully_rate_per_1k",        "Incidents per 1,000 Students",
-  "Avg. Bullying Problem",        "avg_bully_prob",           "Average Rating",
-  "Relationships with Peers",     "avg_peer_rel",             "Average Rating",
-  "Relationships with Adults",    "avg_adult_rel",            "Average Rating",
-  "Mental Health Training (%)",   "pct_mental_health_training",          "Percent of Students",
-  "Economically Disadv. (%)",     "pct_disadv",               "Percent of Students",
-  "Mental Health Staff Rate",     "staff_per_1k_students",    "Staff per 1,000 Students")
 
 # Measures where higher values are better:
 good_measures <- c(
@@ -292,7 +153,7 @@ server <- function(input, output, session) {
   ## Get plot data based on selection logic ---- 
   plot_data <- reactive({
     
-    req(input$locality, input$measure,input$highlight)
+    req(input$locality, input$measure, input$highlight)
     selected <- selected_area()
     
     # Start with selected measure and geography level
@@ -556,7 +417,6 @@ server <- function(input, output, session) {
   })
   
   change_plot_data <- reactive({
-    
     req(input$highlight)
     selected <- selected_area()
     
@@ -575,7 +435,7 @@ server <- function(input, output, session) {
         distinct()
       
       dat %>%
-        left_join(division_region,by = c("label" = "division_name")) %>%
+        left_join(division_region, by = c("label" = "division_name")) %>%
         filter(region_name == selected$region_name) %>%
         select(-region_name)
       
@@ -584,8 +444,11 @@ server <- function(input, output, session) {
         select(school_name, division_name) %>%
         distinct()
       
+      print("building dataframe")
+      print(dat %>% filter(grepl("Patrick Henry", label)))
+      
       dat %>%
-        left_join(school_division,by = c("label" = "school_name")) %>%
+        left_join(school_division, by = c("label" = "school_name")) %>%
         filter(division_name == selected$division_name) %>%
         select(-division_name)
     }
@@ -631,6 +494,8 @@ server <- function(input, output, session) {
     highlight_line <- change_plot_data() %>%
       filter(label == input$highlight)
     
+    print(change_plot_data() %>% filter(grepl("Patrick Henry", label)))
+
     p <- ggplot() +
       geom_line(data = change_plot_data(),
         aes(x = school_year, y = value, group = label), color = "grey80", linewidth = 0.5) +

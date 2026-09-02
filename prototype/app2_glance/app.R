@@ -8,130 +8,13 @@ library(ggbeeswarm)
 library(plotly)
 library(tidyverse)
 
-# For school levels
-school_levels <- read_csv("school_key.csv") %>%
-  select(grade_standard, sch_id)
+# Read ----
+plt_dat <- readr::read_csv("plt_dat.csv")
+measure_key <- readr::read_csv("measure_key.csv")
 
-prototype_data <- read_csv("prototype_data.csv") %>%
-  left_join(school_levels, by = "sch_id") %>%
-  filter(
-    locality_grouping != "school" |
-      grade_standard %in% c("High", "Middle"))
-
-# Dataprep ----
-## Reduce to most recent values ----
-# Bully information as of 23/24:
-bully_recent <- prototype_data %>%
-  filter(school_year == "2023-2024") %>%
-  select(school_year:division_name, sch_id:school_name, n_bullying_incidents:bully_rate_per_1k) %>%
-  mutate(
-    label = case_when(
-      locality_grouping == "state" ~ "State Average",
-      locality_grouping == "region" ~ region_name, 
-      locality_grouping == "division" ~ division_name,
-      TRUE ~ school_name),
-    # If bully rate is NA make 0 
-    bully_rate_per_1k = case_when(
-      is.na(bully_rate_per_1k) ~ 0,
-      TRUE ~ bully_rate_per_1k))
-
-# Climate data is more complicated: 
-# - years are 21/22 AND 22/23
-# - different state averages calculated (middle school, high school, combined)
-climate <- prototype_data %>%
-  filter(str_detect(school_year, "2022")) %>%
-  select(school_year:division_name, sch_id:school_name, n_students_surveyed:avg_bully_prob, grade_standard)
-
-# School:
-# we only care about school type here 
-climate_recent_sch <- climate %>% 
-  filter(locality_grouping == "school",
-         !is.na(n_students_surveyed)) %>%
-  group_by(school_name) %>%
-  filter(n() == 1 | school_year == "2022-2023") %>%
-  ungroup()
-
-# Division:
-# High schools in 21-22 and middle schools in 22-23
-
-# Calculate division averages across years
-climate_div_avg <- climate %>%
-  filter(locality_grouping == "division") %>%
-  group_by(division_number, division_name) %>%
-  summarise(
-    across(where(is.numeric), mean, na.rm = TRUE),
-    school_year = "2021-2023",
-    locality_grouping = "division")
-
-# Region:
-# Calculate region averages across years 
-reg_avg <- climate %>%
-  filter(locality_grouping == "region") %>%
-  group_by(region_number, region_name) %>%
-  summarise(
-    across(where(is.numeric), mean, na.rm = TRUE),
-    school_year = "2021-2023",
-    locality_grouping = "region")
-
-# State:
-# Calculate state average across years
-state_avg <- climate %>%
-  filter(locality_grouping == "state") %>%
-  summarise(
-    across(where(is.numeric), mean, na.rm = TRUE),
-    school_year = "2021-2023",
-    locality_grouping = "state",
-    region_number = NA_real_)
-
-# Combine all climate data: 
-climate_recent <- bind_rows(state_avg, reg_avg, climate_div_avg, climate_recent_sch) %>%
-  mutate(label = case_when(
-    locality_grouping == "school" ~ school_name,
-    locality_grouping == "division" ~ division_name,
-    locality_grouping == "region" ~ region_name,
-    TRUE ~ "State Average"
-  ))
-
-# Staffing and disadvantage 24/25
-staff_disadv_recent <- prototype_data %>%
-  filter(school_year == "2024-2025") %>%
-  select(school_year:pct_disadv, total_positions:staff_per_1k_students) %>%
-  mutate(label = case_when(
-    locality_grouping == "state" ~ "State Average",
-    locality_grouping == "region" ~ region_name, 
-    locality_grouping == "division" ~ division_name,
-    TRUE ~ school_name))
-
-## Standardize on measure names ----
-measure_key <- tibble::tribble(
-  ~label,                         ~name,                         ~year,          ~units,
-  "Bullying Rate",                "bully_rate_per_1k",           "2024",         "Incidents per 1,000 Students",
-  "Avg. Bullying Problem",        "avg_bully_prob",              "2022/2023",    "Average Rating",
-  "Relationships with Peers",     "avg_peer_rel",                "2022/2023",    "Average Rating",
-  "Relationships with Adults",    "avg_adult_rel",               "2022/2023",    "Average Rating",
-  "Mental Health Training (%)",   "pct_mental_health_training",  "2022/2023",    "Percent of Students",
-  "Economically Disadv. (%)",     "pct_disadv",                  "2025",         "Percent of Students",
-  "Mental Health Staff Rate",     "staff_per_1k_students",       "2025",         "Staff per 1,000 Students"
-)
-
-
-## Pivot longer & then combine 
-staff_disad_long <- staff_disadv_recent %>%
-  select(label, locality_grouping, pct_disadv, staff_per_1k_students) %>%
-  pivot_longer(cols = c(pct_disadv, staff_per_1k_students))
-
-climate_long <- climate_recent %>%
-  select(label, locality_grouping, pct_mental_health_training:avg_bully_prob) %>%
-  pivot_longer(cols = c(pct_mental_health_training:avg_bully_prob))
-
-bully_long <- bully_recent %>%
-  select(label, locality_grouping, bully_rate_per_1k) %>%
-  pivot_longer(cols = bully_rate_per_1k)
-
-# Combine:
-plt_dat <- rbind(staff_disad_long, climate_long, bully_long) %>%
-  left_join(measure_key %>% select(name, year, units), by = "name")
-
+# Add measure metadata
+plt_dat <- plt_dat %>%
+  left_join(measure_key %>% select(name, units, year),by = "name")
 
 # UI ----
 ui <- 
@@ -283,7 +166,7 @@ server <- function(input, output, session) {
       grouping <- "other group"
     }
     
-    paste0("See ", highlight, " across all indicators")
+    paste("See all youth mental health indicators for ", highlight)
   })
   
 }
