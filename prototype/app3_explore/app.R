@@ -27,6 +27,14 @@ good_measures <- c(
   "pct_mental_health_training",
   "staff_per_1k_students")
 
+# Carto API Key
+# carto_key <- Sys.getenv("CARTO_API_KEY")
+# carto_url <- paste0('https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png?key=', carto_key)
+# saveRDS(carto_url, paste0("carto_url_9_2026.rds"))
+
+carto_url <- readRDS("carto_url_9_2026.rds")
+
+
 # UI ----
 ui <- 
   page_sidebar(
@@ -642,7 +650,8 @@ server <- function(input, output, session) {
                               "<br>", "State Average: ", round(state_data()$value, 2), " ", selected_measure()$units)) 
     
     leaflet(dat) %>% 
-      addProviderTiles(providers$CartoDB.Positron) %>% 
+      #addProviderTiles(providers$CartoDB.Positron) %>% 
+      addTiles(urlTemplate = carto_url) %>%
       addPolygons(fillColor = ~pal(value), fillOpacity = 0.75, 
                   color = ~ifelse(selected, "#1B9E77", "white"), 
                   weight = ~ifelse(selected, 3, 1), 
