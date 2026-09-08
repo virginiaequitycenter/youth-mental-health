@@ -43,6 +43,17 @@ ui <-
     # Main body: 
     card(
       card_title("Compare how two indicators intersect"),
+      HTML(paste0(
+        "<span style='font-size: 0.8rem;'>",
+        "In this visualization, you’ll see a scatter plot of two indicators you select, 
+      with each point representing a school, division, or region. Your area and the state 
+      average are highlighted for easy comparison. By viewing both indicators together, you 
+      can see how communities are distributed, identify possible patterns, and spot areas that 
+      stand out from the broader group. Points that deviate or stand out may highlight communities 
+      with unusually high or low values on one or both indicators, providing a starting point 
+      for further exploration.",
+        "</span>"
+      )),
       layout_columns(
         selectInput(
           "measure1", 

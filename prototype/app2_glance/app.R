@@ -41,8 +41,22 @@ ui <-
         options = list(placeholder = "Start typing")
       ),
     ),
+    
+    # Main body:
     card(
       textOutput("all_values_header"),
+      
+      # Prototype instructions:
+      HTML(paste0(
+        "<span style='font-size: 0.8rem;'>",
+        "This visualization shows values for your selected school, division, or region 
+        across all measures, compared with the state average and other schools. Viewing 
+        all indicators together can help reveal notable patterns, trends, or deviations 
+        that may warrant further exploration. Use this view as a starting point for identifying 
+        areas of interest and taking a deeper look at what may be driving the outcomes.",
+        "</span>"
+      )),
+      
       plotlyOutput("all_values_plt")
     )
   )

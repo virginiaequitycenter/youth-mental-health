@@ -61,6 +61,17 @@ ui <-
       ),
     ),
     
+    # Prototype instructions:
+    HTML(paste0(
+      "<span style='font-size: 0.8rem;'>",
+      "In this collection of visualizations, you can explore a single indicator in a variety 
+      of ways for your school, division, or region, including its rank among peers, severity 
+      across the state, change over time, and geographic similarities. Your area and the state 
+      average are highlighted for easy comparison. Viewing the same indicator in different ways 
+      can reveal patterns, provide context, and give you a more complete understanding of what the data means.",
+      "</span>"
+    )),
+    
     # Main body: 
     selectInput(
       "measure", 
